@@ -1,4 +1,7 @@
 // I038 - arma lv 1
+// function vF takes lamble each level up
+// get from player  LUMBER from console -> call AdjustPlayerStateBJ((0-S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString())))),GetTriggerPlayer(),PLAYER_STATE_RESOURCE_LUMBER)
+// get stats call ModifyHeroStat(1,K[(1+GetPlayerId(GetTriggerPlayer()))],0,S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString()))))
 globals
 gamecache CACHE=InitGameCache("KeyBindings.w3v")
 trigger ChuangjianDanwei=CreateTrigger()
@@ -5081,7 +5084,7 @@ call SetUnitPositionLoc(K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))],Ge
 call PanCameraToTimedLocForPlayer(GetOwningPlayer(GetTriggerUnit()),GetRectCenter(ur),0)
 endfunction
 function yN takes nothing returns nothing
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador "+(GetPlayerName(GetTriggerPlayer())+" se ha ido del juego.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку "+(GetPlayerName(GetTriggerPlayer())+" se ha ido del juego.")))
 call RemoveUnit(K[(1+GetPlayerId(GetTriggerPlayer()))])
 endfunction
 function zN takes nothing returns nothing
@@ -5206,14 +5209,14 @@ endfunction
 function db takes nothing returns nothing
 set Ue=(1+GetPlayerId(GetOwningPlayer(GetEnumUnit())))
 if(Xb())then
-call CreateTextTagUnitBJ("Escribe/Write: -Iniciar Demo",GetEnumUnit(),0,8.,'d',.0,.0,0)
+call CreateTextTagUnitBJ("Escribe/Write: -Iniciar Demo (-i-d)",GetEnumUnit(),0,8.,'d',.0,.0,0)
 call SetTextTagVelocityBJ(bj_lastCreatedTextTag,64,90)
 call SetTextTagPermanentBJ(bj_lastCreatedTextTag,false)
 call SetTextTagLifespanBJ(bj_lastCreatedTextTag,1.5)
 call SetTextTagAgeBJ(bj_lastCreatedTextTag,0)
 endif
 if(Ob())then
-call CreateTextTagUnitBJ("Escribe/Write: -Avanzar",GetEnumUnit(),0,8.,'d',.0,.0,0)
+call CreateTextTagUnitBJ("Escribe/Write: -Avanzar (-av)",GetEnumUnit(),0,8.,'d',.0,.0,0)
 call SetTextTagVelocityBJ(bj_lastCreatedTextTag,64,90)
 call SetTextTagPermanentBJ(bj_lastCreatedTextTag,false)
 call SetTextTagLifespanBJ(bj_lastCreatedTextTag,1.5)
@@ -5468,7 +5471,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(EB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5501,7 +5504,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(IB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5534,7 +5537,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(BB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5567,7 +5570,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(DB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5600,7 +5603,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(GB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5633,7 +5636,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(JB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5666,7 +5669,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(LB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5688,9 +5691,9 @@ set re[ee]=false
 set ie[ee]="Pre Osos (Предварительно медведи)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNFurbolg.blp"
 set ne[ee]="Мне просто нужно, чтобы вы убили пандарея, они дадут вам ключ, чтобы убить 5 молодых медведей."
-set Ve[ee]="Muy bien ahora la proxima mision."
+set Ve[ee]="Очень хорошо, теперь следующая миссия."
 set Ee[ee]=1
-set Xe[ee]="Pandareans (Pandareans )."
+set Xe[ee]="Pandareans (Пандарены )."
 set Re[ee]=25
 set Ie[ee]=0
 set Ae[ee]='I04T'
@@ -5699,7 +5702,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(PB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5732,7 +5735,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(SB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5765,7 +5768,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(UB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5798,7 +5801,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(YB())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5831,7 +5834,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ec())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5864,7 +5867,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ic())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5897,7 +5900,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Ec())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5930,7 +5933,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Ic())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5963,7 +5966,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Bc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -5996,7 +5999,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Dc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6029,7 +6032,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Gc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6062,7 +6065,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Jc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6095,7 +6098,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Lc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6128,7 +6131,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Pc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6161,7 +6164,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Sc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6194,7 +6197,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Uc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6227,7 +6230,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Yc())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6251,7 +6254,7 @@ set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNHoly Armor.blp"
 set ne[ee]="Убейте 10 Красных Колдунов (Лабиринт)"
 set Ve[ee]="Ven a buscar tu Recompenza."
 set Ee[ee]=1
-set Xe[ee]="Brujos Rojo (Красные колдун )s"
+set Xe[ee]="Brujos Rojos (Красные колдуни)"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]=Ye[7]
@@ -6260,7 +6263,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(eC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6284,7 +6287,7 @@ set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNLion Carapace.blp"
 set ne[ee]="Убейте 10 Зеленых Колдунов (Лабиринт)"
 set Ve[ee]="Ven a buscar tu Recompenza."
 set Ee[ee]=1
-set Xe[ee]="Brujos Verde (Зеленые колдун )s"
+set Xe[ee]="Brujos Verdes (Зеленые колдуни)"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]=Ye[8]
@@ -6293,7 +6296,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(iC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6326,7 +6329,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(EC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6359,7 +6362,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(IC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6392,7 +6395,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(BC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6425,7 +6428,7 @@ set be[ee]=true
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(DC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6458,7 +6461,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(GC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6491,7 +6494,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(JC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6524,7 +6527,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(LC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6557,7 +6560,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(PC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6590,7 +6593,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(SC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6623,7 +6626,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(UC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6656,7 +6659,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(YC())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6689,7 +6692,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ed())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6722,7 +6725,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ad())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6755,7 +6758,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Xd())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6788,7 +6791,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Ad())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6821,7 +6824,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(cd())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6854,7 +6857,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(fd())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6887,7 +6890,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(hd())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6920,7 +6923,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(kd())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6953,7 +6956,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(md())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -6986,7 +6989,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(qd())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7010,7 +7013,7 @@ set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
 set Ee[ee]=1
-set Xe[ee]="kills mas (убивает больш )."
+set Xe[ee]="kills mas (убивает большe )."
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]='I08W'
@@ -7019,7 +7022,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(td())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7052,7 +7055,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(wd())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7118,7 +7121,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(xD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7154,7 +7157,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7184,7 +7187,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7214,7 +7217,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7244,7 +7247,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7274,7 +7277,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7314,7 +7317,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7344,7 +7347,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7374,7 +7377,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7395,7 +7398,7 @@ set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNRockGolem.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
 set Ee[ee]=1
-set Xe[ee]="Prometeo: SuperHuma (Прометей: Суперме )n"
+set Xe[ee]="Prometeo: SuperHuman (Прометей: Супермен )"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]='I0AP'
@@ -7404,7 +7407,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7431,7 +7434,7 @@ set be[ee]=false
 call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
 set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
+call QuestMessageBJ(FA(oe[ee]),1,("Oтсутствует: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
 call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
@@ -7465,7 +7468,7 @@ set Dx[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=(Dx[(1+GetPlayerId(Ge
 call AdjustPlayerStateBJ(Ie[qe],oe[qe],PLAYER_STATE_RESOURCE_LUMBER)
 set ce=GetUnitLoc(K[qe])
 call AddSpecialEffectLocBJ(ce,"Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl")
-call CreateTextTagLocBJ("¡Mision Completa!",ce,0,15.,'d',80.,.0,0)
+call CreateTextTagLocBJ("Завершите миссию!",ce,0,15.,'d',80.,.0,0)
 call SetTextTagVelocityBJ(bj_lastCreatedTextTag,250.,90)
 call SetTextTagPermanentBJ(bj_lastCreatedTextTag,false)
 call SetTextTagLifespanBJ(bj_lastCreatedTextTag,1.)
@@ -7480,7 +7483,7 @@ else
 call DisplayTextToForce(FA(oe[bj_forLoopAIndex]),"Debes ir a recibir tu recompensa donde obtuviste la mision.")
 endif
 else
-call QuestMessageBJ(FA(oe[qe]),1,("Faltan: "+(I2S(Ee[qe])+(" "+Xe[qe]))))
+call QuestMessageBJ(FA(oe[qe]),1,("Oтсутствует: "+(I2S(Ee[qe])+(" "+Xe[qe]))))
 endif
 endif
 endfunction
@@ -7499,7 +7502,7 @@ if(BD())then
 if(ND())then
 set je[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=false
 call UnitAddItemByIdSwapped('I045',GetTriggerUnit())
-call DisplayTextToForce(FA(GetOwningPlayer(GetTriggerUnit())),"Muy bien, Obten este objeto, ahora necesito que explores el mapa y vallas a Fury Town, Shadow Town, Rage Town, Golden Town. Cuando Completes esto vuelve a Moon Town.")
+call DisplayTextToForce(FA(GetOwningPlayer(GetTriggerUnit())),"Ладно, возьмите этот объект, теперь мне нужно, чтобы вы исследовали карту и заборы в Городе Ярости, Городе Теней, Городе Ярости, Золотом городе. Когда закончите, вернитесь в Лунный городок.")
 set Le[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=true
 endif
 set ve[(1+GetPlayerId(oe[qe]))]=false
@@ -7509,7 +7512,7 @@ set G[qe]=(G[qe]+Ie[qe])
 call AdjustPlayerStateBJ(Ie[qe],oe[qe],PLAYER_STATE_RESOURCE_LUMBER)
 set ce=GetUnitLoc(K[qe])
 call AddSpecialEffectLocBJ(ce,"Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl")
-call CreateTextTagLocBJ("¡Mision Completa!",ce,0,15.,'d',80.,.0,0)
+call CreateTextTagLocBJ("Завершите миссию!",ce,0,15.,'d',80.,.0,0)
 call SetTextTagVelocityBJ(bj_lastCreatedTextTag,250.,90)
 call SetTextTagPermanentBJ(bj_lastCreatedTextTag,false)
 call SetTextTagLifespanBJ(bj_lastCreatedTextTag,1.)
@@ -10428,7 +10431,7 @@ call CreateItemLoc('I03E',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(UK())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10500,7 +10503,7 @@ call CreateItemLoc('I03F',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(rl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10558,7 +10561,7 @@ call CreateItemLoc('I043',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Il())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10588,7 +10591,7 @@ call CreateItemLoc('I04J',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 if(cl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10624,7 +10627,7 @@ call CreateItemLoc('I02T',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 if(Fl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10669,7 +10672,7 @@ call SetUnitPositionLoc(uv,GetRectCenter(Tv[bj_forLoopAIndex]))
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 if(kl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10716,7 +10719,7 @@ call CreateItemLoc('I07I',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(ql())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10762,7 +10765,7 @@ call CreateItemLoc('I07J',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(Ul())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10812,7 +10815,7 @@ call CreateItemLoc('I07K',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(eL())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11198,7 +11201,7 @@ call CreateItemLoc('I065',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Im())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11249,7 +11252,7 @@ call CreateItemLoc('I065',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Dm())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11300,7 +11303,7 @@ call CreateItemLoc('I065',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Jm())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11349,7 +11352,7 @@ call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(Pm())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11394,7 +11397,7 @@ call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(Pm())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11423,7 +11426,7 @@ call CreateItemLoc('I065',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Pm())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11481,7 +11484,7 @@ call CreateItemLoc('I065',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(wm())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11550,7 +11553,7 @@ call CreateItemLoc('I065',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(oM())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11612,7 +11615,7 @@ call CreateItemLoc('I04I',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(RM())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11674,7 +11677,7 @@ call CreateItemLoc('I04I',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(DM())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11745,7 +11748,7 @@ call CreateItemLoc('I0A0',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(KM())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11832,7 +11835,7 @@ call CreateItemLoc('I0A0',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(TM())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11845,7 +11848,7 @@ call CreateItemLoc('I0A7',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Cronos())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r he obtenido el job Oceano! Puede usar si tiene mas que 50 Rebirths")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r he obtenido el job Oceano! Puede usar si tiene mas que 50 Rebirths")))
 call CreateItemLoc('I0AQ',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11927,7 +11930,7 @@ call CreateItemLoc('I09Z',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Cronos())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r he obtenido el job Cronos! Puede usar si tiene mas que 50 Rebirths")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r  получил работу Cronos! Вы можете использовать, если у вас есть больше, чем 50 Rebirths")))
 call CreateItemLoc('I0AJ',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -11936,7 +11939,7 @@ call CreateItemLoc('I0A0',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(op())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -12030,7 +12033,7 @@ call CreateItemLoc('I0A0',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Np())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r eму повезло и он выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
@@ -12120,7 +12123,7 @@ call CreateItemLoc('I0A0',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Hp())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Box Expert' Premium|r, может увеличиться 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
@@ -13021,10 +13024,10 @@ call ForGroupBJ(fA(GetOwningPlayer(GetTriggerUnit()),'h00R'),function BQ)
 endif
 endfunction
 function DQ takes nothing returns nothing
-call DialogSetMessage(sv,"¿Quieres hacer un Rebirth?")
-call DialogAddButtonBJ(sv,"Deseo un Rebirth")
+call DialogSetMessage(sv,"Вы хотите сделать перерождение?")
+call DialogAddButtonBJ(sv,"Я хочу возрождение")
 set Sv[1]=bj_lastCreatedButton
-call DialogAddButtonBJ(sv,"No, Más Tarde")
+call DialogAddButtonBJ(sv,"Нет позже")
 set Sv[2]=bj_lastCreatedButton
 endfunction
 function FQ takes nothing returns boolean
@@ -14826,15 +14829,15 @@ call TriggerRegisterPlayerChatEvent(Pa,Player(8),"-fd",true)
 call TriggerAddCondition(Pa,Condition(function ob))
 call TriggerAddAction(Pa,function rb)
 set qa=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(qa,Player(0),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(1),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(2),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(3),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(4),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(5),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(6),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(7),"-Iniciar Demo",true)
-call TriggerRegisterPlayerChatEvent(qa,Player(8),"-Iniciar Demo",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(0),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(1),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(2),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(3),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(4),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(5),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(6),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(7),"-i-d",true)
+call TriggerRegisterPlayerChatEvent(qa,Player(8),"-i-d",true)
 call TriggerAddCondition(qa,Condition(function ab))
 call TriggerAddAction(qa,function nb)
 set Qa=CreateTrigger()
@@ -14879,24 +14882,24 @@ call TriggerAddAction(sa,function gb)
     call TriggerAddCondition( LoadModuleSingle, Condition( function Trig_LoadModuleSingle_Conditions ) )
     call TriggerAddAction( LoadModuleSingle, function Trig_LoadModuleSingle_Actions )
 set Sa=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(Sa,Player(0),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(1),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(2),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(3),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(4),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(5),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(6),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(7),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(8),"-Avansar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(0),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(1),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(2),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(3),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(4),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(5),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(6),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(7),"-avanzar",true)
-call TriggerRegisterPlayerChatEvent(Sa,Player(8),"-avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(0),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(1),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(2),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(3),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(4),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(5),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(6),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(7),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(8),"-Avanzar",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(0),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(1),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(2),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(3),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(4),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(5),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(6),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(7),"-av",true)
+call TriggerRegisterPlayerChatEvent(Sa,Player(8),"-av",true)
 call TriggerAddAction(Sa,function hb)
 set ta=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(ta,EVENT_PLAYER_UNIT_DEATH)
