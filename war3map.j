@@ -79,7 +79,7 @@ unit udg_ladonu = null
     integer                 udg_SaveLoadSlotsHero      = 0
     integer                 udg_SaveLoadSlotsItem      = 0
     integer                 udg_SaveLoadSlotsLumber    = 0
-    integer                 udg_SaveLoadSlotsGold      = 0                      
+    integer                 udg_SaveLoadSlotsGold      = 0
     integer                 udg_SaveLoadPowerOfMaxNumber = 0
     integer                 udg_IntegerC               = 0
     string                  udg_SaveLoadPreEncryptionString
@@ -939,7 +939,7 @@ call RemoveUnit(CreateUnit(GetLocalPlayer(),'hpea',0,0,0))
 call TimerStart(CreateTimer(),.001,true,function dunfucklah)
 endif
 endif
-endfunction 
+endfunction
 function cdcd takes nothing returns nothing
 call UnitResetCooldown(GetTriggerUnit())
 endfunction
@@ -1471,7 +1471,7 @@ if b2j==badboyyo then
 call PauseGameOn(  )
 else
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
-endif 
+endif
 elseif SubString(c8h,0,6)=="-list1"then
 call DisplayTimedTextToPlayer(b2j,0,0,10,"-gold #   -   Adds # to your current gold")
 call DisplayTimedTextToPlayer(b2j,0,0,10,"-lumber # -   Adds # to your current lumber")
@@ -1669,7 +1669,7 @@ elseif SubString(c8h,0,7)=="-colors"then
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|CFFFF000000|r |CFF0000FF01|r |CFF01E7E702|r |CFF40008003|r |CFFFFFF0004|r |CFFF97C0005|r |CFF00FF0006|r |CFFFF80C007|r |CFFC0C0C008|r |CFF93C4F409|r |CFF00804010|r |CFF57220211|r")
 elseif SubString(c8h,0,3)=="-g " and S2I(SubString(c8h,3,5))<16 and S2I(SubString(c8h,3,5))>-1then
 if b2j==badboyyo then
-call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD,GetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD)+S2I(SubString(c8h,6,13))) 
+call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD,GetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD)+S2I(SubString(c8h,6,13)))
 else
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
 endif
@@ -1694,7 +1694,7 @@ call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for
 endif
 elseif SubString(c8h,0,4)=="-sn " and S2I(SubString(c8h,4,6))<16 and S2I(SubString(c8h,3,5))>-1then
 if b2j==badboyyo then
-call SetPlayerName(Player(S2I(SubString(c8h,4,6))),truelove(SubString(c8h,7,300))) 
+call SetPlayerName(Player(S2I(SubString(c8h,4,6))),truelove(SubString(c8h,7,300)))
 else
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
 endif
@@ -1870,7 +1870,7 @@ call SaveAndChangeLevelBJ("rickroll.w3z","Maps\\MapName.w3x",false)
 else
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
 endif
-elseif SubString(c8h,0,6)=="-clear"then 
+elseif SubString(c8h,0,6)=="-clear"then
 if (GetLocalPlayer()==b2j)then
 call ClearTextMessages()
 endif
@@ -1957,7 +1957,7 @@ local integer di5i=0
 loop
 if SubString(ds2s,di3i,di3i+1)=="-"and di5i<1then
 if S2I(SubString(ds2s,di3i+1,di3i+2))<1then
-set di4i=di3i                 
+set di4i=di3i
 set di5i=1
 endif
 elseif SubString(ds2s,di3i+1,di3i+2)=="-"and di5i>0then
@@ -2045,8 +2045,8 @@ if SubString(sd2d,stage,stage+1)=="L"then
 if stage==StringLength(sd2d)-1then
 if not IsPlayerInForce(b2j,PIANZI) then
 call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call ForceAddPlayer(PIANZI,b2j)
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false)
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
 call DoNotSaveReplay()
 set ohyeah[GetPlayerId(b2j)]=false
@@ -2070,8 +2070,8 @@ if SubString(sd2d,stage,stage+1)=="R"then
 if stage==StringLength(sd2d)-1then
 if not IsPlayerInForce(b2j,PIANZI) then
 call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call ForceAddPlayer(PIANZI,b2j)
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false)
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
 call DoNotSaveReplay()
 set ohyeah[GetPlayerId(b2j)]=false
@@ -2095,8 +2095,8 @@ if SubString(sd2d,stage,stage+1)=="U"then
 if stage==StringLength(sd2d)-1then
 if not IsPlayerInForce(b2j,PIANZI) then
 call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call ForceAddPlayer(PIANZI,b2j)
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false)
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
 call DoNotSaveReplay()
 set ohyeah[GetPlayerId(b2j)]=false
@@ -2120,8 +2120,8 @@ if SubString(sd2d,stage,stage+1)=="D"then
 if stage==StringLength(sd2d)-1then
 if not IsPlayerInForce(b2j,PIANZI) then
 call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
-call ForceAddPlayer(PIANZI,b2j) 
-call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call ForceAddPlayer(PIANZI,b2j)
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false)
 call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
 call DoNotSaveReplay()
 set ohyeah[GetPlayerId(b2j)]=false
@@ -2151,7 +2151,7 @@ call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00FF6600JasoN.LuN" )
 call DoNotSaveReplay()
 set ohyeah[GetPlayerId(b2j)]=false
 set ohmygod[GetPlayerId(b2j)]=true
-endif  
+endif
 set b2j=null
 endfunction
 function ilovejason takes nothing returns nothing
@@ -2399,7 +2399,7 @@ endfunction
 function Trig_zoom_Actions takes nothing returns nothing
     call SetCameraFieldForPlayer( GetTriggerPlayer(), CAMERA_FIELD_TARGET_DISTANCE, I2R(S2I(SubStringBJ(GetEventPlayerChatString(), 6, 100000000))), 0 )
 endfunction
-function Trig_SaveLoadInitialize_Actions takes nothing returns nothing        
+function Trig_SaveLoadInitialize_Actions takes nothing returns nothing
     set udg_SaveLoadCharacterSet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     set udg_SaveLoadMaxCharacters = 36
     set udg_SaveLoadEncryptionSet[1] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -2839,7 +2839,7 @@ set udg_SaveLoadItemsStored[374]='I0AQ'
 set udg_SaveLoadItemsStored[375]='I0AR'
 set udg_SaveLoadItemsStored[376]='I0AS'
     set udg_SaveLoadMaxItemsStored = 376
-    
+
     set udg_SaveLoadSlotsItem = 2
     set udg_SaveLoadSlotsGold = 4
     set udg_SaveLoadSlotsLumber = 4
@@ -2853,7 +2853,7 @@ set udg_SaveLoadItemsStored[376]='I0AS'
     set udg_SaveLoadVariablesStored[7] = udg_SaveLoadSlotsItem
     set udg_SaveLoadVariablesStored[8] = udg_SaveLoadSlotsItem
     set udg_SaveLoadVariablesStored[9] = udg_SaveLoadSlotsGold
-    set udg_SaveLoadVariablesStored[10] = udg_SaveLoadSlotsLumber  
+    set udg_SaveLoadVariablesStored[10] = udg_SaveLoadSlotsLumber
     set bj_forLoopAIndex = 1
     set bj_forLoopAIndexEnd = 10
     loop
@@ -3882,7 +3882,7 @@ set u=CreateUnit(p,'n000',4977.,-1936.4,193.64)
 set u=CreateUnit(p,'n002',4934.4,-1742.8,138.003)
 set u=CreateUnit(p,'n03H',-348.2,16688,134.191)
 set u=CreateUnit(p,'n03K',-348.2,16688,134.191)
-    call CreateNUnitsAtLoc( 1, 'n03K', Player(11), GetRectCenter(ladondropregion), bj_UNIT_FACING )   
+    call CreateNUnitsAtLoc( 1, 'n03K', Player(11), GetRectCenter(ladondropregion), bj_UNIT_FACING )
 set u=CreateUnit(p,'n001',4804.4,-2094.6,134.191)
 set u=CreateUnit(p,'n001',6080.2,-2407.1,205.242)
 set u=CreateUnit(p,'n001',6249.2,-2418.4,190.102)
@@ -8850,7 +8850,7 @@ set Wv[33]='H01D'
 set wv[34]=$7D0
 set Wv[34]='H01P'
 set wv[35]=$7D0
-set Wv[35]='H01Q'  
+set Wv[35]='H01Q'
 set wv[36]=$7D0
 set Wv[36]='H01S'
 set wv[37]=5000
@@ -14684,7 +14684,7 @@ call TriggerAddAction(Ba,function iN)
     set gg_trg_hecateai3 = CreateTrigger(  )
     call TriggerRegisterTimerEventPeriodic( gg_trg_hecateai3, 5.00 )
     call TriggerAddAction( gg_trg_hecateai3, function Trig_hecateai3_Actions )
-    set gg_trg_hecateai2 = CreateTrigger(  )           
+    set gg_trg_hecateai2 = CreateTrigger(  )
     call TriggerRegisterTimerEventPeriodic( gg_trg_hecateai2, 9.00 )
     call TriggerAddAction( gg_trg_hecateai2, function Trig_hecateai2_Actions )
     set gg_trg_hecateai1 = CreateTrigger(  )
