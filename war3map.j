@@ -13076,7 +13076,7 @@ function KQ takes nothing returns nothing
 call ClearTextMessagesBJ(FA(GetTriggerPlayer()))
 endfunction
 function LQ takes nothing returns boolean
-return(SubStringBJ(GetEventPlayerChatString(),1,7)=="-Item: ")and(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(kx)and(Kx)
+return(SubStringBJ(GetEventPlayerChatString(),1,7)=="-Item: ")and(kx)and(Kx)
 endfunction
 function mQ takes nothing returns nothing
 set Hv=GetUnitLoc(K[(1+GetPlayerId(GetTriggerPlayer()))])
@@ -13084,7 +13084,7 @@ call CreateItemLoc(O[S2I(SubStringBJ(GetEventPlayerChatString(),8,StringLength(G
 call RemoveLocation(Hv)
 endfunction
 function pQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-SP to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
+return(SubStringBJ(GetEventPlayerChatString(),1,7)=="-SP to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
 endfunction
 function PQ takes nothing returns nothing
 set ze[1]=S2I(SubStringBJ(GetEventPlayerChatString(),8,9))
@@ -13093,19 +13093,19 @@ call AdjustPlayerStateBJ(ze[2],Player(-1+(ze[1])),PLAYER_STATE_RESOURCE_LUMBER)
 set G[ze[1]]=(G[ze[1]]+ze[2])
 endfunction
 function QQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(kx==false)
+return(kx==false)
 endfunction
 function sQ takes nothing returns nothing
 set kx=true
 endfunction
 function tQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(Kx==false)
+return(Kx==false)
 endfunction
 function TQ takes nothing returns nothing
 set Kx=true
 endfunction
 function UQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-RB to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
+return(SubStringBJ(GetEventPlayerChatString(),1,7)=="-RB to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
 endfunction
 function wQ takes nothing returns nothing
 set ze[1]=S2I(SubStringBJ(GetEventPlayerChatString(),8,9))
@@ -13114,7 +13114,7 @@ call AdjustPlayerStateBJ(ze[2],Player(-1+(ze[1])),PLAYER_STATE_RESOURCE_GOLD)
 set tv[ze[1]]=(tv[ze[1]]+ze[2])
 endfunction
 function yQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-LV to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")
+return(SubStringBJ(GetEventPlayerChatString(),1,7)=="-LV to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")
 endfunction
 function YQ takes nothing returns nothing
 set ze[1]=S2I(SubStringBJ(GetEventPlayerChatString(),8,9))
