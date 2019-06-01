@@ -3226,7 +3226,7 @@ function Trig_SaveModuleSingle_Actions takes nothing returns nothing
     call PreloadGenClear()
     call PreloadGenStart()
     call Preload("-load " + (udg_SaveLoadFinalString))
-    call PreloadGenEnd("GoldenGodsII\\"+(udg_userName)+"-"+"Lamble-"(G[GetConvertedPlayerId(GetTriggerPlayer())])+".txt")
+    call PreloadGenEnd("GoldenGodsII\\"+(udg_userName)+"_"+(udg_heroName)+".txt")
     call ForceClear( udg_SaveLoadPlayerGroupFocus )
 endfunction
 function Trig_LoadModuleSingle_Conditions takes nothing returns boolean
