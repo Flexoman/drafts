@@ -3224,6 +3224,7 @@ function Trig_SaveModuleSingle_Actions takes nothing returns nothing
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, udg_SaveLoadFinalString )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "--------------------" )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Saved to Warcraft/GoldenGodsII/(name).txt" )
+
     call PreloadGenClear()
     call PreloadGenStart()
     call Preload("-load " + (udg_SaveLoadFinalString))
