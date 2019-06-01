@@ -62,6 +62,8 @@ unit udg_ladonu = null
     integer                 udg_SaveLoadMaxEncryptionSets = 0
     integer array           udg_SaveLoadHeroesStored
     string                  udg_SaveLoadEncryptedString
+    string                  udg_heroName
+    string                  udg_userName
     string                  udg_SaveLoadFinalString
     string array            udg_SaveLoadCharacterNumbers
     string array            udg_SaveLoadEncryptionNumbers
@@ -3212,10 +3214,19 @@ function Trig_SaveModuleSingle_Actions takes nothing returns nothing
         endif
         set bj_forLoopAIndex = bj_forLoopAIndex + 1
     endloop
+    set udg_heroName = GetHeroProperName(GetEnumUnit())
+    set udg_userName = GetPlayerName(GetTriggerPlayer())
     set udg_SaveLoadFinalString = ( ( udg_SaveLoadEncryptionKey + "-" ) + udg_SaveLoadEncryptedString )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Here is your code:  ")
+    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "--------------------" )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, udg_SaveLoadFinalString )
-    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Big thanks to Effane for the code system!!!" )
+    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "--------------------" )
+    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Saved to Warcraft/GoldenGodsII/(name).txt" )
+
+    call PreloadGenClear()
+    call PreloadGenStart()
+    call Preload("-load " + (udg_SaveLoadFinalString))
+    call PreloadGenEnd("GoldenGodsII\\"+(udg_userName)+"-"+"Lamble-"(G[GetConvertedPlayerId(GetTriggerPlayer())])+".txt")
     call ForceClear( udg_SaveLoadPlayerGroupFocus )
 endfunction
 function Trig_LoadModuleSingle_Conditions takes nothing returns boolean
