@@ -7573,7 +7573,7 @@ function kD takes nothing returns boolean
 return(GetEventDamage()>=.01)
 endfunction
 function KD takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lD takes nothing returns boolean
 return(GetUnitAbilityLevelSwapped('A03F',GetEventDamageSource())==1)
@@ -9911,19 +9911,19 @@ function dk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00R')
 endfunction
 function Dk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Fk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Gk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hk takes nothing returns boolean
 return(RectContainsUnit(Tx,uv))
@@ -9968,19 +9968,19 @@ function Jk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00Y')
 endfunction
 function kk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Kk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Lk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Mk takes nothing returns boolean
 return(RectContainsUnit(ux,uv))
@@ -10031,16 +10031,16 @@ function qk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00Z')
 endfunction
 function Qk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Sk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Tk takes nothing returns boolean
 return(RectContainsUnit(Ux,uv))
@@ -10087,22 +10087,22 @@ function wk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00X')
 endfunction
 function Wk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Yk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function zk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Zk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function eK takes nothing returns boolean
 return(RectContainsUnit(wx,uv))
@@ -10157,16 +10157,16 @@ function rK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n010')
 endfunction
 function iK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function aK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function nK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function VK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function EK takes nothing returns boolean
 return(RectContainsUnit(Wx,uv))
@@ -10207,16 +10207,16 @@ function RK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n011')
 endfunction
 function IK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function AK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function NK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function bK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function BK takes nothing returns boolean
 return(RectContainsUnit(yx,uv))
@@ -10257,19 +10257,19 @@ function dK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n012')
 endfunction
 function DK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function FK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function GK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hK takes nothing returns boolean
 return(RectContainsUnit(Yx,uv))
@@ -10314,19 +10314,19 @@ function JK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n013')
 endfunction
 function kK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function KK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function LK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function MK takes nothing returns boolean
 return(RectContainsUnit(zx,uv))
@@ -10371,25 +10371,25 @@ function qK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n014')
 endfunction
 function QK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function SK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function TK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function uK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function UK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wK takes nothing returns boolean
 return(RectContainsUnit(Zx,uv))
@@ -10443,25 +10443,25 @@ function YK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n016')
 endfunction
 function zK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ZK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function el takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ol takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function il takes nothing returns boolean
 return(RectContainsUnit(wo,uv))
@@ -10515,19 +10515,19 @@ function Vl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01E')
 endfunction
 function El takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Xl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ol takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Rl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Il takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Al takes nothing returns boolean
 return(RectContainsUnit(Hr,uv))
@@ -10573,7 +10573,7 @@ function Bl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01G')
 endfunction
 function cl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Cl takes nothing returns boolean
 return(RectContainsUnit(lr,uv))
@@ -10603,13 +10603,13 @@ function fl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01Q')
 endfunction
 function Fl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Gl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hl takes nothing returns boolean
 return(RectContainsUnit(xi,uv))
@@ -10647,16 +10647,16 @@ function Jl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n020')
 endfunction
 function kl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Kl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ll takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ll takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ml takes nothing returns boolean
 return(RectContainsUnit(oi,uv))
@@ -10696,13 +10696,13 @@ function Pl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n021')
 endfunction
 function ql takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ql takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Sl takes nothing returns boolean
 return(RectContainsUnit(ri,uv))
@@ -10739,16 +10739,16 @@ function ul takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n022')
 endfunction
 function Ul takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Wl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Yl takes nothing returns boolean
 return(RectContainsUnit(ii,uv))
@@ -10789,16 +10789,16 @@ function vL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n023')
 endfunction
 function eL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function oL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function iL takes nothing returns boolean
 return(RectContainsUnit(ai,uv))
@@ -10839,16 +10839,16 @@ function VL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03J')
 endfunction
 function EL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function XL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function OL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function RL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function IL takes nothing returns boolean
 return(RectContainsUnit(ni,uv))
@@ -10884,16 +10884,16 @@ function CL takes nothing returns boolean
 return(mv==1)
 endfunction
 function dL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function DL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function FL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gL takes nothing returns boolean
 return(RectContainsUnit(Vi,uv))
@@ -10945,16 +10945,16 @@ function HL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02H')
 endfunction
 function jL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function JL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function kL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function KL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lL takes nothing returns boolean
 return(RectContainsUnit(Xi,uv))
@@ -10995,19 +10995,19 @@ function ML takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02I')
 endfunction
 function pL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function PL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function qL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function QL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function SL takes nothing returns boolean
 return(RectContainsUnit(Ri,uv))
@@ -11052,19 +11052,19 @@ function uL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02J')
 endfunction
 function UL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function WL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function YL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function zL takes nothing returns boolean
 return(RectContainsUnit(Oi,uv))
@@ -11109,19 +11109,19 @@ function em takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02M')
 endfunction
 function xm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function om takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function im takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function am takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function nm takes nothing returns boolean
 return(RectContainsUnit(Ai,uv))
@@ -11166,16 +11166,16 @@ function Xm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02N')
 endfunction
 function Om takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Rm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Im takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Am takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Nm takes nothing returns boolean
 return(RectContainsUnit(Bi,uv))
@@ -11217,16 +11217,16 @@ function cm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02V')
 endfunction
 function Cm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function dm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Dm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Fm takes nothing returns boolean
 return(RectContainsUnit(ci,uv))
@@ -11268,16 +11268,16 @@ function hm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02W')
 endfunction
 function Hm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function jm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Jm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function km takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Km takes nothing returns boolean
 return(RectContainsUnit(Ci,uv))
@@ -11319,19 +11319,19 @@ function mm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02X')
 endfunction
 function Mm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function pm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Pm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function qm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Qm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sm takes nothing returns boolean
 return(RectContainsUnit(di,uv))
@@ -11446,19 +11446,19 @@ function Tm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02Y')
 endfunction
 function um takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Um takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Wm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ym takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ym takes nothing returns boolean
 return(RectContainsUnit(Di,uv))
@@ -11504,22 +11504,22 @@ function vM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n030')
 endfunction
 function eM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function oM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function iM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function plus502 takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function aM takes nothing returns boolean
 return(RectContainsUnit(Ui,uv))
@@ -11573,19 +11573,19 @@ function EM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n031')
 endfunction
 function XM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function OM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function RM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function IM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function AM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function NM takes nothing returns boolean
 return(RectContainsUnit(wi,uv))
@@ -11635,19 +11635,19 @@ function cM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n032')
 endfunction
 function CM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function dM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function DM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function FM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gM takes nothing returns boolean
 return(RectContainsUnit(Wi,uv))
@@ -11700,19 +11700,19 @@ function jM takes nothing returns boolean
 return(HM())
 endfunction
 function JM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function kM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function KM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function LM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mM takes nothing returns boolean
 return(RectContainsUnit(Ra,uv))
@@ -11768,34 +11768,34 @@ function PM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03C')
 endfunction
 function qM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function droptheitem takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function QM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function SM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function TM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function uM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function UM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Cronos takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wM takes nothing returns boolean
 return(RectContainsUnit(Ia,uv))
@@ -11873,28 +11873,28 @@ function hecatedropCondition takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03I')
 endfunction
 function zM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ZM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ep takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function op takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ip takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ap takes nothing returns boolean
 return(RectContainsUnit(Aa,uv))
@@ -11959,34 +11959,34 @@ function Ep takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03G')
 endfunction
 function Xp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Op takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Rp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ip takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ap takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Np takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function bp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Bp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function cp takes nothing returns boolean
 return(RectContainsUnit(Na,uv))
 endfunction
 function plus50 takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Cp takes nothing returns nothing
 set bj_forLoopAIndex=1
@@ -12057,28 +12057,28 @@ function Dp takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03F')
 endfunction
 function fp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Fp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Gp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Hp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function jp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Jp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 
 function kp takes nothing returns boolean
@@ -12161,13 +12161,13 @@ function qp takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(Pp()))!=null
 endfunction
 function Qp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Sp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tp takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12192,13 +12192,13 @@ function Up takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(up()))!=null
 endfunction
 function wp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Wp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Yp takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12223,13 +12223,13 @@ function vP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(Zp()))!=null
 endfunction
 function eP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function oP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12254,16 +12254,16 @@ function nP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(aP()))!=null
 endfunction
 function VP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function EP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function XP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function OP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function RP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12292,16 +12292,16 @@ function NP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(AP()))!=null
 endfunction
 function bP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function BP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function cP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function CP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function dP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12330,19 +12330,19 @@ function FP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(fP()))!=null
 endfunction
 function gP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function GP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function HP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function jP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function JP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12375,19 +12375,19 @@ function lP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(KP()))!=null
 endfunction
 function LP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function MP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function pP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function PP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function qP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12420,19 +12420,19 @@ function SP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(sP()))!=null
 endfunction
 function tP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function TP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function uP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function UP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function WP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12466,7 +12466,7 @@ function zP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(YP()))!=null
 endfunction
 function ZP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12483,7 +12483,7 @@ function oq takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(xq()))!=null
 endfunction
 function rq takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function iq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12500,7 +12500,7 @@ function Vq takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(nq()))!=null
 endfunction
 function Eq takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Xq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
