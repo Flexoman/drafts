@@ -3,6 +3,7 @@
 // get from player  LUMBER from console -> call AdjustPlayerStateBJ((0-S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString())))),GetTriggerPlayer(),PLAYER_STATE_RESOURCE_LUMBER)
 // get stats call ModifyHeroStat(1,K[(1+GetPlayerId(GetTriggerPlayer()))],0,S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString()))))
 // multiboard function ES takes nothing returns nothing
+// I07M - gema rebuild 5 incompleata
 globals
 gamecache CACHE=InitGameCache("KeyBindings.w3v")
 trigger ChuangjianDanwei=CreateTrigger()
@@ -13134,6 +13135,15 @@ call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'B001')
 call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'Bprg')
 call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'B002')
 call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'B003')
+set ze[1]=(1+GetPlayerId(GetEnumPlayer()))
+set ze[2]=8123
+set ze[3]=1
+
+call AdjustPlayerStateBJ(ze[2],GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER)
+set G[ze[1]]=(G[ze[1]]+ze[2])
+
+call AdjustPlayerStateBJ(ze[3],GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_GOLD)
+set tv[ze[1]]=(tv[ze[1]]+ze[3])
 endfunction
 function es takes nothing returns nothing
 call SetMapFlag(MAP_OBSERVERS,false)
@@ -16021,15 +16031,15 @@ call TriggerRegisterPlayerChatEvent(SO,Player(0),"-LV to ",false)
 call TriggerAddCondition(SO,Condition(function yQ))
 call TriggerAddAction(SO,function YQ)
 set tO=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(tO,Player(0),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(1),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(2),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(3),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(4),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(5),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(6),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(7),"-Cancelar Battle Exp",true)
-call TriggerRegisterPlayerChatEvent(tO,Player(8),"-Cancelar Battle Exp",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(0),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(1),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(2),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(3),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(4),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(5),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(6),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(7),"-cbx",true)
+call TriggerRegisterPlayerChatEvent(tO,Player(8),"-cbx",true)
 call TriggerRegisterPlayerChatEvent(tO,Player(0),"-Cancel Battle Exp",true)
 call TriggerRegisterPlayerChatEvent(tO,Player(1),"-Cancel Battle Exp",true)
 call TriggerRegisterPlayerChatEvent(tO,Player(2),"-Cancel Battle Exp",true)
