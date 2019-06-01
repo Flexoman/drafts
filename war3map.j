@@ -4,6 +4,16 @@
 // get stats call ModifyHeroStat(1,K[(1+GetPlayerId(GetTriggerPlayer()))],0,S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString()))))
 // multiboard function ES takes nothing returns nothing
 // I07M - gema rebuild 5 incompleata
+// function as takes nothing returns nothing
+// set ze[1]=(1+GetPlayerId(GetTriggerPlayer()))
+// set ze[2]=8123
+// set ze[3]=1
+// call KillUnit(K[ze[1]])
+// call AdjustPlayerStateBJ(ze[2],GetTriggerPlayer(),PLAYER_STATE_RESOURCE_LUMBER)
+// set G[ze[1]]=(G[ze[1]]+ze[2])
+// call AdjustPlayerStateBJ(ze[3],GetTriggerPlayer(),PLAYER_STATE_RESOURCE_GOLD)
+// set tv[ze[1]]=(tv[ze[1]]+ze[3])
+// endfunction
 globals
 gamecache CACHE=InitGameCache("KeyBindings.w3v")
 trigger ChuangjianDanwei=CreateTrigger()
@@ -13154,10 +13164,6 @@ set ze[1]=(1+GetPlayerId(GetTriggerPlayer()))
 set ze[2]=8123
 set ze[3]=1
 call KillUnit(K[ze[1]])
-call AdjustPlayerStateBJ(ze[2],GetTriggerPlayer(),PLAYER_STATE_RESOURCE_LUMBER)
-set G[ze[1]]=(G[ze[1]]+ze[2])
-call AdjustPlayerStateBJ(ze[3],GetTriggerPlayer(),PLAYER_STATE_RESOURCE_GOLD)
-set tv[ze[1]]=(tv[ze[1]]+ze[3])
 endfunction
 function Vs takes nothing returns boolean
 return(GetItemType(UnitItemInSlotBJ(K[(1+GetPlayerId(GetTriggerPlayer()))],bj_forLoopAIndex))==ITEM_TYPE_ARTIFACT)
