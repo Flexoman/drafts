@@ -2,6 +2,7 @@
 // function vF takes lamble each level up
 // get from player  LUMBER from console -> call AdjustPlayerStateBJ((0-S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString())))),GetTriggerPlayer(),PLAYER_STATE_RESOURCE_LUMBER)
 // get stats call ModifyHeroStat(1,K[(1+GetPlayerId(GetTriggerPlayer()))],0,S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString()))))
+// multiboard function ES takes nothing returns nothing
 globals
 gamecache CACHE=InitGameCache("KeyBindings.w3v")
 trigger ChuangjianDanwei=CreateTrigger()
@@ -62,8 +63,10 @@ unit udg_ladonu = null
     integer                 udg_SaveLoadMaxEncryptionSets = 0
     integer array           udg_SaveLoadHeroesStored
     string                  udg_SaveLoadEncryptedString
-    string                  udg_heroName
+    string                  udg_heroLevel
     string                  udg_userName
+    string                  udg_lambleSp
+    string                  udg_goldRb
     string                  udg_SaveLoadFinalString
     string array            udg_SaveLoadCharacterNumbers
     string array            udg_SaveLoadEncryptionNumbers
@@ -3214,19 +3217,24 @@ function Trig_SaveModuleSingle_Actions takes nothing returns nothing
         endif
         set bj_forLoopAIndex = bj_forLoopAIndex + 1
     endloop
-    set udg_heroName = GetHeroProperName(GetEnumUnit())
+    set udg_heroLevel = I2S(GetHeroLevel(GetTriggerUnit()))
     set udg_userName = GetPlayerName(GetTriggerPlayer())
+    set udg_lambleSp = I2S(G[(1+GetPlayerId(GetEnumPlayer()))])
+    set udg_goldRb = I2S(tv[(1+GetPlayerId(GetEnumPlayer()))])
     set udg_SaveLoadFinalString = ( ( udg_SaveLoadEncryptionKey + "-" ) + udg_SaveLoadEncryptedString )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Here is your code:  ")
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "--------------------" )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, udg_SaveLoadFinalString )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "--------------------" )
-    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Saved to Warcraft/GoldenGodsII/(name).txt" )
+    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Saved to Warcraft/GoldenGodsII/(name)(rb)(sp).txt" )
 
     call PreloadGenClear()
     call PreloadGenStart()
+    call Preload("RB: " + (udg_goldRb))
+    call Preload("SP: " + (udg_lambleSp))
+    call Preload("Level: " + (udg_heroLevel))
     call Preload("-load " + (udg_SaveLoadFinalString))
-    call PreloadGenEnd("GoldenGodsII\\"+(udg_userName)+"_"+(udg_heroName)+".txt")
+    call PreloadGenEnd("GoldenGodsII\\"+(udg_userName)+"_rb_"+(udg_goldRb)+"_sp_"+(udg_lambleSp)+"_.txt")
     call ForceClear( udg_SaveLoadPlayerGroupFocus )
 endfunction
 function Trig_LoadModuleSingle_Conditions takes nothing returns boolean
@@ -13921,7 +13929,7 @@ endfunction
 function XS takes nothing returns nothing
 set hx=0
 set hx=(hx+1)
-call MultiboardSetItemValueBJ(Gx,1,hx,"Jugadores")
+call MultiboardSetItemValueBJ(Gx,1,hx,"Players")
 call MultiboardSetItemValueBJ(Gx,2,hx,"Kills")
 call MultiboardSetItemValueBJ(Gx,3,hx,"BK")
 call MultiboardSetItemValueBJ(Gx,4,hx,"HK")
