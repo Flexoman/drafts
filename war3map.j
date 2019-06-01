@@ -2,6 +2,7 @@
 // function vF takes lamble each level up
 // get from player  LUMBER from console -> call AdjustPlayerStateBJ((0-S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString())))),GetTriggerPlayer(),PLAYER_STATE_RESOURCE_LUMBER)
 // get stats call ModifyHeroStat(1,K[(1+GetPlayerId(GetTriggerPlayer()))],0,S2I(SubStringBJ(GetEventPlayerChatString(),4,StringLength(GetEventPlayerChatString()))))
+// code udg_SaveLoadFinalString
 globals
 gamecache CACHE=InitGameCache("KeyBindings.w3v")
 trigger ChuangjianDanwei=CreateTrigger()
@@ -62,6 +63,8 @@ unit udg_ladonu = null
     integer                 udg_SaveLoadMaxEncryptionSets = 0
     integer array           udg_SaveLoadHeroesStored
     string                  udg_SaveLoadEncryptedString
+    string                  udg_heroName
+    string                  udg_userName
     string                  udg_SaveLoadFinalString
     string array            udg_SaveLoadCharacterNumbers
     string array            udg_SaveLoadEncryptionNumbers
@@ -3212,10 +3215,19 @@ function Trig_SaveModuleSingle_Actions takes nothing returns nothing
         endif
         set bj_forLoopAIndex = bj_forLoopAIndex + 1
     endloop
+    set udg_heroName = GetHeroProperName(GetEnumUnit())
+    set udg_userName = GetPlayerName(GetTriggerPlayer())
     set udg_SaveLoadFinalString = ( ( udg_SaveLoadEncryptionKey + "-" ) + udg_SaveLoadEncryptedString )
+
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Here is your code:  ")
+    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "--------------------" )
     call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, udg_SaveLoadFinalString )
-    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Big thanks to Effane for the code system!!!" )
+    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "--------------------" )
+    call DisplayTimedTextToForce( GetForceOfPlayer(GetTriggerPlayer()), 300.00, "Saved to Warcraft/GoldenGodsII/(name).txt" )
+    call PreloadGenClear()
+    call PreloadGenStart()
+    call Preload("-load " + (udg_SaveLoadFinalString))
+    call PreloadGenEnd("GoldenGodsII\\"+(udg_userName)+"-"+"Lamble-"(G[GetConvertedPlayerId(GetTriggerPlayer())])+".txt")
     call ForceClear( udg_SaveLoadPlayerGroupFocus )
 endfunction
 function Trig_LoadModuleSingle_Conditions takes nothing returns boolean
@@ -5461,7 +5473,7 @@ set ie[ee]="Lanzas de Bandidos (Копья Бандидос)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBandit.blp"
 set ne[ee]="Нам нужно, чтобы вы принесли копья тех бандитов, которые крадут все наше оружие, они слабые, что вы можете с ними."
 set Ve[ee]="Exelente, Gracias por matar Bandidos y traer sus lanzas."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]=" lanzas de bandido (бандитские копья )."
 set Re[ee]=50
 set Ie[ee]=1
@@ -5494,7 +5506,7 @@ set ie[ee]="Viaje de Gema Job 1 (Путешествие Gem Job 1)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGem.blp"
 set ne[ee]="Вы должны убить ополченцев, мы дадим вам то, что вы хотите, я знаю! Вы хотите Gem Job 1, для смены работы я дам его вам, только если вы убьете 5 единиц Милиции."
 set Ve[ee]="Хорошо, достаточно."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]=" cabezas de Milicia (Милиция головы )."
 set Re[ee]=25
 set Ie[ee]=0
@@ -5527,7 +5539,7 @@ set ie[ee]="Jabalis Furiosos (Яростный копье)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNRazorback.blp"
 set ne[ee]="У этих джабали есть особые перья, которые мы должны извлечь, чтобы испытать их."
 set Ve[ee]="Exelente! Es lo que necesitaba."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="plumas de Jabalis (Джабалис перья )."
 set Re[ee]=100
 set Ie[ee]=5
@@ -5560,7 +5572,7 @@ set ie[ee]="Troll Basicos (Основной тролль)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNForestTroll.blp"
 set ne[ee]="Тролли, мне нужно, чтобы вы позаботились о них, они очень сильны, вы должны идти в группе."
 set Ve[ee]="Muy bien!!!! Exelente"
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Cabezas de Troll (Головы тролле )s"
 set Re[ee]='d'
 set Ie[ee]=10
@@ -5626,7 +5638,7 @@ set ie[ee]="Pequeños Sasquash (Маленький Sasquash)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNOrbOfFire.blp"
 set ne[ee]="Убейте немного саскваша, чтобы они скрыли драгоценный камень Иов 2."
 set Ve[ee]="Хорошо, достаточно."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Piel de Sasquash (Sasquash skin )."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -5659,7 +5671,7 @@ set ie[ee]="Familia Sasquash (Sasquash Family)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSasquatch.blp"
 set ne[ee]="Убей молодого Саскваша, они меня пугают, они быстро растут и убивают нас! D:"
 set Ve[ee]="Exelente ven a buscar tu recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Cabeza de Joven Sasquash (Голова молодого Саскваша )."
 set Re[ee]='d'
 set Ie[ee]=0
@@ -5692,7 +5704,7 @@ set ie[ee]="Pre Osos (Предварительно медведи)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNFurbolg.blp"
 set ne[ee]="Мне просто нужно, чтобы вы убили пандарея, они дадут вам ключ, чтобы убить 3 молодых медведей."
 set Ve[ee]="Очень хорошо, теперь следующая миссия."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Pandareans (Пандарены )."
 set Re[ee]=25
 set Ie[ee]=0
@@ -5723,9 +5735,9 @@ set ve[ee]=true
 set re[ee]=false
 set ie[ee]="Osos Jovenes (Молодые медведи)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp"
-set ne[ee]="Убейте 3 молодых медведей."
+set ne[ee]="Убейте 2 молодых медведей."
 set Ve[ee]="Идеально!"
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Pelaje de Oso (Медведь пальто )."
 set Re[ee]=$C8
 set Ie[ee]=0
@@ -5758,7 +5770,7 @@ set ie[ee]="Osos Job 3 (Медведи Работа 3)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGrizzlyBear.blp"
 set ne[ee]="Убить 3 больших медведей"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Piel Sagrada de Oso (Шкура священного медведя )."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -5791,7 +5803,7 @@ set ie[ee]="Zarpador (Zarpador)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNMurloc.blp"
 set ne[ee]="Вы должны убить несколько когтей"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="cuero de zarpador (коготь кожа )."
 set Re[ee]=0
 set Ie[ee]=15
@@ -5824,7 +5836,7 @@ set ie[ee]="Magos Locos (Безумные Волшебники)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNMedivh.blp"
 set ne[ee]="У этих магов странная магия что-то из них приносит."
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="magia de magos (магия магов )."
 set Re[ee]=0
 set Ie[ee]=15
@@ -5857,7 +5869,7 @@ set ie[ee]="Gnoll (Gnoll)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGnollKing.blp"
 set ne[ee]="Хитрость гноллов, убей их или покори мир."
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="bolas de gnoll (гнолл шарики )."
 set Re[ee]=0
 set Ie[ee]=15
@@ -5890,7 +5902,7 @@ set ie[ee]="Huesos de Esqueletos (Скелет кости)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSkeletonWarrior.blp"
 set ne[ee]="Принесите немного костей для домашних животных, которые немного голодны."
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="huesos (кости )."
 set Re[ee]=0
 set Ie[ee]=5
@@ -5923,7 +5935,7 @@ set ie[ee]="Cripta (крипта)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp"
 set ne[ee]="Приносит тьму из склепа демонов"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="oscuridad de demonios (тьма демонов )."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -5956,7 +5968,7 @@ set ie[ee]="Zombies (зомби)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp"
 set ne[ee]="Получить мертвую плоть от зомби."
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="carne podrida (гнилое мясо )."
 set Re[ee]=0
 set Ie[ee]=$A
@@ -5987,9 +5999,9 @@ set ve[ee]=true
 set re[ee]=false
 set ie[ee]="Viaje a Montaña Oscura (Поездка в Темную Гору)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNTombOfRelics.blp"
-set ne[ee]="Убейте 3 пауков, которые находятся над Городом Теней."
+set ne[ee]="Убейте 2 пауков, которые находятся над Городом Теней."
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="piernas de arañas (ноги пауков )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6055,7 +6067,7 @@ set ie[ee]="Armadura Verde (Зеленая броня)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNGreenMetalCarapace.blp"
 set ne[ee]="Убить 3 лесных троллей"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="trolls de bosque (лесные тролли )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6088,7 +6100,7 @@ set ie[ee]="Armadura Natural (Натуральная броня)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNNature Armor.blp"
 set ne[ee]="Убить 3 гипер троллей"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Hiper troll (Гипер тролл )s"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6119,9 +6131,9 @@ set ve[ee]=true
 set re[ee]=false
 set ie[ee]="Armadura de Agua (Водяной доспех)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNWater Composite Armor.blp"
-set ne[ee]="Убейте 3 Саскваш Янг."
+set ne[ee]="Убейте 2 Саскваш Янг."
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Sasquash Jovenes (Саскваш Янг )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6154,7 +6166,7 @@ set ie[ee]="Armadura de Fuego (Огненная броня)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNFire Plate Armor.blp"
 set ne[ee]="Убить 3 диких медведей"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Osos Salvajes (Дикие медвед )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6187,7 +6199,7 @@ set ie[ee]="Armadura de Oscuridad (Доспехи тьмы)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNHalf-Armor Of Darkness.blp"
 set ne[ee]="Убить 3 скелетов"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Huesos de Esqueletos (Скелетные кости )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6220,7 +6232,7 @@ set ie[ee]="Armadura de Oro y Plata (Золотая и серебряная бр
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNRoyalArmor.blp.blp"
 set ne[ee]="Убить 3 нерубских дьяволов"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Demonios Nerubia (Нерубские демон )n"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6251,9 +6263,9 @@ set ve[ee]=true
 set re[ee]=false
 set ie[ee]="Armadura Dorada (Золотая броня)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNHoly Armor.blp"
-set ne[ee]="Убейте 3 Красных Колдунов (Лабиринт)"
+set ne[ee]="Убейте 2 Красных Колдунов (Лабиринт)"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Brujos Rojos (Красные колдуни)"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6284,9 +6296,9 @@ set ve[ee]=true
 set re[ee]=false
 set ie[ee]="Armadura Sagrada (Священная броня)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNLion Carapace.blp"
-set ne[ee]="Убейте 3 Зеленых Колдунов (Лабиринт)"
+set ne[ee]="Убейте 2 Зеленых Колдунов (Лабиринт)"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Brujos Verdes (Зеленые колдуни)"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6319,7 +6331,7 @@ set ie[ee]="Armadura de Titaneo (Доспехи Титенео)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSea Heavy Armor.blp"
 set ne[ee]="Убить 3 рыцарей"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Pedazo de Armadura de Caballeros (Кусок доспеха рыцарей )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6352,7 +6364,7 @@ set ie[ee]="Armadura de las Tormentas (Доспехи Бурь)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNWind Armor.blp"
 set ne[ee]="Убить 3 морских воинов"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Piel de Marinos (Морская кожа )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6385,7 +6397,7 @@ set ie[ee]="Armadura de Satiro (Сатиро броня)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCrowLightArmor.blp"
 set ne[ee]="Убить 3 камень"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Rocas (Скалы )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6418,7 +6430,7 @@ set ie[ee]="Armadura de Semidios (Полубог броня)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNPowerCarapace.blp"
 set ne[ee]="Убить 3 тигров"
 set Ve[ee]="Ven a buscar tu Recompenza."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Carne de Trigres (Мясо Тригрес )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6517,7 +6529,7 @@ set ie[ee]="Arañas (пауки)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="araña (паук )s"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6550,7 +6562,7 @@ set ie[ee]="Vengadores (Мстители)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="vengadores (мстители )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6583,7 +6595,7 @@ set ie[ee]="Gigante de Montaña (Горный великан)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="gigante de montaña (гигантская гор )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6616,7 +6628,7 @@ set ie[ee]="Hija de doncella (Дочь девицы)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="hijas de doncell (девичьи дочер )a"
 set Re[ee]=0
 set Ie[ee]=0
@@ -6649,7 +6661,7 @@ set ie[ee]="Piedra (камень)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="piedras (камни )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6682,7 +6694,7 @@ set ie[ee]="Guardianes (опекуны)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="guardianes (опекуны )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6715,7 +6727,7 @@ set ie[ee]="Evil Fenix (Злой Феникс)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="evil fenix (злой феник )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6748,7 +6760,7 @@ set ie[ee]="Criaturas (существа)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="criaturas (существа )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6781,7 +6793,7 @@ set ie[ee]="Mayor (выше)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="mayor (выше )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6814,7 +6826,7 @@ set ie[ee]="Oso Chaman (Chaman Bear)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="osos (медведи )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6847,7 +6859,7 @@ set ie[ee]="Sirenas (сирены)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="sirenas (русалки )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6880,7 +6892,7 @@ set ie[ee]="Espectros de Sombra (Призрачные призраки)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="sombras (тень )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6913,7 +6925,7 @@ set ie[ee]="Reina (королева)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="reina (Королева )."
 set Re[ee]=0
 set Ie[ee]=20
@@ -6942,11 +6954,11 @@ set xe[ee]=GetTriggerUnit()
 set oe[ee]=GetOwningPlayer(xe[ee])
 set ve[ee]=true
 set re[ee]=false
-set ie[ee]="Satiro (satiro)"
+set ie[ee]="Satiro (сатири)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="satiro (сатир )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -6979,7 +6991,7 @@ set ie[ee]="Aquiles Force (Ахиллесова сила)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="kills mas (убивает больш )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -7012,7 +7024,7 @@ set ie[ee]="Hector Force (Гектор Форс)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="kills mas (убивает большe )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -7045,7 +7057,7 @@ set ie[ee]="Perseo Force (Perseo Force)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="kills mas (убивает больш )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -7078,7 +7090,7 @@ set ie[ee]="Satiro Bestial (Сатиро Бесталь)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="satiro bestial (сатирический звериный )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -7111,7 +7123,7 @@ set ie[ee]="Armadura de Semidios Completa (Полная броня Демира�
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="mayores (выше )."
 set Re[ee]=0
 set Ie[ee]=0
@@ -7147,8 +7159,8 @@ set ie[ee]="Golden Gods Gema (Жемчужина золотых богов)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSkeletonMage.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
-set Xe[ee]="Thanto (Thanto )s"
+set Ee[ee]=2
+set Xe[ee]="Thantos ( Тантос )"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]='I0AS'
@@ -7177,7 +7189,7 @@ set ie[ee]="Armadura vieja de Zeus (Старая броня Зевса)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNLichKing.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Evil Zeu (Злой Зев )s"
 set Re[ee]=0
 set Ie[ee]=0
@@ -7207,7 +7219,7 @@ set ie[ee]="Armadura Deluxe (Deluxe Armor)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Cria de Uran (Уран Разведени )o"
 set Re[ee]=0
 set Ie[ee]=0
@@ -7237,8 +7249,8 @@ set ie[ee]="Armadura del Super Guerrero (Доспех Супер Воина)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBeastMaster.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
-set Xe[ee]="Chati (Chati )s"
+set Ee[ee]=2
+set Xe[ee]="Chatis (Chatis )"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]='I074'
@@ -7267,8 +7279,8 @@ set ie[ee]="Armadura de Titanes (Доспехи титанов)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSummonWaterElemental.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
-set Xe[ee]="Ocean (Ocean )o"
+set Ee[ee]=2
+set Xe[ee]="Oceano (Oceano )"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]='I076'
@@ -7307,8 +7319,8 @@ set ie[ee]="Armadura de Dioses (Доспехи богов)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
-set Xe[ee]="Poseido (Посейдо )n"
+set Ee[ee]=2
+set Xe[ee]="Poseidon (Посейдон )"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]='I075'
@@ -7337,8 +7349,8 @@ set ie[ee]="Level Box - Titan (Коробка уровня - Титан)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNFleshGolem.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
-set Xe[ee]="Cron (хрон )o"
+set Ee[ee]=2
+set Xe[ee]="Cronо (кронс )"
 set Re[ee]=0
 set Ie[ee]=0
 set Ae[ee]='I0AK'
@@ -7367,7 +7379,7 @@ set ie[ee]="SuperHuman job - Part One (Суперчеловеческая раб
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNBeastMaster.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Atlas: SuperHuma (Атлас: Суперчелове )n"
 set Re[ee]=0
 set Ie[ee]=0
@@ -7397,7 +7409,7 @@ set ie[ee]="SuperHuman job - Part Two (Суперчеловеческая раб
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNRockGolem.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Prometeo: SuperHuman (Прометей: Супермен )"
 set Re[ee]=0
 set Ie[ee]=0
@@ -7424,7 +7436,7 @@ set ie[ee]="Armadura de Aquiles (Доспехи ахиллова)"
 set ae[ee]="ReplaceableTextures\\CommandButtons\\BTNSpy.blp"
 set ne[ee]="Удалить указанное количество"
 set Ve[ee]="Приходите и получите награду."
-set Ee[ee]=3
+set Ee[ee]=2
 set Xe[ee]="Aquiles (Ахиллес)"
 set Re[ee]=0
 set Ie[ee]=0
@@ -7573,7 +7585,7 @@ function kD takes nothing returns boolean
 return(GetEventDamage()>=.01)
 endfunction
 function KD takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lD takes nothing returns boolean
 return(GetUnitAbilityLevelSwapped('A03F',GetEventDamageSource())==1)
@@ -7880,8 +7892,8 @@ function Zf takes nothing returns boolean
 return(GetUnitAbilityLevelSwapped('A06J',K[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))])==1)
 endfunction
 function vF takes nothing returns nothing
-set G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=(G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]+23)
-call AdjustPlayerStateBJ(23,GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER)
+set G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=(G[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]+22)
+call AdjustPlayerStateBJ(22,GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER)
 if(Zf())then
 set rx[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]=(rx[(1+GetPlayerId(GetOwningPlayer(GetTriggerUnit())))]+1)
 if(zf())then
@@ -9911,19 +9923,19 @@ function dk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00R')
 endfunction
 function Dk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Fk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Gk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hk takes nothing returns boolean
 return(RectContainsUnit(Tx,uv))
@@ -9968,19 +9980,19 @@ function Jk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00Y')
 endfunction
 function kk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Kk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Lk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Mk takes nothing returns boolean
 return(RectContainsUnit(ux,uv))
@@ -10031,16 +10043,16 @@ function qk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00Z')
 endfunction
 function Qk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Sk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Tk takes nothing returns boolean
 return(RectContainsUnit(Ux,uv))
@@ -10087,22 +10099,22 @@ function wk takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n00X')
 endfunction
 function Wk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Yk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function zk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Zk takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function eK takes nothing returns boolean
 return(RectContainsUnit(wx,uv))
@@ -10157,16 +10169,16 @@ function rK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n010')
 endfunction
 function iK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function aK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function nK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function VK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function EK takes nothing returns boolean
 return(RectContainsUnit(Wx,uv))
@@ -10207,16 +10219,16 @@ function RK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n011')
 endfunction
 function IK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function AK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function NK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function bK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function BK takes nothing returns boolean
 return(RectContainsUnit(yx,uv))
@@ -10257,19 +10269,19 @@ function dK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n012')
 endfunction
 function DK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function FK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function GK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hK takes nothing returns boolean
 return(RectContainsUnit(Yx,uv))
@@ -10314,19 +10326,19 @@ function JK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n013')
 endfunction
 function kK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function KK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function LK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function MK takes nothing returns boolean
 return(RectContainsUnit(zx,uv))
@@ -10371,25 +10383,25 @@ function qK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n014')
 endfunction
 function QK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function SK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function TK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function uK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function UK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wK takes nothing returns boolean
 return(RectContainsUnit(Zx,uv))
@@ -10431,7 +10443,7 @@ call CreateItemLoc('I03E',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(UK())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10443,25 +10455,25 @@ function YK takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n016')
 endfunction
 function zK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ZK takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function el takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ol takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function il takes nothing returns boolean
 return(RectContainsUnit(wo,uv))
@@ -10503,7 +10515,7 @@ call CreateItemLoc('I03F',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(rl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10515,19 +10527,19 @@ function Vl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01E')
 endfunction
 function El takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Xl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ol takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Rl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Il takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Al takes nothing returns boolean
 return(RectContainsUnit(Hr,uv))
@@ -10561,7 +10573,7 @@ call CreateItemLoc('I043',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
 if(Il())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10573,7 +10585,7 @@ function Bl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01G')
 endfunction
 function cl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Cl takes nothing returns boolean
 return(RectContainsUnit(lr,uv))
@@ -10591,7 +10603,7 @@ call CreateItemLoc('I04J',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 if(cl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10603,13 +10615,13 @@ function fl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n01Q')
 endfunction
 function Fl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Gl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hl takes nothing returns boolean
 return(RectContainsUnit(xi,uv))
@@ -10627,7 +10639,7 @@ call CreateItemLoc('I02T',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 if(Fl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10647,16 +10659,16 @@ function Jl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n020')
 endfunction
 function kl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Kl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ll takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ll takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ml takes nothing returns boolean
 return(RectContainsUnit(oi,uv))
@@ -10672,7 +10684,7 @@ call SetUnitPositionLoc(uv,GetRectCenter(Tv[bj_forLoopAIndex]))
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 if(kl())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10696,13 +10708,13 @@ function Pl takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n021')
 endfunction
 function ql takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ql takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Sl takes nothing returns boolean
 return(RectContainsUnit(ri,uv))
@@ -10719,7 +10731,7 @@ call CreateItemLoc('I07I',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(ql())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10739,16 +10751,16 @@ function ul takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n022')
 endfunction
 function Ul takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Wl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yl takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Yl takes nothing returns boolean
 return(RectContainsUnit(ii,uv))
@@ -10765,7 +10777,7 @@ call CreateItemLoc('I07J',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(Ul())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10789,16 +10801,16 @@ function vL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n023')
 endfunction
 function eL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function oL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function iL takes nothing returns boolean
 return(RectContainsUnit(ai,uv))
@@ -10815,7 +10827,7 @@ call CreateItemLoc('I07K',GetRectCenter(Tv[bj_forLoopAIndex]))
 set gx[(1+GetPlayerId(GetOwningPlayer(uv)))]=(gx[(1+GetPlayerId(GetOwningPlayer(uv)))]+1)
 call PanCameraToTimedLocForPlayer(Player(-1+(bj_forLoopAIndex)),GetRectCenter(Tv[bj_forLoopAIndex]),0)
 if(eL())then
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, podra subir 100 Niveles.")))
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,("Игроку |cffffcc00"+(GetPlayerName(GetOwningPlayer(uv))+"|r повезло и выиграл |cffffcc00Lvl Book Premium|r, дае 100 level.")))
 call CreateItemLoc('I048',GetRectCenter(Tv[bj_forLoopAIndex]))
 call SetItemUserData(bj_lastCreatedItem,bj_forLoopAIndex)
 endif
@@ -10839,16 +10851,16 @@ function VL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03J')
 endfunction
 function EL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function XL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function OL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function RL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function IL takes nothing returns boolean
 return(RectContainsUnit(ni,uv))
@@ -10884,16 +10896,16 @@ function CL takes nothing returns boolean
 return(mv==1)
 endfunction
 function dL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function DL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function FL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gL takes nothing returns boolean
 return(RectContainsUnit(Vi,uv))
@@ -10945,16 +10957,16 @@ function HL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02H')
 endfunction
 function jL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function JL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function kL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function KL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lL takes nothing returns boolean
 return(RectContainsUnit(Xi,uv))
@@ -10995,19 +11007,19 @@ function ML takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02I')
 endfunction
 function pL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function PL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function qL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function QL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function SL takes nothing returns boolean
 return(RectContainsUnit(Ri,uv))
@@ -11052,19 +11064,19 @@ function uL takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02J')
 endfunction
 function UL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function WL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function YL takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function zL takes nothing returns boolean
 return(RectContainsUnit(Oi,uv))
@@ -11109,19 +11121,19 @@ function em takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02M')
 endfunction
 function xm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function om takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function im takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function am takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function nm takes nothing returns boolean
 return(RectContainsUnit(Ai,uv))
@@ -11166,16 +11178,16 @@ function Xm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02N')
 endfunction
 function Om takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Rm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Im takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Am takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Nm takes nothing returns boolean
 return(RectContainsUnit(Bi,uv))
@@ -11217,16 +11229,16 @@ function cm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02V')
 endfunction
 function Cm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function dm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Dm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Fm takes nothing returns boolean
 return(RectContainsUnit(ci,uv))
@@ -11268,16 +11280,16 @@ function hm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02W')
 endfunction
 function Hm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function jm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Jm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function km takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Km takes nothing returns boolean
 return(RectContainsUnit(Ci,uv))
@@ -11319,19 +11331,19 @@ function mm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02X')
 endfunction
 function Mm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function pm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Pm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function qm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Qm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sm takes nothing returns boolean
 return(RectContainsUnit(di,uv))
@@ -11446,19 +11458,19 @@ function Tm takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n02Y')
 endfunction
 function um takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Um takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Wm takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ym takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ym takes nothing returns boolean
 return(RectContainsUnit(Di,uv))
@@ -11504,22 +11516,22 @@ function vM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n030')
 endfunction
 function eM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function oM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function iM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function plus502 takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function aM takes nothing returns boolean
 return(RectContainsUnit(Ui,uv))
@@ -11573,19 +11585,19 @@ function EM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n031')
 endfunction
 function XM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function OM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function RM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function IM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function AM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function NM takes nothing returns boolean
 return(RectContainsUnit(wi,uv))
@@ -11635,19 +11647,19 @@ function cM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n032')
 endfunction
 function CM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function dM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function DM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function fM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function FM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gM takes nothing returns boolean
 return(RectContainsUnit(Wi,uv))
@@ -11700,19 +11712,19 @@ function jM takes nothing returns boolean
 return(HM())
 endfunction
 function JM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function kM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function KM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function lM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function LM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mM takes nothing returns boolean
 return(RectContainsUnit(Ra,uv))
@@ -11768,34 +11780,34 @@ function PM takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03C')
 endfunction
 function qM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function droptheitem takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function QM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function SM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function TM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function uM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function UM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Cronos takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wM takes nothing returns boolean
 return(RectContainsUnit(Ia,uv))
@@ -11873,28 +11885,28 @@ function hecatedropCondition takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03I')
 endfunction
 function zM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ZM takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ep takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function op takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ip takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function ap takes nothing returns boolean
 return(RectContainsUnit(Aa,uv))
@@ -11959,34 +11971,34 @@ function Ep takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03G')
 endfunction
 function Xp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Op takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Rp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ip takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Ap takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Np takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function bp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Bp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function cp takes nothing returns boolean
 return(RectContainsUnit(Na,uv))
 endfunction
 function plus50 takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Cp takes nothing returns nothing
 set bj_forLoopAIndex=1
@@ -12057,28 +12069,28 @@ function Dp takes nothing returns boolean
 return(GetUnitTypeId(GetDyingUnit())=='n03F')
 endfunction
 function fp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Fp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function gp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Gp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Hp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function jp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Jp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 
 function kp takes nothing returns boolean
@@ -12161,13 +12173,13 @@ function qp takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(Pp()))!=null
 endfunction
 function Qp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function sp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Sp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function tp takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12192,13 +12204,13 @@ function Up takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(up()))!=null
 endfunction
 function wp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Wp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function yp takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Yp takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12223,13 +12235,13 @@ function vP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(Zp()))!=null
 endfunction
 function eP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function xP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function oP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function rP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12254,16 +12266,16 @@ function nP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(aP()))!=null
 endfunction
 function VP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function EP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function XP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function OP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function RP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12292,16 +12304,16 @@ function NP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(AP()))!=null
 endfunction
 function bP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function BP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function cP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function CP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function dP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12330,19 +12342,19 @@ function FP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(fP()))!=null
 endfunction
 function gP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function GP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function hP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function HP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function jP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function JP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12375,19 +12387,19 @@ function lP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(KP()))!=null
 endfunction
 function LP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function mP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function MP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function pP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function PP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function qP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12420,19 +12432,19 @@ function SP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(sP()))!=null
 endfunction
 function tP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function TP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function uP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function UP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function wP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function WP takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12466,7 +12478,7 @@ function zP takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(YP()))!=null
 endfunction
 function ZP takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function vq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12483,7 +12495,7 @@ function oq takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(xq()))!=null
 endfunction
 function rq takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function iq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -12500,7 +12512,7 @@ function Vq takes nothing returns boolean
 return((IsUnitType(GetDyingUnit(),UNIT_TYPE_HERO)!=true)and(nq()))!=null
 endfunction
 function Eq takes nothing returns boolean
-return(GetRandomReal(0,'d')<=92.)
+return(GetRandomReal(0,'d')<=72.)
 endfunction
 function Xq takes nothing returns nothing
 set Uv=GetUnitLoc(GetDyingUnit())
@@ -13065,7 +13077,7 @@ function KQ takes nothing returns nothing
 call ClearTextMessagesBJ(FA(GetTriggerPlayer()))
 endfunction
 function LQ takes nothing returns boolean
-return(SubStringBJ(GetEventPlayerChatString(),1,7)=="-Item: ")and(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(kx)and(Kx)
+return(SubStringBJ(GetEventPlayerChatString(),1,7)=="-Item: ")and(true)and(kx)and(Kx)
 endfunction
 function mQ takes nothing returns nothing
 set Hv=GetUnitLoc(K[(1+GetPlayerId(GetTriggerPlayer()))])
@@ -13073,7 +13085,7 @@ call CreateItemLoc(O[S2I(SubStringBJ(GetEventPlayerChatString(),8,StringLength(G
 call RemoveLocation(Hv)
 endfunction
 function pQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-SP to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
+return(true)and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-SP to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
 endfunction
 function PQ takes nothing returns nothing
 set ze[1]=S2I(SubStringBJ(GetEventPlayerChatString(),8,9))
@@ -13082,19 +13094,19 @@ call AdjustPlayerStateBJ(ze[2],Player(-1+(ze[1])),PLAYER_STATE_RESOURCE_LUMBER)
 set G[ze[1]]=(G[ze[1]]+ze[2])
 endfunction
 function QQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(kx==false)
+return(true)and(kx==false)
 endfunction
 function sQ takes nothing returns nothing
 set kx=true
 endfunction
 function tQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(Kx==false)
+return(true)and(Kx==false)
 endfunction
 function TQ takes nothing returns nothing
 set Kx=true
 endfunction
 function UQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-RB to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
+return(true)and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-RB to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")and(kx)and(Kx)
 endfunction
 function wQ takes nothing returns nothing
 set ze[1]=S2I(SubStringBJ(GetEventPlayerChatString(),8,9))
@@ -13103,7 +13115,7 @@ call AdjustPlayerStateBJ(ze[2],Player(-1+(ze[1])),PLAYER_STATE_RESOURCE_GOLD)
 set tv[ze[1]]=(tv[ze[1]]+ze[2])
 endfunction
 function yQ takes nothing returns boolean
-return(GetPlayerName(GetTriggerPlayer())=="ChatiSnake")and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-LV to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")
+return(true)and(SubStringBJ(GetEventPlayerChatString(),1,7)=="-LV to ")and(SubStringBJ(GetEventPlayerChatString(),$A,$B)==": ")
 endfunction
 function YQ takes nothing returns nothing
 set ze[1]=S2I(SubStringBJ(GetEventPlayerChatString(),8,9))
@@ -13187,13 +13199,13 @@ set bj_forLoopAIndex=bj_forLoopAIndex+1
 endloop
 endfunction
 function fs takes nothing returns nothing
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"Felicitaciones, ha pasado media hora, todos ganan 200 SP.")
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"Поздравляю, прошло полчаса, все получают 1234 SP.")
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=$A
 loop
 exitwhen bj_forLoopAIndex>bj_forLoopAIndexEnd
-set G[bj_forLoopAIndex]=(G[bj_forLoopAIndex]+$C8)
-call AdjustPlayerStateBJ($C8,Player(-1+(bj_forLoopAIndex)),PLAYER_STATE_RESOURCE_LUMBER)
+set G[bj_forLoopAIndex]=(G[bj_forLoopAIndex]+1234)
+call AdjustPlayerStateBJ(1234,Player(-1+(bj_forLoopAIndex)),PLAYER_STATE_RESOURCE_LUMBER)
 set bj_forLoopAIndex=bj_forLoopAIndex+1
 endloop
 endfunction
@@ -14024,7 +14036,7 @@ function RS takes nothing returns nothing
 call ConditionalTriggerExecute(ER)
 endfunction
 function AS takes nothing returns nothing
-call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"Recuerda Más Información en Informaciones (F9) y www.goldengods.forolatino.info")
+call DisplayTextToForce(bj_FORCE_ALL_PLAYERS,"Помните больше информации в информации (F9) y www.goldengods.forolatino.info")
 endfunction
 function InitCustomTeams takes nothing returns nothing
 call SetPlayerTeam(Player(0),0)
