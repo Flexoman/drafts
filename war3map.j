@@ -13135,15 +13135,6 @@ call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'B001')
 call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'Bprg')
 call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'B002')
 call UnitRemoveAbility(K[(1+GetPlayerId(GetTriggerPlayer()))],'B003')
-set ze[1]=(1+GetPlayerId(GetEnumPlayer()))
-set ze[2]=8123
-set ze[3]=1
-
-call AdjustPlayerStateBJ(ze[2],GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_LUMBER)
-set G[ze[1]]=(G[ze[1]]+ze[2])
-
-call AdjustPlayerStateBJ(ze[3],GetOwningPlayer(GetTriggerUnit()),PLAYER_STATE_RESOURCE_GOLD)
-set tv[ze[1]]=(tv[ze[1]]+ze[3])
 endfunction
 function es takes nothing returns nothing
 call SetMapFlag(MAP_OBSERVERS,false)
@@ -13159,7 +13150,14 @@ function rs takes nothing returns nothing
 call IssueImmediateOrderById(GetAttacker(),$D0004)
 endfunction
 function as takes nothing returns nothing
-call KillUnit(K[(1+GetPlayerId(GetTriggerPlayer()))])
+set ze[1]=(1+GetPlayerId(GetTriggerPlayer()))
+set ze[2]=8123
+set ze[3]=1
+call KillUnit(K[ze[1]])
+call AdjustPlayerStateBJ(ze[2],GetTriggerPlayer(),PLAYER_STATE_RESOURCE_LUMBER)
+set G[ze[1]]=(G[ze[1]]+ze[2])
+call AdjustPlayerStateBJ(ze[3],GetTriggerPlayer(),PLAYER_STATE_RESOURCE_GOLD)
+set tv[ze[1]]=(tv[ze[1]]+ze[3])
 endfunction
 function Vs takes nothing returns boolean
 return(GetItemType(UnitItemInSlotBJ(K[(1+GetPlayerId(GetTriggerPlayer()))],bj_forLoopAIndex))==ITEM_TYPE_ARTIFACT)
